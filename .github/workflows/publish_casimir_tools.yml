@@ -1,0 +1,39 @@
+name: Publish casimir-tools to PyPI
+
+on:
+  push:
+    tags:
+      - "casimir-tools-v*"   # trigger: git tag casimir-tools-v0.1.0 && git push --tags
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # required for trusted PyPI publishing (OIDC)
+      contents: read    # required for actions/checkout under restricted repo settings
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build tools
+        run: pip install hatchling hatch twine
+
+      - name: Build casimir-tools wheel + sdist
+        working-directory: casimir_tools
+        run: hatch build
+
+      - name: Run tests before publish
+        working-directory: casimir_tools
+        run: |
+          pip install -e ".[dev]"
+          pytest tests/ -v
+
+      - name: Publish to PyPI (trusted publishing / OIDC)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: casimir_tools/dist/

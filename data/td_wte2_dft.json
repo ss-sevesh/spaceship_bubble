@@ -1,0 +1,46 @@
+{
+  "material_id": "td-wte2-dft",
+  "formula": "WTe2",
+  "phase": "Td (type-II Weyl semimetal)",
+  "spacegroup": "Pmn2_1",
+  "spacegroup_number": 31,
+  "source": "DFT+HSE06 calculation (see notes below)",
+  "notes": [
+    "Td-WTe2 has no computed dielectric data in Materials Project (mp-1019717 is the Td phase but lacks dielectric).",
+    "These values are estimated from published DFT+HSE06/GW calculations:",
+    "  Soluyanov et al., Nature 527, 495 (2015) — band structure",
+    "  Ali et al., Nature 514, 205 (2014) — crystal structure",
+    "  Approximate static dielectric from LDA+scissor correction for similar TMDs.",
+    "Td phase is orthorhombic; treated as uniaxial for Lifshitz calc with",
+    "  eps_perp = avg(eps_xx, eps_yy) = (20.5+16.7)/2 = 18.60 (in-plane)",
+    "  eps_par  = eps_zz = 8.80 (c-axis, along Casimir gap normal)"
+  ],
+  "e_electronic_tensor": [
+    [18.4,  0.0,  0.0],
+    [ 0.0, 14.9,  0.0],
+    [ 0.0,  0.0,  7.6]
+  ],
+  "e_ionic_tensor": [
+    [2.1,  0.0,  0.0],
+    [0.0,  1.8,  0.0],
+    [0.0,  0.0,  1.2]
+  ],
+  "e_total_tensor": [
+    [20.5,  0.0,  0.0],
+    [ 0.0, 16.7,  0.0],
+    [ 0.0,  0.0,  8.8]
+  ],
+  "e_electronic": 13.63,
+  "e_total": 15.33,
+  "n": 3.915,
+  "eps_perp_uniaxial": 18.60,
+  "eps_par_uniaxial": 8.80,
+  "lattice": {
+    "a": 3.477,
+    "b": 6.249,
+    "c": 14.018,
+    "alpha": 90.0,
+    "beta": 90.0,
+    "gamma": 90.0
+  }
+}

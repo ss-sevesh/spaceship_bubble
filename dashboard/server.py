@@ -1,0 +1,79 @@
+from fastapi import FastAPI, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
+import subprocess
+import json
+import os
+import threading
+import uvicorn
+
+app = FastAPI(title="Spaceship Bubble API")
+
+# Simulation State — protected by a lock for thread-safe background task access
+_STATE_LOCK = threading.Lock()
+STATE = {"is_running": False, "last_error": None}
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Verified Paths
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MAIN_SCRIPT = os.path.join(BASE_DIR, "main.py")
+RESULTS_JSON = os.path.join(BASE_DIR, "outputs", "pareto_results.json")
+SYNC_SCRIPT = os.path.join(BASE_DIR, "sync_assets.py")
+
+@app.get("/api/results")
+async def get_results():
+    if os.path.exists(RESULTS_JSON):
+        with open(RESULTS_JSON, "r") as f:
+            return json.load(f)
+    return {"error": "Results not yet available. Run main.py --optimize first."}
+
+@app.post("/api/run-simulation")
+async def run_simulation(background_tasks: BackgroundTasks):
+    with _STATE_LOCK:
+        if STATE["is_running"]:
+            return {"status": "Already running"}
+        STATE["is_running"] = True
+        STATE["last_error"] = None
+
+    def simulate():
+        try:
+            # 1. Run Physics Simulation
+            res = subprocess.run(["uv", "run", "python", MAIN_SCRIPT, "--all"], cwd=BASE_DIR, capture_output=True, text=True, timeout=300)
+            if res.returncode != 0:
+                with _STATE_LOCK:
+                    STATE["last_error"] = res.stderr
+
+            # 2. Sync Assets to Public
+            subprocess.run(["uv", "run", "python", SYNC_SCRIPT], cwd=BASE_DIR, timeout=60)
+        except Exception as e:
+            with _STATE_LOCK:
+                STATE["last_error"] = str(e)
+        finally:
+            with _STATE_LOCK:
+                STATE["is_running"] = False
+
+    background_tasks.add_task(simulate)
+    return {"status": "Simulation started"}
+
+@app.get("/api/status")
+async def get_status():
+    with _STATE_LOCK:
+        is_running = STATE["is_running"]
+        last_error = STATE["last_error"]
+    return {
+        "status": "busy" if is_running else "idle",
+        "error": last_error,
+        "paths_verified": {
+            "base": BASE_DIR,
+            "main": os.path.exists(MAIN_SCRIPT),
+            "results": os.path.exists(RESULTS_JSON)
+        }
+    }
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)

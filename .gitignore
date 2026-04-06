@@ -1,0 +1,42 @@
+# Environment — never commit secrets
+.env
+.env.*
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[oc]
+*.pyd
+*.egg-info/
+dist/
+build/
+wheels/
+
+# uv
+.python-version
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Node
+node_modules/
+
+# Pytest cache
+.pytest_cache/
+
+# Misc generated
+*.log
+
+# Claude Code session cache (local only)
+.claude/

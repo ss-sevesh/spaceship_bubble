@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaceship Bubble Project Map</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #viz {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+        }
+        .node {
+            cursor: pointer;
+            stroke-width: 2px;
+        }
+        .link {
+            stroke: #30363d;
+            stroke-opacity: 0.6;
+            stroke-width: 2px;
+            fill: none;
+        }
+        .label {
+            font-size: 13px;
+            fill: #adbac7;
+            pointer-events: none;
+            text-shadow: 0 1px 2px #000;
+        }
+        .header {
+            padding: 20px;
+            background: rgba(13, 17, 23, 0.8);
+            border-bottom: 1px solid #30363d;
+            z-index: 10;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+            color: #58a6ff;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #8b949e;
+        }
+        .tooltip {
+            position: absolute;
+            background: #22272e;
+            border: 1px solid #444c56;
+            padding: 12px;
+            border-radius: 6px;
+            pointer-events: none;
+            opacity: 0;
+            font-size: 14px;
+            max-width: 280px;
+            z-index: 100;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        #status-msg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #8b949e;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Spaceship Bubble Architecture</h1>
+        <p>Interactive Data & Logic Flow Map (Drag nodes to explore)</p>
+    </div>
+    
+    <div id="status-msg">Initializing visualization... (Check internet connection for D3.js)</div>
+    <div class="tooltip" id="tooltip"></div>
+    <svg id="viz"></svg>
+
+    <script>
+        // Data structure representing your project components
+        const data = {
+            nodes: [
+                { id: "API", group: "External", name: "Materials Project API", desc: "The external source for crystal structures and dielectric data." },
+                { id: "Fetch", group: "Logic", name: "fetch_materials.py", desc: "Pulls data from API and caches it locally." },
+                { id: "Data", group: "Storage", name: "data/*.json", desc: "Local JSON files containing material properties." },
+                { id: "Physics", group: "Core", name: "Physics Engine (Lifshitz)", desc: "Calculates Casimir forces using the Lifshitz formula." },
+                { id: "Tools", group: "Core", name: "casimir_tools/", desc: "High-performance core library for force calculations." },
+                { id: "Optimizer", group: "Logic", name: "optimizer.py (NSGA-II)", desc: "Genetic algorithm that evolves optimal material designs." },
+                { id: "Outputs", group: "Storage", name: "outputs/pareto_results.json", desc: "Results of optimization (the best trade-offs found)." },
+                { id: "Dashboard", group: "UI", name: "React Dashboard", desc: "Web UI to visualize the results and 3D scenes." },
+                { id: "ThreeJS", group: "UI", name: "Three.js / Canvas", desc: "Renders physical geometry of nano-layers in 3D." },
+                { id: "Main", group: "Logic", name: "main.py", desc: "The entry point script that orchestrates the entire pipeline." }
+            ],
+            links: [
+                { source: "API", target: "Fetch" },
+                { source: "Fetch", target: "Data" },
+                { source: "Data", target: "Physics" },
+                { source: "Physics", target: "Tools" },
+                { source: "Tools", target: "Physics" },
+                { source: "Data", target: "Optimizer" },
+                { source: "Physics", target: "Optimizer" },
+                { source: "Optimizer", target: "Outputs" },
+                { source: "Outputs", target: "Dashboard" },
+                { source: "Dashboard", target: "ThreeJS" },
+                { source: "Main", target: "Fetch" },
+                { source: "Main", target: "Physics" },
+                { source: "Main", target: "Optimizer" }
+            ]
+        };
+
+        function init() {
+            const status = document.getElementById('status-msg');
+            if (typeof d3 === 'undefined') {
+                status.innerHTML = "Error: D3.js failed to load. Please check your internet connection.";
+                return;
+            }
+            status.style.display = 'none';
+
+            const svg = d3.select("#viz");
+            const width = window.innerWidth;
+            const height = window.innerHeight - 80;
+
+            svg.attr("viewBox", [0, 0, width, height]);
+
+            // Arrow head definition
+            svg.append("defs").append("marker")
+                .attr("id", "arrowhead")
+                .attr("viewBox", "-0 -5 10 10")
+                .attr("refX", 20)
+                .attr("refY", 0)
+                .attr("orient", "auto")
+                .attr("markerWidth", 5)
+                .attr("markerHeight", 5)
+                .attr("xoverflow", "visible")
+                .append("svg:path")
+                .attr("d", "M 0,-5 L 10 ,0 L 0,5")
+                .attr("fill", "#30363d")
+                .style("stroke", "none");
+
+            const simulation = d3.forceSimulation(data.nodes)
+                .force("link", d3.forceLink(data.links).id(d => d.id).distance(120))
+                .force("charge", d3.forceManyBody().strength(-1000))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("x", d3.forceX(width / 2).strength(0.1))
+                .force("y", d3.forceY(height / 2).strength(0.1));
+
+            const link = svg.append("g")
+                .selectAll("line")
+                .data(data.links)
+                .enter().append("line")
+                .attr("class", "link")
+                .attr("marker-end", "url(#arrowhead)");
+
+            const node = svg.append("g")
+                .selectAll("circle")
+                .data(data.nodes)
+                .enter().append("circle")
+                .attr("class", "node")
+                .attr("r", 10)
+                .attr("fill", d => {
+                    const colors = { External: "#f78166", Logic: "#58a6ff", Storage: "#3fb950", Core: "#d29922", UI: "#bc8cff" };
+                    return colors[d.group] || "#8b949e";
+                })
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+
+            const label = svg.append("g")
+                .selectAll("text")
+                .data(data.nodes)
+                .enter().append("text")
+                .attr("class", "label")
+                .text(d => d.name)
+                .attr("dx", 15)
+                .attr("dy", 5);
+
+            const tooltip = d3.select("#tooltip");
+
+            node.on("mouseover", (event, d) => {
+                tooltip.style("opacity", 1)
+                    .html(`<strong style="color:${d3.select(event.currentTarget).attr("fill")}">${d.name}</strong><br/><span style="color:#8b949e;font-size:11px">${d.group.toUpperCase()}</span><br/><br/>${d.desc}`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 10) + "px");
+                d3.select(event.currentTarget).transition().duration(200).attr("r", 14);
+            })
+            .on("mouseout", (event, d) => {
+                tooltip.style("opacity", 0);
+                d3.select(event.currentTarget).transition().duration(200).attr("r", 10);
+            });
+
+            simulation.on("tick", () => {
+                link
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+
+                node
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+
+                label
+                    .attr("x", d => d.x)
+                    .attr("y", d => d.y);
+            });
+
+            function dragstarted(event) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                event.subject.fx = event.subject.x;
+                event.subject.fy = event.subject.y;
+            }
+
+            function dragged(event) {
+                event.subject.fx = event.x;
+                event.subject.fy = event.y;
+            }
+
+            function dragended(event) {
+                if (!event.active) simulation.alphaTarget(0);
+                event.subject.fx = null;
+                event.subject.fy = null;
+            }
+        }
+
+        // Run after page loads
+        window.onload = init;
+    </script>
+</body>
+</html>

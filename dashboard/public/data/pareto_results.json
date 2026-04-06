@@ -1,0 +1,971 @@
+{
+  "meta": {
+    "n_gen": 100,
+    "pop_size": 50,
+    "seed": 42,
+    "n_pareto": 50,
+    "EPS_TE": 164.2724788301944,
+    "EPS_WTE2": 6.161309290108833,
+    "substrate": "hex",
+    "LAYER_THICKNESS_NM": 5.0,
+    "optimizer_T_K": 300.0,
+    "n_objectives": 3,
+    "T_validation_K": 300.0,
+    "l_T_nm": 1214.8214482217634,
+    "substrate_dielectric_model": "Cauchy"
+  },
+  "variables": [
+    {
+      "theta_rad": 1.5698176091599927,
+      "theta_deg": 89.94392361018498,
+      "d_nm": 99.88408373064254,
+      "N_layers": 20,
+      "kappa0": 0.9999959722186402,
+      "eps_substrate": 1.115505079050585,
+      "kappa_eff": 0.9999919830450574,
+      "eps_eff": 164.24398836345415
+    },
+    {
+      "theta_rad": 1.5664230973016255,
+      "theta_deg": 89.74943240719344,
+      "d_nm": 99.88408373064254,
+      "N_layers": 20,
+      "kappa0": 0.9999959722186402,
+      "eps_substrate": 1.0882848013062472,
+      "kappa_eff": 0.999982899504736,
+      "eps_eff": 164.24328056098344
+    },
+    {
+      "theta_rad": 1.5707855815883975,
+      "theta_deg": 89.9993843450176,
+      "d_nm": 99.20507588651839,
+      "N_layers": 20,
+      "kappa0": 0.9999959176539702,
+      "eps_substrate": 1.1152940029888658,
+      "kappa_eff": 0.999991762445681,
+      "eps_eff": 164.2387486727517
+    },
+    {
+      "theta_rad": 1.5634511504785473,
+      "theta_deg": 89.57915239729374,
+      "d_nm": 99.88408373064254,
+      "N_layers": 20,
+      "kappa0": 0.9999959722186402,
+      "eps_substrate": 1.1107754068489057,
+      "kappa_eff": 0.9999654865025794,
+      "eps_eff": 164.2438678683966
+    },
+    {
+      "theta_rad": 1.5664230973016255,
+      "theta_deg": 89.74943240719344,
+      "d_nm": 99.94423892251635,
+      "N_layers": 20,
+      "kappa0": 0.9999959722186402,
+      "eps_substrate": 1.115507728906025,
+      "kappa_eff": 0.9999603987195206,
+      "eps_eff": 164.06159298105342
+    },
+    {
+      "theta_rad": 1.5707353991516066,
+      "theta_deg": 89.99650910318381,
+      "d_nm": 99.20506323450876,
+      "N_layers": 20,
+      "kappa0": 0.9999740544896641,
+      "eps_substrate": 1.118344264329803,
+      "kappa_eff": 0.9999432888151605,
+      "eps_eff": 164.02374106864468
+    },
+    {
+      "theta_rad": 1.5689128096924456,
+      "theta_deg": 89.89208241938886,
+      "d_nm": 98.54860191835797,
+      "N_layers": 20,
+      "kappa0": 0.9999607728733445,
+      "eps_substrate": 1.0879857114323317,
+      "kappa_eff": 0.9999324866586303,
+      "eps_eff": 164.05213198879704
+    },
+    {
+      "theta_rad": 1.5664230973016255,
+      "theta_deg": 89.74943240719344,
+      "d_nm": 99.88408373064254,
+      "N_layers": 20,
+      "kappa0": 0.9999959722186402,
+      "eps_substrate": 1.115507728906025,
+      "kappa_eff": 0.9998773585195593,
+      "eps_eff": 163.39189945325472
+    },
+    {
+      "theta_rad": 1.5672654698763004,
+      "theta_deg": 89.79769680049988,
+      "d_nm": 99.47011693261227,
+      "N_layers": 20,
+      "kappa0": 0.9998985140393718,
+      "eps_substrate": 1.0045941583852889,
+      "kappa_eff": 0.999865770505614,
+      "eps_eff": 164.03398462793106
+    },
+    {
+      "theta_rad": 1.5707929163013674,
+      "theta_deg": 89.99980459311472,
+      "d_nm": 99.20507588651839,
+      "N_layers": 20,
+      "kappa0": 0.9982290495879258,
+      "eps_substrate": 1.1085731274165669,
+      "kappa_eff": 0.9981983401681627,
+      "eps_eff": 164.02157228067173
+    },
+    {
+      "theta_rad": 1.5665013674114252,
+      "theta_deg": 89.75391695414699,
+      "d_nm": 95.24720726111714,
+      "N_layers": 19,
+      "kappa0": 0.9999949623991811,
+      "eps_substrate": 1.1140761851900676,
+      "kappa_eff": 0.9576228057283291,
+      "eps_eff": 52.040673973597464
+    },
+    {
+      "theta_rad": 1.5664230973016255,
+      "theta_deg": 89.74943240719344,
+      "d_nm": 99.86153611954782,
+      "N_layers": 20,
+      "kappa0": 0.9370242380543368,
+      "eps_substrate": 1.0989682592126857,
+      "kappa_eff": 0.9370128406087842,
+      "eps_eff": 164.2510523219065
+    },
+    {
+      "theta_rad": 1.5645604710680787,
+      "theta_deg": 89.64271178520086,
+      "d_nm": 67.23174193964077,
+      "N_layers": 13,
+      "kappa0": 0.9714989450128023,
+      "eps_substrate": 1.101510460446133,
+      "kappa_eff": 0.6544821643675487,
+      "eps_eff": 7.525433909231731
+    },
+    {
+      "theta_rad": 0.10413924626674669,
+      "theta_deg": 5.966739292758099,
+      "d_nm": 85.06188228630594,
+      "N_layers": 18,
+      "kappa0": 0.010234615507675505,
+      "eps_substrate": 1.0988546275172766,
+      "kappa_eff": 0.0009602306216191656,
+      "eps_eff": 26.38959986471707
+    },
+    {
+      "theta_rad": 0.048641800473874786,
+      "theta_deg": 2.786969875070473,
+      "d_nm": 84.47756178497946,
+      "N_layers": 17,
+      "kappa0": 0.960595966881251,
+      "eps_substrate": 1.6377986343683641,
+      "kappa_eff": 0.0399005270032381,
+      "eps_eff": 25.495836151869447
+    },
+    {
+      "theta_rad": 1.4191789036194082,
+      "theta_deg": 81.31296155139552,
+      "d_nm": 80.27265378379367,
+      "N_layers": 17,
+      "kappa0": 0.019015061764605656,
+      "eps_substrate": 1.0010273461379908,
+      "kappa_eff": 0.015838242175958403,
+      "eps_eff": 15.394961522673507
+    },
+    {
+      "theta_rad": 0.18075634839035024,
+      "theta_deg": 10.3565758829634,
+      "d_nm": 68.86345711277198,
+      "N_layers": 14,
+      "kappa0": 0.10143227767088353,
+      "eps_substrate": 1.0996127620412541,
+      "kappa_eff": 0.013128412735127831,
+      "eps_eff": 9.009714380597702
+    },
+    {
+      "theta_rad": 1.3539355896543437,
+      "theta_deg": 77.57479501975038,
+      "d_nm": 52.83319522566411,
+      "N_layers": 11,
+      "kappa0": 0.9222996183963634,
+      "eps_substrate": 1.1153434097911,
+      "kappa_eff": 0.515045726310306,
+      "eps_eff": 5.379783566883316
+    },
+    {
+      "theta_rad": 0.002537838012268346,
+      "theta_deg": 0.14540740719084624,
+      "d_nm": 67.6403607065853,
+      "N_layers": 16,
+      "kappa0": 0.012867726353761044,
+      "eps_substrate": 1.0043527165543202,
+      "kappa_eff": 2.5391992196277312e-05,
+      "eps_eff": 10.729678754931488
+    },
+    {
+      "theta_rad": 0.002472558696059668,
+      "theta_deg": 0.14166717788258906,
+      "d_nm": 67.6403607065853,
+      "N_layers": 16,
+      "kappa0": 0.012867726353761044,
+      "eps_substrate": 1.003827803015833,
+      "kappa_eff": 2.5016590090718434e-05,
+      "eps_eff": 11.203207336175211
+    },
+    {
+      "theta_rad": 1.4626656013374686,
+      "theta_deg": 83.80456579560158,
+      "d_nm": 47.60075248643564,
+      "N_layers": 10,
+      "kappa0": 0.9865788162357831,
+      "eps_substrate": 1.004067503105692,
+      "kappa_eff": 0.47090404096210464,
+      "eps_eff": 3.6904999069705493
+    },
+    {
+      "theta_rad": 0.16736724943512027,
+      "theta_deg": 9.589437021345702,
+      "d_nm": 60.41136209996595,
+      "N_layers": 13,
+      "kappa0": 0.11807665050253402,
+      "eps_substrate": 1.084567234649944,
+      "kappa_eff": 0.01235129733487358,
+      "eps_eff": 6.2963222302074895
+    },
+    {
+      "theta_rad": 1.5326251737392202,
+      "theta_deg": 87.81295403076184,
+      "d_nm": 50.5487820817438,
+      "N_layers": 10,
+      "kappa0": 0.010248886176451533,
+      "eps_substrate": 1.0981954140354078,
+      "kappa_eff": 0.005278106126670162,
+      "eps_eff": 4.461610656342223
+    },
+    {
+      "theta_rad": 0.0007919363960190318,
+      "theta_deg": 0.045374613134691495,
+      "d_nm": 48.170675259300516,
+      "N_layers": 12,
+      "kappa0": 0.011849765922748204,
+      "eps_substrate": 1.0023297202341868,
+      "kappa_eff": 5.416106807004088e-06,
+      "eps_eff": 4.935252072443706
+    },
+    {
+      "theta_rad": 6.611682812709763e-06,
+      "theta_deg": 0.00037882152064745456,
+      "d_nm": 40.19112540460581,
+      "N_layers": 9,
+      "kappa0": 0.9981625834773195,
+      "eps_substrate": 1.0061641370531484,
+      "kappa_eff": 2.827049837863534e-06,
+      "eps_eff": 3.197314067543367
+    },
+    {
+      "theta_rad": 1.2285594121230017,
+      "theta_deg": 70.39126919572155,
+      "d_nm": 39.507254773263696,
+      "N_layers": 8,
+      "kappa0": 0.026005804156254808,
+      "eps_substrate": 1.0106300689574765,
+      "kappa_eff": 0.010238909193104422,
+      "eps_eff": 3.1204549082959963
+    },
+    {
+      "theta_rad": 0.00010088537272269233,
+      "theta_deg": 0.005780306071614509,
+      "d_nm": 32.28613736896359,
+      "N_layers": 6,
+      "kappa0": 0.8663690559581585,
+      "eps_substrate": 1.0109002582470936,
+      "kappa_eff": 2.838071425644069e-05,
+      "eps_eff": 2.430103819382952
+    },
+    {
+      "theta_rad": 6.611682812709763e-06,
+      "theta_deg": 0.00037882152064745456,
+      "d_nm": 30.64463803519153,
+      "N_layers": 6,
+      "kappa0": 0.12487032404689288,
+      "eps_substrate": 1.0524749093810128,
+      "kappa_eff": 2.54351562463623e-07,
+      "eps_eff": 2.4200929663065724
+    },
+    {
+      "theta_rad": 3.3317734220722337e-06,
+      "theta_deg": 0.00019089655537859847,
+      "d_nm": 24.10264310151688,
+      "N_layers": 5,
+      "kappa0": 0.015038935615667107,
+      "eps_substrate": 1.0006817064721991,
+      "kappa_eff": 1.2128264073484214e-08,
+      "eps_eff": 1.936676516856551
+    },
+    {
+      "theta_rad": 1.5664230973016255,
+      "theta_deg": 89.74943240719344,
+      "d_nm": 19.694789158369346,
+      "N_layers": 4,
+      "kappa0": 0.9999960162732936,
+      "eps_substrate": 1.115505079050585,
+      "kappa_eff": 0.2204235443499551,
+      "eps_eff": 2.037483639890123
+    },
+    {
+      "theta_rad": 1.4819895196992492,
+      "theta_deg": 84.91174476138696,
+      "d_nm": 18.67014142719288,
+      "N_layers": 4,
+      "kappa0": 0.9999937121593108,
+      "eps_substrate": 1.115505079050585,
+      "kappa_eff": 0.1902255168655259,
+      "eps_eff": 1.8859580623242445
+    },
+    {
+      "theta_rad": 5.392516457666196e-06,
+      "theta_deg": 0.0003089684339791101,
+      "d_nm": 15.717280177753572,
+      "N_layers": 3,
+      "kappa0": 0.011458410030836814,
+      "eps_substrate": 1.1082782085043006,
+      "kappa_eff": 1.0549769619378418e-08,
+      "eps_eff": 1.7764098130519097
+    },
+    {
+      "theta_rad": 0.0007926531938086331,
+      "theta_deg": 0.045415682622799956,
+      "d_nm": 12.128532108829408,
+      "N_layers": 3,
+      "kappa0": 0.011889072263733038,
+      "eps_substrate": 1.0825079202767838,
+      "kappa_eff": 1.2352879375885693e-06,
+      "eps_eff": 1.5614417865919774
+    },
+    {
+      "theta_rad": 1.5102884112088892,
+      "theta_deg": 86.53315180978792,
+      "d_nm": 8.156775503980828,
+      "N_layers": 2,
+      "kappa0": 0.8957504368626696,
+      "eps_substrate": 1.0026838713777817,
+      "kappa_eff": 0.07457098481232417,
+      "eps_eff": 1.2709970895850915
+    },
+    {
+      "theta_rad": 0.02643654524438488,
+      "theta_deg": 1.514702467409901,
+      "d_nm": 7.131518938257451,
+      "N_layers": 2,
+      "kappa0": 0.014023906392615733,
+      "eps_substrate": 1.0048681969965867,
+      "kappa_eff": 3.0847565243515233e-05,
+      "eps_eff": 1.2730939343111147
+    },
+    {
+      "theta_rad": 3.334863682377986e-06,
+      "theta_deg": 0.00019107361425171489,
+      "d_nm": 7.789073769859133,
+      "N_layers": 2,
+      "kappa0": 0.9419423586572475,
+      "eps_substrate": 1.0048790645207561,
+      "kappa_eff": 3.352027847944818e-07,
+      "eps_eff": 1.3577065444257272
+    },
+    {
+      "theta_rad": 1.6490451550150634e-06,
+      "theta_deg": 9.448332760885974e-05,
+      "d_nm": 6.562083525028655,
+      "N_layers": 1,
+      "kappa0": 0.9402692672073572,
+      "eps_substrate": 1.0327317857136014,
+      "kappa_eff": 1.0414955889519702e-07,
+      "eps_eff": 1.2513726100274136
+    },
+    {
+      "theta_rad": 0.0034801732666301655,
+      "theta_deg": 0.19939924015216542,
+      "d_nm": 4.96588730097035,
+      "N_layers": 1,
+      "kappa0": 0.012603612812135059,
+      "eps_substrate": 1.004864675441106,
+      "kappa_eff": 2.247947252881048e-06,
+      "eps_eff": 1.1645985875465423
+    },
+    {
+      "theta_rad": 3.334863682377986e-06,
+      "theta_deg": 0.00019107361425171489,
+      "d_nm": 4.810199610447864,
+      "N_layers": 1,
+      "kappa0": 0.013431988293643444,
+      "eps_substrate": 1.004864675441106,
+      "kappa_eff": 2.295670028863448e-09,
+      "eps_eff": 1.1645985875465423
+    },
+    {
+      "theta_rad": 3.334863682377986e-06,
+      "theta_deg": 0.00019107361425171489,
+      "d_nm": 7.131518938257451,
+      "N_layers": 3,
+      "kappa0": 0.013431988293643444,
+      "eps_substrate": 1.004864675441106,
+      "kappa_eff": 5.979828641425321e-09,
+      "eps_eff": 1.4596137970362932
+    },
+    {
+      "theta_rad": 3.334863682377986e-06,
+      "theta_deg": 0.00019107361425171489,
+      "d_nm": 7.131518938257451,
+      "N_layers": 3,
+      "kappa0": 0.013557503562858899,
+      "eps_substrate": 1.004864675441106,
+      "kappa_eff": 6.035707174475115e-09,
+      "eps_eff": 1.4596137970362932
+    },
+    {
+      "theta_rad": 3.1576689218603874e-06,
+      "theta_deg": 0.00018092110232222514,
+      "d_nm": 4.346332401760817,
+      "N_layers": 1,
+      "kappa0": 0.011112931071753,
+      "eps_substrate": 1.0107456644989063,
+      "kappa_eff": 1.766032908868359e-09,
+      "eps_eff": 1.1683547338254225
+    },
+    {
+      "theta_rad": 3.334863682377986e-06,
+      "theta_deg": 0.00019107361425171489,
+      "d_nm": 3.8970747606184735,
+      "N_layers": 1,
+      "kappa0": 0.015056983042697716,
+      "eps_substrate": 1.0107456644989063,
+      "kappa_eff": 2.5270836981366006e-09,
+      "eps_eff": 1.1683547338254225
+    },
+    {
+      "theta_rad": 1.3405274407391827e-05,
+      "theta_deg": 0.0007680656467582874,
+      "d_nm": 3.6219818591804103,
+      "N_layers": 1,
+      "kappa0": 0.011204009058430959,
+      "eps_substrate": 1.0001087432048046,
+      "kappa_eff": 7.51424213312852e-09,
+      "eps_eff": 1.1551238899089684
+    },
+    {
+      "theta_rad": 1.4980057869896253,
+      "theta_deg": 85.82940928067893,
+      "d_nm": 4.447860303435249,
+      "N_layers": 1,
+      "kappa0": 0.011116791154417853,
+      "eps_substrate": 1.1021402094575965,
+      "kappa_eff": 0.0005543972341612388,
+      "eps_eff": 1.2725375149821556
+    },
+    {
+      "theta_rad": 0.0036839571938733218,
+      "theta_deg": 0.2110751991157993,
+      "d_nm": 3.0065534009011117,
+      "N_layers": 1,
+      "kappa0": 0.011849765922748204,
+      "eps_substrate": 1.000183063047037,
+      "kappa_eff": 2.1832687765966705e-06,
+      "eps_eff": 1.1551523889613335
+    },
+    {
+      "theta_rad": 0.0007919363960190318,
+      "theta_deg": 0.045374613134691495,
+      "d_nm": 3.0065534009011117,
+      "N_layers": 1,
+      "kappa0": 0.011849765922748204,
+      "eps_substrate": 1.0023297202341868,
+      "kappa_eff": 4.693352281160982e-07,
+      "eps_eff": 1.1576250181052772
+    },
+    {
+      "theta_rad": 0.028622083909448218,
+      "theta_deg": 1.6399246088806865,
+      "d_nm": 3.0065534009011117,
+      "N_layers": 1,
+      "kappa0": 0.011838913678921514,
+      "eps_substrate": 1.0881304806136853,
+      "kappa_eff": 1.6941020300525535e-05,
+      "eps_eff": 1.2564037500319716
+    },
+    {
+      "theta_rad": 0.0005847793531121356,
+      "theta_deg": 0.03350538887971583,
+      "d_nm": 2.9946092046003328,
+      "N_layers": 1,
+      "kappa0": 0.011838913678921514,
+      "eps_substrate": 1.1029808768381235,
+      "kappa_eff": 3.4624403923106794e-07,
+      "eps_eff": 1.2735406314104607
+    },
+    {
+      "theta_rad": 0.0005847793531121356,
+      "theta_deg": 0.03350538887971583,
+      "d_nm": 2.9946092046003328,
+      "N_layers": 1,
+      "kappa0": 0.011387014997319101,
+      "eps_substrate": 1.1029808768381235,
+      "kappa_eff": 3.3302768939655615e-07,
+      "eps_eff": 1.2735406314104607
+    }
+  ],
+  "objectives": [
+    {
+      "E_Casimir_Jm2": 5.914542917985468e-09,
+      "E_Casimir_mJm2": 5.914542917985467e-06,
+      "thickness_nm": 99.99964897527346,
+      "thermal_fraction": 173.2110874164951,
+      "E_Casimir_T300K_mJm2": -0.00014670886489512533,
+      "E_Casimir_multilayer_mJm2": -0.00014643989159254163,
+      "slab_thickness_correction": 0.9983946431135425
+    },
+    {
+      "E_Casimir_Jm2": 5.953009523268632e-09,
+      "E_Casimir_mJm2": 5.953009523268632e-06,
+      "thickness_nm": 99.99964897527346,
+      "thermal_fraction": 81.20418554032238,
+      "E_Casimir_T300K_mJm2": -0.00014670882864016235,
+      "E_Casimir_multilayer_mJm2": -0.00014643985406206933,
+      "slab_thickness_correction": 0.9983946341153371
+    },
+    {
+      "E_Casimir_Jm2": 5.996728719047713e-09,
+      "E_Casimir_mJm2": 5.996728719047714e-06,
+      "thickness_nm": 99.99958448324773,
+      "thermal_fraction": 168.57256204888043,
+      "E_Casimir_T300K_mJm2": -0.00014972180510844688,
+      "E_Casimir_multilayer_mJm2": -0.00014945107327615358,
+      "slab_thickness_correction": 0.9984166472874632
+    },
+    {
+      "E_Casimir_Jm2": 6.026749273573571e-09,
+      "E_Casimir_mJm2": 6.026749273573571e-06,
+      "thickness_nm": 99.99964897527346,
+      "thermal_fraction": 40.23480621716502,
+      "E_Casimir_T300K_mJm2": -0.00014670885872316016,
+      "E_Casimir_multilayer_mJm2": -0.00014643988520343377,
+      "slab_thickness_correction": 0.9983946415817097
+    },
+    {
+      "E_Casimir_Jm2": 6.040934130799555e-09,
+      "E_Casimir_mJm2": 6.040934130799555e-06,
+      "thickness_nm": 99.99739886617228,
+      "thermal_fraction": 35.065720007319186,
+      "E_Casimir_T300K_mJm2": -0.0001464364904904367,
+      "E_Casimir_multilayer_mJm2": -0.0001461673420081032,
+      "slab_thickness_correction": 0.998390357035466
+    },
+    {
+      "E_Casimir_Jm2": 6.204722477203751e-09,
+      "E_Casimir_mJm2": 6.204722477203751e-06,
+      "thickness_nm": 99.99692353832762,
+      "thermal_fraction": 24.486515266802083,
+      "E_Casimir_T300K_mJm2": -0.00014971061025902303,
+      "E_Casimir_multilayer_mJm2": -0.00014943948770861906,
+      "slab_thickness_correction": 0.9984139466193684
+    },
+    {
+      "E_Casimir_Jm2": 6.334664171378478e-09,
+      "E_Casimir_mJm2": 6.3346641713784774e-06,
+      "thickness_nm": 99.99734864464384,
+      "thermal_fraction": 20.5687759738706,
+      "E_Casimir_T300K_mJm2": -0.00015270391671766366,
+      "E_Casimir_multilayer_mJm2": -0.00015243112724354466,
+      "slab_thickness_correction": 0.9984355445322477
+    },
+    {
+      "E_Casimir_Jm2": 6.399522082517462e-09,
+      "E_Casimir_mJm2": 6.3995220825174615e-06,
+      "thickness_nm": 99.98909473332051,
+      "thermal_fraction": 11.323290199591945,
+      "E_Casimir_T300K_mJm2": -0.0001466650566849333,
+      "E_Casimir_multilayer_mJm2": -0.0001463945393190759,
+      "slab_thickness_correction": 0.998383747484092
+    },
+    {
+      "E_Casimir_Jm2": 6.502683808902922e-09,
+      "E_Casimir_mJm2": 6.502683808902922e-06,
+      "thickness_nm": 99.99734864464384,
+      "thermal_fraction": 10.345812048205623,
+      "E_Casimir_T300K_mJm2": -0.0001485252936293944,
+      "E_Casimir_multilayer_mJm2": -0.00014825487658734783,
+      "slab_thickness_correction": 0.9984054624627717
+    },
+    {
+      "E_Casimir_Jm2": 1.3688727807417762e-08,
+      "E_Casimir_mJm2": 1.3688727807417762e-05,
+      "thickness_nm": 99.9969236104709,
+      "thermal_fraction": 0.7714397195246876,
+      "E_Casimir_T300K_mJm2": -0.000149710439749293,
+      "E_Casimir_multilayer_mJm2": -0.0001494393132853554,
+      "slab_thickness_correction": 0.9984139189224845
+    },
+    {
+      "E_Casimir_Jm2": 1.9447054406280716e-07,
+      "E_Casimir_mJm2": 0.00019447054406280715,
+      "thickness_nm": 95.7636462465309,
+      "thermal_fraction": 0.033477434624974725,
+      "E_Casimir_T300K_mJm2": -0.00015463523346711234,
+      "E_Casimir_multilayer_mJm2": -0.00015354948196370056,
+      "slab_thickness_correction": 0.9932217941209183
+    },
+    {
+      "E_Casimir_Jm2": 2.643403971264122e-07,
+      "E_Casimir_mJm2": 0.0002643403971264122,
+      "thickness_nm": 99.9997399080033,
+      "thermal_fraction": 0.022762966705994352,
+      "E_Casimir_T300K_mJm2": -0.00014680798323919527,
+      "E_Casimir_multilayer_mJm2": -0.0001465389650063973,
+      "slab_thickness_correction": 0.9983954678897242
+    },
+    {
+      "E_Casimir_Jm2": 2.080033327761631e-06,
+      "E_Casimir_mJm2": 0.002080033327761631,
+      "thickness_nm": 67.36959345107722,
+      "thermal_fraction": 0.004858260807320456,
+      "E_Casimir_T300K_mJm2": -0.0002995503995384667,
+      "E_Casimir_multilayer_mJm2": -0.00028428885156163886,
+      "slab_thickness_correction": 0.9491461232205203
+    },
+    {
+      "E_Casimir_Jm2": 2.7472172855831204e-06,
+      "E_Casimir_mJm2": 0.0027472172855831202,
+      "thickness_nm": 90.25574587681805,
+      "thermal_fraction": 0.0027772423949661475,
+      "E_Casimir_T300K_mJm2": -0.00019899408039374377,
+      "E_Casimir_multilayer_mJm2": -0.00019635825720766176,
+      "slab_thickness_correction": 0.9869448041147812
+    },
+    {
+      "E_Casimir_Jm2": 2.7735440233652194e-06,
+      "E_Casimir_mJm2": 0.0027735440233652192,
+      "thickness_nm": 85.42785524744764,
+      "thermal_fraction": 0.002781668395114813,
+      "E_Casimir_T300K_mJm2": -0.00020205882180190408,
+      "E_Casimir_multilayer_mJm2": -0.00019901202093747477,
+      "slab_thickness_correction": 0.9851077453765438
+    },
+    {
+      "E_Casimir_Jm2": 2.9211202052333874e-06,
+      "E_Casimir_mJm2": 0.0029211202052333873,
+      "thickness_nm": 84.25976208737701,
+      "thermal_fraction": 0.0027779366794101917,
+      "E_Casimir_T300K_mJm2": -0.00021492663175133738,
+      "E_Casimir_multilayer_mJm2": -0.00021000425621680582,
+      "slab_thickness_correction": 0.9772538593674676
+    },
+    {
+      "E_Casimir_Jm2": 3.6177309693819514e-06,
+      "E_Casimir_mJm2": 0.0036177309693819514,
+      "thickness_nm": 71.99627151368469,
+      "thermal_fraction": 0.0027777185885307087,
+      "E_Casimir_T300K_mJm2": -0.00029579794509775406,
+      "E_Casimir_multilayer_mJm2": -0.00028387667104047033,
+      "slab_thickness_correction": 0.9598005851639433
+    },
+    {
+      "E_Casimir_Jm2": 3.8787050219915945e-06,
+      "E_Casimir_mJm2": 0.0038787050219915944,
+      "thickness_nm": 57.18300146309187,
+      "thermal_fraction": 0.0037799569540639265,
+      "E_Casimir_T300K_mJm2": -0.0005316321015038568,
+      "E_Casimir_multilayer_mJm2": -0.0005003657559635365,
+      "slab_thickness_correction": 0.9412376504779197
+    },
+    {
+      "E_Casimir_Jm2": 3.887709193664805e-06,
+      "E_Casimir_mJm2": 0.0038877091936648047,
+      "thickness_nm": 77.75557324246388,
+      "thermal_fraction": 0.002777239836020297,
+      "E_Casimir_T300K_mJm2": -0.0003276874197690251,
+      "E_Casimir_multilayer_mJm2": -0.0003190353182582179,
+      "slab_thickness_correction": 0.9736992054182957
+    },
+    {
+      "E_Casimir_Jm2": 3.918718887191797e-06,
+      "E_Casimir_mJm2": 0.003918718887191797,
+      "thickness_nm": 78.62852491619896,
+      "thermal_fraction": 0.002777239835967742,
+      "E_Casimir_T300K_mJm2": -0.00033141540155173517,
+      "E_Casimir_multilayer_mJm2": -0.0003230019360958274,
+      "slab_thickness_correction": 0.9747168277424662
+    },
+    {
+      "E_Casimir_Jm2": 4.228056693124232e-06,
+      "E_Casimir_mJm2": 0.0042280566931242325,
+      "thickness_nm": 48.01141823017215,
+      "thermal_fraction": 0.0035685731214097636,
+      "E_Casimir_T300K_mJm2": -0.0005859552667381949,
+      "E_Casimir_multilayer_mJm2": -0.0005420760115888472,
+      "slab_thickness_correction": 0.9251571268595472
+    },
+    {
+      "E_Casimir_Jm2": 4.264423045293239e-06,
+      "E_Casimir_mJm2": 0.0042644230452932395,
+      "thickness_nm": 62.79246480639279,
+      "thermal_fraction": 0.00277766357943556,
+      "E_Casimir_T300K_mJm2": -0.00038404132869660954,
+      "E_Casimir_multilayer_mJm2": -0.0003652110940714118,
+      "slab_thickness_correction": 0.9510331041452859
+    },
+    {
+      "E_Casimir_Jm2": 5.318843874113307e-06,
+      "E_Casimir_mJm2": 0.005318843874113307,
+      "thickness_nm": 51.53685551086379,
+      "thermal_fraction": 0.00277731720585521,
+      "E_Casimir_T300K_mJm2": -0.0005508790890297274,
+      "E_Casimir_multilayer_mJm2": -0.0005106684987031184,
+      "slab_thickness_correction": 0.9270447111805902
+    },
+    {
+      "E_Casimir_Jm2": 6.127187036965163e-06,
+      "E_Casimir_mJm2": 0.006127187036965163,
+      "thickness_nm": 57.71479949411791,
+      "thermal_fraction": 0.002777239834311131,
+      "E_Casimir_T300K_mJm2": -0.0006678009178663918,
+      "E_Casimir_multilayer_mJm2": -0.0006369954236155385,
+      "slab_thickness_correction": 0.9539134467038503
+    },
+    {
+      "E_Casimir_Jm2": 6.949499904446083e-06,
+      "E_Casimir_mJm2": 0.006949499904446083,
+      "thickness_nm": 42.837110432657326,
+      "thermal_fraction": 0.002777239834251859,
+      "E_Casimir_T300K_mJm2": -0.000862740442401254,
+      "E_Casimir_multilayer_mJm2": -0.0007983688550875753,
+      "slab_thickness_correction": 0.9254073644758072
+    },
+    {
+      "E_Casimir_Jm2": 7.069325557887147e-06,
+      "E_Casimir_mJm2": 0.0070693255578871475,
+      "thickness_nm": 41.79550574086729,
+      "thermal_fraction": 0.0027775310174201,
+      "E_Casimir_T300K_mJm2": -0.0008893766977184205,
+      "E_Casimir_multilayer_mJm2": -0.0008098900884987519,
+      "slab_thickness_correction": 0.910644806918329
+    },
+    {
+      "E_Casimir_Jm2": 8.5767221106828e-06,
+      "E_Casimir_mJm2": 0.0085767221106828,
+      "thickness_nm": 32.470740044519204,
+      "thermal_fraction": 0.0027772398364666324,
+      "E_Casimir_T300K_mJm2": -0.0012566991983947796,
+      "E_Casimir_multilayer_mJm2": -0.0011072300954157934,
+      "slab_thickness_correction": 0.8810756291842026
+    },
+    {
+      "E_Casimir_Jm2": 9.481195275781137e-06,
+      "E_Casimir_mJm2": 0.009481195275781137,
+      "thickness_nm": 30.807975512370447,
+      "thermal_fraction": 0.0027772398342298422,
+      "E_Casimir_T300K_mJm2": -0.0014486448254979988,
+      "E_Casimir_multilayer_mJm2": -0.0012878178426856785,
+      "slab_thickness_correction": 0.8889938873181124
+    },
+    {
+      "E_Casimir_Jm2": 1.1773278032256957e-05,
+      "E_Casimir_mJm2": 0.011773278032256957,
+      "thickness_nm": 24.205055621555893,
+      "thermal_fraction": 0.0027772398342296627,
+      "E_Casimir_T300K_mJm2": -0.0021280953585566744,
+      "E_Casimir_multilayer_mJm2": -0.0018803672686189832,
+      "slab_thickness_correction": 0.8836053425872036
+    },
+    {
+      "E_Casimir_Jm2": 1.796753782973123e-05,
+      "E_Casimir_mJm2": 0.01796753782973123,
+      "thickness_nm": 22.042653030096133,
+      "thermal_fraction": 0.0029190672066272553,
+      "E_Casimir_T300K_mJm2": -0.003951677022732109,
+      "E_Casimir_multilayer_mJm2": -0.0034642538218222873,
+      "slab_thickness_correction": 0.8766559279334883
+    },
+    {
+      "E_Casimir_Jm2": 1.8203699256895244e-05,
+      "E_Casimir_mJm2": 0.018203699256895245,
+      "thickness_nm": 19.09793115592614,
+      "thermal_fraction": 0.002881509405317255,
+      "E_Casimir_T300K_mJm2": -0.004067866398348044,
+      "E_Casimir_multilayer_mJm2": -0.0035861377658629,
+      "slab_thickness_correction": 0.881579134493207
+    },
+    {
+      "E_Casimir_Jm2": 2.4274252963922326e-05,
+      "E_Casimir_mJm2": 0.024274252963922327,
+      "thickness_nm": 17.073680000979078,
+      "thermal_fraction": 0.0027772398342296627,
+      "E_Casimir_T300K_mJm2": -0.005795883312702466,
+      "E_Casimir_multilayer_mJm2": -0.004930950414974481,
+      "slab_thickness_correction": 0.8507714283571493
+    },
+    {
+      "E_Casimir_Jm2": 3.1951921201368496e-05,
+      "E_Casimir_mJm2": 0.03195192120136849,
+      "thickness_nm": 13.108019098113125,
+      "thermal_fraction": 0.002777239834233901,
+      "E_Casimir_T300K_mJm2": -0.008703557221986506,
+      "E_Casimir_multilayer_mJm2": -0.007723765144115634,
+      "slab_thickness_correction": 0.8874229476294562
+    },
+    {
+      "E_Casimir_Jm2": 3.8246279627529125e-05,
+      "E_Casimir_mJm2": 0.03824627962752913,
+      "thickness_nm": 8.340236323890949,
+      "thermal_fraction": 0.0027927699581556976,
+      "E_Casimir_T300K_mJm2": -0.012231969679761995,
+      "E_Casimir_multilayer_mJm2": -0.010612019746271425,
+      "slab_thickness_correction": 0.8674965804179682
+    },
+    {
+      "E_Casimir_Jm2": 5.065517375036851e-05,
+      "E_Casimir_mJm2": 0.050655173750368515,
+      "thickness_nm": 8.321426380315621,
+      "thermal_fraction": 0.0027772398368724064,
+      "E_Casimir_T300K_mJm2": -0.016940048899811967,
+      "E_Casimir_multilayer_mJm2": -0.01503995543391363,
+      "slab_thickness_correction": 0.8877054913085007
+    },
+    {
+      "E_Casimir_Jm2": 5.362394009045723e-05,
+      "E_Casimir_mJm2": 0.053623940090457234,
+      "thickness_nm": 10.671002078564722,
+      "thermal_fraction": 0.002777239834229974,
+      "E_Casimir_T300K_mJm2": -0.01751186444441098,
+      "E_Casimir_multilayer_mJm2": -0.015341947644399707,
+      "slab_thickness_correction": 0.8760010593527996
+    },
+    {
+      "E_Casimir_Jm2": 5.560070351335127e-05,
+      "E_Casimir_mJm2": 0.05560070351335127,
+      "thickness_nm": 6.716958199729232,
+      "thermal_fraction": 0.002777239834229693,
+      "E_Casimir_T300K_mJm2": -0.019086661350256686,
+      "E_Casimir_multilayer_mJm2": -0.01424270599178519,
+      "slab_thickness_correction": 0.7460597582602673
+    },
+    {
+      "E_Casimir_Jm2": 6.612234289941291e-05,
+      "E_Casimir_mJm2": 0.0661223428994129,
+      "thickness_nm": 5.124967002857643,
+      "thermal_fraction": 0.0027772398342436966,
+      "E_Casimir_T300K_mJm2": -0.024393140810754714,
+      "E_Casimir_multilayer_mJm2": -0.01965841047728377,
+      "slab_thickness_correction": 0.8054766519923082
+    },
+    {
+      "E_Casimir_Jm2": 7.047186323917542e-05,
+      "E_Casimir_mJm2": 0.07047186323917543,
+      "thickness_nm": 5.124967002857643,
+      "thermal_fraction": 0.0027772398342296627,
+      "E_Casimir_T300K_mJm2": -0.026212196087397253,
+      "E_Casimir_multilayer_mJm2": -0.021292822634244726,
+      "slab_thickness_correction": 0.8118589363942689
+    },
+    {
+      "E_Casimir_Jm2": 7.878712904957611e-05,
+      "E_Casimir_mJm2": 0.0787871290495761,
+      "thickness_nm": 13.349664405045356,
+      "thermal_fraction": 0.002777239834229662,
+      "E_Casimir_T300K_mJm2": -0.026850537235738867,
+      "E_Casimir_multilayer_mJm2": -0.02537730208111466,
+      "slab_thickness_correction": 0.9449866017146017
+    },
+    {
+      "E_Casimir_Jm2": 7.878712904957611e-05,
+      "E_Casimir_mJm2": 0.0787871290495761,
+      "thickness_nm": 13.349664405045356,
+      "thermal_fraction": 0.002777239834229662,
+      "E_Casimir_T300K_mJm2": -0.026850537235738867,
+      "E_Casimir_multilayer_mJm2": -0.02537730208111466,
+      "slab_thickness_correction": 0.9449866017146017
+    },
+    {
+      "E_Casimir_Jm2": 8.813376908609366e-05,
+      "E_Casimir_mJm2": 0.08813376908609366,
+      "thickness_nm": 5.032729386787165,
+      "thermal_fraction": 0.0027772398342296627,
+      "E_Casimir_T300K_mJm2": -0.03361792783419402,
+      "E_Casimir_multilayer_mJm2": -0.027970254588941777,
+      "slab_thickness_correction": 0.831372595585102
+    },
+    {
+      "E_Casimir_Jm2": 0.00010962528711783905,
+      "E_Casimir_mJm2": 0.10962528711783905,
+      "thickness_nm": 5.032729386787165,
+      "thermal_fraction": 0.0027772398342296623,
+      "E_Casimir_T300K_mJm2": -0.042839872873455614,
+      "E_Casimir_multilayer_mJm2": -0.036487027220162796,
+      "slab_thickness_correction": 0.8508636445841677
+    },
+    {
+      "E_Casimir_Jm2": 0.00011765411523136378,
+      "E_Casimir_mJm2": 0.11765411523136378,
+      "thickness_nm": 5.00306362109781,
+      "thermal_fraction": 0.002777239834229663,
+      "E_Casimir_T300K_mJm2": -0.046582469983839234,
+      "E_Casimir_multilayer_mJm2": -0.040246929907138206,
+      "slab_thickness_correction": 0.8629903508200576
+    },
+    {
+      "E_Casimir_Jm2": 0.00012998883107536197,
+      "E_Casimir_mJm2": 0.12998883107536197,
+      "thickness_nm": 5.00026673585522,
+      "thermal_fraction": 0.002777240687832065,
+      "E_Casimir_T300K_mJm2": -0.04997947857280651,
+      "E_Casimir_multilayer_mJm2": -0.04141985537508852,
+      "slab_thickness_correction": 0.8281264806395103
+    },
+    {
+      "E_Casimir_Jm2": 0.0001707795470240549,
+      "E_Casimir_mJm2": 0.1707795470240549,
+      "thickness_nm": 5.0013107475865946,
+      "thermal_fraction": 0.0027772398342429012,
+      "E_Casimir_T300K_mJm2": -0.06992088085128732,
+      "E_Casimir_multilayer_mJm2": -0.06239927453118962,
+      "slab_thickness_correction": 0.8909406020629835
+    },
+    {
+      "E_Casimir_Jm2": 0.00017330239104674998,
+      "E_Casimir_mJm2": 0.17330239104675,
+      "thickness_nm": 5.001302513314016,
+      "thermal_fraction": 0.0027772398342302746,
+      "E_Casimir_T300K_mJm2": -0.07097936970984077,
+      "E_Casimir_multilayer_mJm2": -0.06334475936398118,
+      "slab_thickness_correction": 0.8909515977461944
+    },
+    {
+      "E_Casimir_Jm2": 0.00026956464676858305,
+      "E_Casimir_mJm2": 0.26956464676858305,
+      "thickness_nm": 5.000181366028443,
+      "thermal_fraction": 0.0027772398350267248,
+      "E_Casimir_T300K_mJm2": -0.11195863529419818,
+      "E_Casimir_multilayer_mJm2": -0.0999792999028463,
+      "slab_thickness_correction": 0.8914695165729074
+    },
+    {
+      "E_Casimir_Jm2": 0.00028769481381699314,
+      "E_Casimir_mJm2": 0.28769481381699313,
+      "thickness_nm": 5.001248633946381,
+      "thermal_fraction": 0.002777239834229996,
+      "E_Casimir_T300K_mJm2": -0.11984831666382018,
+      "E_Casimir_multilayer_mJm2": -0.10710475532118588,
+      "slab_thickness_correction": 0.8921173523635708
+    },
+    {
+      "E_Casimir_Jm2": 0.00028769481381699574,
+      "E_Casimir_mJm2": 0.28769481381699574,
+      "thickness_nm": 5.001248633946381,
+      "thermal_fraction": 0.002777239834229971,
+      "E_Casimir_T300K_mJm2": -0.11984831666382018,
+      "E_Casimir_multilayer_mJm2": -0.10710475532118588,
+      "slab_thickness_correction": 0.8921173523635708
+    }
+  ]
+}
