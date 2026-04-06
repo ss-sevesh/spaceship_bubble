@@ -45,9 +45,9 @@ References
 5. Parsegian, V.A. (2006) Van der Waals Forces. Cambridge UP.
 """
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __author__  = "Sevesh SS"
-__email__   = "sevesh@kec.edu.in"
+__email__   = "seveshss.24aim@kongu.edu"
 __license__ = "MIT"
 
 from casimir_tools._core import (

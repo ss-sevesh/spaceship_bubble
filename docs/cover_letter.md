@@ -4,11 +4,11 @@
 
 ---
 
-**[YOUR FULL NAME]**  
-[Department of Electronics and Communication Engineering / Dept. of Physics — choose correct dept.]  
-Kumaraguru College of Technology  
-Coimbatore 641049, Tamil Nadu, India  
-Email: [your.email@kct.ac.in]  
+**Sevesh SS**  
+Department of Artificial Intelligence and Machine Learning  
+Kongu Engineering College  
+Perundurai, Erode 638060, Tamil Nadu, India  
+Email: seveshss.24aim@kongu.edu  
 ORCID: [0000-0000-0000-0000]  
 
 Date: April 2026
@@ -96,10 +96,10 @@ Abstract: 143 words (IEEE TNano limit: 150 ✓)
 
 Sincerely,
 
-**[YOUR FULL NAME]**  
-[Year] Student, [Department]  
-Kumaraguru College of Technology, Coimbatore, India  
-[your.email@kct.ac.in]
+**Sevesh SS**  
+Final Year Student, Dept. of Artificial Intelligence and Machine Learning  
+Kongu Engineering College, Erode, India  
+seveshss.24aim@kongu.edu
 
 ---
 

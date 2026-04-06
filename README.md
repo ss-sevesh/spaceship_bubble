@@ -132,7 +132,7 @@ E_chiral = ct.casimir_energy_chiral(eps_static1=164.27, eps_static2=8.46, d=10e-
 d_nm, F  = ct.sweep_force(eps1=164.27, eps2=8.46, d_min_nm=5.0, d_max_nm=100.0, n_points=100)
 ```
 
-Current version: `v0.1.3` — to publish next release: `git tag casimir-tools-v0.X.X && git push --tags`
+Current version: `v0.1.4` — to publish next release: `git tag casimir-tools-v0.X.X && git push --tags`
 
 ---
 
