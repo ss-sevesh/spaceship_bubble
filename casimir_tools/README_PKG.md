@@ -7,41 +7,79 @@ Developed as part of the *AI-driven Casimir Stiction Suppression* project (KEC 2
 ## Installation
 
 ```bash
+# Core (numpy + scipy only)
 pip install casimir-tools
+
+# With plotting support (matplotlib)
+pip install "casimir-tools[plot]"
+
+# Full dev install
+pip install "casimir-tools[plot,dev]"
 ```
 
 ## Quick Start
 
 ```python
-from casimir_tools import casimir_energy, casimir_energy_chiral, MATERIALS
+import casimir_tools as ct
 
-# Standard Lifshitz energy: Te | vacuum | WTe2 at 10 nm
-te   = MATERIALS["Te"]
-wte2 = MATERIALS["WTe2_hex"]
+# ── Material presets ──────────────────────────────────────────────────────────
+te   = ct.MATERIALS["Te"]        # eps_static, eps_perp, eps_par
+wte2 = ct.MATERIALS["WTe2_hex"]
 
-E = casimir_energy(te["eps_static"], wte2["eps_static"], d=10e-9)
+# ── Standard Lifshitz energy (T = 0) ─────────────────────────────────────────
+# Keyword args: eps_static1, eps_static2, d
+E = ct.casimir_energy(eps_static1=te["eps_static"],
+                      eps_static2=wte2["eps_static"],
+                      d=10e-9)
 print(f"E = {E*1e3:.4f} mJ/m²")   # ~ -0.20 mJ/m²
 
-# With chiral correction κ = 0.7 → near-zero Casimir
-E_chiral = casimir_energy_chiral(te["eps_static"], wte2["eps_static"],
-                                  d=10e-9, kappa=0.7)
+# ── Chiral correction (κ² term) ───────────────────────────────────────────────
+# kappa=0.7 drives Casimir energy toward zero / repulsive regime
+E_chiral = ct.casimir_energy_chiral(eps_static1=te["eps_static"],
+                                     eps_static2=wte2["eps_static"],
+                                     d=10e-9, kappa=0.7)
 print(f"E_chiral = {E_chiral*1e3:.4f} mJ/m²")
 
-# Finite temperature (T = 300 K, Matsubara summation)
-from casimir_tools import casimir_energy_finite_T
-E_300K = casimir_energy_finite_T(te["eps_static"], wte2["eps_static"],
-                                  d=10e-9, T=300.0)
+# ── Finite temperature (T = 300 K, Matsubara summation) ──────────────────────
+E_300K = ct.casimir_energy_finite_T(eps_static1=te["eps_static"],
+                                     eps_static2=wte2["eps_static"],
+                                     d=10e-9, T=300.0)
 
-# Anisotropic uniaxial Lifshitz (Te crystal tensor)
-from casimir_tools import casimir_energy_aniso
-E_aniso = casimir_energy_aniso(te["eps_perp"], te["eps_par"],
-                                wte2["eps_perp"], wte2["eps_par"],
-                                d=10e-9)
+# ── Anisotropic uniaxial Lifshitz (Te crystal tensor) ────────────────────────
+E_aniso = ct.casimir_energy_aniso(eps_perp1=te["eps_perp"], eps_par1=te["eps_par"],
+                                   eps_perp2=wte2["eps_perp"], eps_par2=wte2["eps_par"],
+                                   d=10e-9)
 
-# 2-oscillator Sellmeier model
-from casimir_tools import casimir_energy_2osc, TE_2OSC, WTE2_2OSC
-E_2osc = casimir_energy_2osc(**TE_2OSC, **{f"{k}_2": v for k, v in WTE2_2OSC.items()},
-                               d=10e-9)
+# ── 2-oscillator Sellmeier model ──────────────────────────────────────────────
+E_2osc = ct.casimir_energy_2osc(**ct.TE_2OSC,
+                                 **{f"{k}_2": v for k, v in ct.WTE2_2OSC.items()},
+                                 d=10e-9)
+```
+
+## Force Sweep & Plotting
+
+`sweep_force` returns a **tuple** `(d_nm, forces)` — d values are already in nm.
+
+```python
+import casimir_tools as ct
+import numpy as np
+import matplotlib.pyplot as plt   # requires: pip install "casimir-tools[plot]"
+
+EPS_TE = 164.27
+
+# Returns (d_nm_array, force_array) — do NOT pass a pre-built d array
+d_nm, forces = ct.sweep_force(eps1=EPS_TE, eps2=EPS_TE,
+                               d_min_nm=5.0, d_max_nm=100.0, n_points=100)
+
+plt.figure(figsize=(10, 6))
+plt.plot(d_nm, np.abs(forces), color='#007acc', linewidth=2.5)
+# d_nm is already in nm — no * 1e9 conversion needed
+plt.yscale('log')
+plt.xlabel("Separation Distance (nm)")
+plt.ylabel("|F| (N/m²)")
+plt.title("casimir-tools: Te Quantum Force Profile")
+plt.grid(True, which="both", alpha=0.3)
+plt.show()
 ```
 
 ## Physics

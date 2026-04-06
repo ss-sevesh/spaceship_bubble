@@ -37,9 +37,9 @@ pip install casimir-tools --no-deps   # --no-deps avoids Colab numpy restart war
 import casimir_tools as ct
 print(ct.__version__)  # 0.1.1
 
-E = ct.casimir_energy(eps1=164.27, eps2=164.27, d=10e-9)
-E_chiral = ct.casimir_energy_chiral(eps1=164.27, eps2=164.27, d=10e-9, kappa=0.5)
-F = ct.casimir_force(eps1=164.27, eps2=164.27, d=10e-9)
+E = ct.casimir_energy(eps_static1=164.27, eps_static2=164.27, d=10e-9)
+E_chiral = ct.casimir_energy_chiral(eps_static1=164.27, eps_static2=164.27, d=10e-9, kappa=0.5)
+F = ct.casimir_force(eps_static1=164.27, eps_static2=164.27, d=10e-9)
 ```
 
 ### Remaining (user action only)

@@ -37,10 +37,10 @@ plot = ["matplotlib>=3.6"]
 dev  = ["pytest>=7", "ruff", "mypy"]
 
 [project.urls]
-Homepage      = "https://github.com/seveshss/casimir-tools"
-Repository    = "https://github.com/seveshss/casimir-tools"
-Documentation = "https://casimir-tools.readthedocs.io"
-"Bug Tracker" = "https://github.com/seveshss/casimir-tools/issues"
+Homepage      = "https://github.com/ss-sevesh/spaceship_bubble/tree/master/casimir_tools"
+Repository    = "https://github.com/ss-sevesh/spaceship_bubble/tree/master/casimir_tools"
+Documentation = "https://github.com/ss-sevesh/spaceship_bubble/tree/master/casimir_tools#readme"
+"Bug Tracker" = "https://github.com/ss-sevesh/spaceship_bubble/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["casimir_tools"]
