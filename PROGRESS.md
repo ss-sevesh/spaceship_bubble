@@ -2,11 +2,58 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-06 (Session 28)
+**Last updated**: 2026-04-06 (Session 29)
 
 ---
 
-## Session 28 — Pre-Submission Polish: Integration Fixes + Docs + Fresh Figures (Current)
+## Session 29 — GitHub Launch + PyPI Publish (Current)
+
+### Summary
+
+Connected project to GitHub, published `casimir-tools` to PyPI, and fixed package structure bug. Project is now fully public and installable.
+
+### Actions Completed
+
+| Action | Detail |
+|--------|--------|
+| `.gitignore` hardened | Added `node_modules/`, `.pytest_cache/`, `.claude/`, `*.log` — prevented ~100 MB node_modules from being committed |
+| `.env.example` created | Documents `MP_API_KEY` requirement without exposing real key |
+| `LICENSE` added | MIT License, Sevesh SS 2026 |
+| GitHub repo created | **https://github.com/ss-sevesh/spaceship_bubble** — public, 79 files in initial commit |
+| GitHub `pypi` environment created | Required for OIDC trusted publishing |
+| PyPI trusted publisher configured | User set up on pypi.org: project=`casimir-tools`, workflow=`publish_casimir_tools.yml`, env=`pypi` |
+| `casimir-tools v0.1.0` published | **BROKEN** — wheel was empty due to wrong package structure (files at root instead of nested `casimir_tools/casimir_tools/`) |
+| `casimir-tools v0.1.1` published | **FIXED** — restructured into proper nested layout; wheel confirmed correct via zip inspection |
+| v0.1.0 workflow run deleted | Cleaned up GitHub Actions history |
+| Workflow bug fixed | Added `environment: pypi` to `publish_casimir_tools.yml` (OIDC requires environment claim) |
+
+### Package is Live
+
+```bash
+pip install casimir-tools --no-deps   # --no-deps avoids Colab numpy restart warning
+```
+
+```python
+import casimir_tools as ct
+print(ct.__version__)  # 0.1.1
+
+E = ct.casimir_energy(eps1=164.27, eps2=164.27, d=10e-9)
+E_chiral = ct.casimir_energy_chiral(eps1=164.27, eps2=164.27, d=10e-9, kappa=0.5)
+F = ct.casimir_force(eps1=164.27, eps2=164.27, d=10e-9)
+```
+
+### Remaining (user action only)
+
+- [ ] **Yank PyPI v0.1.0**: https://pypi.org/manage/project/casimir-tools/releases/0.1.0/ → "Yank release"
+- [ ] **Fill personal details**: `docs/cover_letter.md` — name, email, ORCID, institution
+- [ ] **ORCID**: Register at https://orcid.org/register (5 min, free)
+- [ ] **Faculty co-author**: Consider adding advisor for credibility (optional)
+- [ ] **Convert draft to LaTeX/PDF** for ScholarOne upload
+- [ ] Add PyPI + GitHub links to IEEE cover letter under "Code Availability"
+
+---
+
+## Session 28 — Pre-Submission Polish: Integration Fixes + Docs + Fresh Figures
 
 ### Summary
 
