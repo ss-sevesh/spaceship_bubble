@@ -9,7 +9,7 @@ Department of Artificial Intelligence and Machine Learning
 Kongu Engineering College  
 Perundurai, Erode 638060, Tamil Nadu, India  
 Email: seveshss.24aim@kongu.edu  
-ORCID: [0000-0000-0000-0000]  
+ORCID: 0009-0007-5498-8076  
 
 Date: April 2026
 

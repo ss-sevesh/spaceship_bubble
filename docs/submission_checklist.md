@@ -51,7 +51,7 @@
 ### Personal / Administrative
 - [ ] **Fill in your real full name** in `docs/cover_letter.md` and `docs/ieee_draft_outline.md` author line
 - [ ] **Add email address** (correspondence author)
-- [ ] **Get/add ORCID** — register free at https://orcid.org/register (takes 2 min)
+- [x] **ORCID** — 0009-0007-5498-8076 (registered)
 - [ ] **Full institution name** — e.g. "Dept. of ECE, Kumaraguru College of Technology, Coimbatore 641049, Tamil Nadu, India"
 - [ ] **Faculty advisor/PI** — consider adding as co-author for credibility (IEEE allows UG solo papers but faculty co-author helps)
 - [ ] **SERB grant number** — replace `[Grant No. TBD]` in Acknowledgments once assigned
