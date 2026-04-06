@@ -2,11 +2,63 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-06 (Session 30)
+**Last updated**: 2026-04-06 (Session 31)
 
 ---
 
-## Session 30 — Package Audit, Docs Fix, v0.1.3 PyPI Release (Current)
+## Session 31 — Author Details, Institution Fix, GitHub Polish, v0.1.5 (Current)
+
+### Summary
+
+Full author details filled across all files. Institution corrected from "Kumaraguru College of Technology" to **Kongu Engineering College, Erode**. ORCID registered and added. GitHub repo made fully professional (topics, homepage, releases). PyPI bumped to v0.1.5 with all corrections live.
+
+### Actions Completed
+
+| Action | Detail |
+|--------|--------|
+| **ORCID registered** | 0009-0007-5498-8076 — added to cover letter, submission checklist |
+| **Email corrected** | `sevesh@kec.edu.in` → `seveshss.24aim@kongu.edu` across all files |
+| **Institution fixed** | "Kumaraguru College of Technology" → "Kongu Engineering College, Erode" |
+| **Dept fixed** | ECE → Artificial Intelligence and Machine Learning (from `24aim` email code) |
+| **cover_letter.md** | Header + signature fully filled: name, dept, institution, email, ORCID |
+| **serb_proposal_draft.md** | Institution, dept, PI details all corrected throughout |
+| **ieee_draft_outline.md** | Author line now has email + ORCID; acknowledgment institution fixed |
+| **submission_checklist.md** | Institution and ORCID items marked ✅ |
+| **GitHub repo** | Added 14 topics, homepage → PyPI, GitHub Releases for v0.1.3/0.1.4/0.1.5 |
+| **PyPI v0.1.4** | Correct author email in package metadata |
+| **PyPI v0.1.5** | Correct institution in PyPI README — all details now live |
+| **README.md** | Fixed stale `eps1=` kwargs example, current version updated |
+| **All stale v0.1.0 references** | Cleaned from docs/, CLAUDE.md, submission_checklist |
+
+### Author Details (canonical — use everywhere)
+
+| Field | Value |
+|-------|-------|
+| Name | Sevesh SS |
+| Email | seveshss.24aim@kongu.edu |
+| ORCID | 0009-0007-5498-8076 |
+| Institution | Kongu Engineering College (KEC) |
+| Department | Artificial Intelligence and Machine Learning |
+| Address | Perundurai, Erode 638060, Tamil Nadu, India |
+
+### Current Package State
+
+| Item | Value |
+|------|-------|
+| PyPI latest | v0.1.5 |
+| GitHub latest release | casimir-tools-v0.1.5 |
+| Tests | 82 passed, 5 skipped |
+| All workflows | ✅ green |
+
+### Remaining (user action only)
+
+- [ ] **Faculty co-author** — approach IIT professor (Madras/Bombay/Delhi, nanophotonics/MEMS dept); draft email ready on request
+- [ ] **Convert IEEE draft to LaTeX/PDF** for ScholarOne upload
+- [ ] **Add college** to ORCID profile at orcid.org → Edit Profile → Employment (optional, not urgent)
+
+---
+
+## Session 30 — Package Audit, Docs Fix, v0.1.3 PyPI Release
 
 ### Summary
 
