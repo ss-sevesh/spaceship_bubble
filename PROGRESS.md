@@ -2,11 +2,69 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-06 (Session 29)
+**Last updated**: 2026-04-06 (Session 30)
 
 ---
 
-## Session 29 — GitHub Launch + PyPI Publish (Current)
+## Session 30 — Package Audit, Docs Fix, v0.1.3 PyPI Release (Current)
+
+### Summary
+
+Full audit of the `casimir-tools` PyPI package after user tried to use it in a notebook and hit errors. Found 7 bugs across README, pyproject.toml, and PROGRESS.md. Fixed all of them, added CI test workflow, and published two patch releases (v0.1.2 → v0.1.3). All systems verified green: 82/87 tests pass locally, GitHub Actions clean, v0.1.3 live on PyPI.
+
+### Bugs Found & Fixed
+
+| # | File | Bug | Fix |
+|---|------|-----|-----|
+| 1 | `README_PKG.md` | Wrong kwargs `eps1=`/`eps2=` — throws `TypeError` on energy functions | Changed to `eps_static1=`/`eps_static2=` |
+| 2 | `README_PKG.md` | `sweep_force` not documented at all | Added full section showing it returns `(d_nm, forces)` tuple |
+| 3 | `README_PKG.md` | `matplotlib` optional extra never mentioned | Added `pip install "casimir-tools[plot]"` |
+| 4 | `README_PKG.md` | `casimir_energy_2osc` example used `**ct.TE_2OSC` (wrong keys) | Fixed to `**{f"{k}_1": v for k, v in ct.TE_2OSC.items()}` |
+| 5 | `README_PKG.md` | Bibtex citation: wrong URL + stale version `0.1.0` | Fixed URL to `ss-sevesh/spaceship_bubble`, version to `0.1.3` |
+| 6 | `pyproject.toml` | All URLs pointed to non-existent `seveshss/casimir-tools` repo | Corrected to `ss-sevesh/spaceship_bubble/tree/master/casimir_tools` |
+| 7 | `PROGRESS.md` | Example code used `eps1=` kwargs that crash | Fixed to `eps_static1=` |
+
+### Infrastructure Added
+
+| Item | Detail |
+|------|--------|
+| `.github/workflows/test_casimir_tools.yml` | CI: runs pytest on every push/PR touching `casimir_tools/`, Python 3.10/3.11/3.12 |
+
+### Releases Published
+
+| Version | What changed |
+|---------|-------------|
+| v0.1.2 | README docs (bugs 1–3, 6, 7), CI workflow |
+| v0.1.3 | README docs (bugs 4–5), bibtex fix |
+
+### Verified Status
+
+| System | Status |
+|--------|--------|
+| Local tests | 82 passed, 5 skipped, 0 failed |
+| GitHub Actions (Test CI) | ✅ success |
+| GitHub Actions (PyPI Publish) | ✅ success — v0.1.3 live |
+| PyPI | ✅ `pypi.org/project/casimir-tools/0.1.3/` |
+
+### Correct Usage (copy-paste safe)
+
+```python
+import casimir_tools as ct
+
+E       = ct.casimir_energy(eps_static1=164.27, eps_static2=164.27, d=10e-9)
+E_chiral= ct.casimir_energy_chiral(eps_static1=164.27, eps_static2=164.27, d=10e-9, kappa=0.5)
+E_T     = ct.casimir_energy_finite_T(eps_static1=164.27, eps_static2=164.27, d=50e-9, T=300)
+d_nm, F = ct.sweep_force(eps1=164.27, eps2=164.27, d_min_nm=5.0, d_max_nm=100.0, n_points=100)
+```
+
+### Remaining (user action only)
+
+- [ ] **Yank PyPI v0.1.0**: `pypi.org/manage/project/casimir-tools/releases/0.1.0/` → "Yank release"
+- [ ] Upgrade GitHub Actions Node: bump `actions/checkout@v4→v5`, `actions/setup-python@v5→v6` before June 2026
+
+---
+
+## Session 29 — GitHub Launch + PyPI Publish
 
 ### Summary
 
