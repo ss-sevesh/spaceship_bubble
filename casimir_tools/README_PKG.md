@@ -31,7 +31,7 @@ wte2 = ct.MATERIALS["WTe2_hex"]
 E = ct.casimir_energy(eps_static1=te["eps_static"],
                       eps_static2=wte2["eps_static"],
                       d=10e-9)
-print(f"E = {E*1e3:.4f} mJ/m²")   # ~ -0.20 mJ/m²
+print(f"E = {E*1e3:.4f} mJ/m²")   # ~ -0.10 mJ/m²
 
 # ── Chiral correction (κ² term) ───────────────────────────────────────────────
 # kappa=0.7 drives Casimir energy toward zero / repulsive regime

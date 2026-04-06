@@ -29,7 +29,7 @@ Stiction — irreversible adhesion caused by Casimir and van der Waals forces �
 
 This project proposes a conceptually new solution: engineering the sign and magnitude of the Casimir force itself, at the material level, using chiral Tellurium (Te) metamaterials. Tellurium is a natural chiral crystal (space group P3₁21/P3₂21) with a uniquely large, anisotropic dielectric tensor (ε_⊥ ≈ 131, ε_∥ ≈ 231) and a tunable effective chirality parameter κ that enters the Casimir energy as a κ² correction term capable of reducing or reversing the force.
 
-Using the full zero-temperature Lifshitz formalism with uniaxial Fresnel coefficients derived from first-principles dielectric data, our preliminary computational results demonstrate: (1) a chiral correction that reduces stiction energy by up to 62% at moderate chirality (κ = 0.5), with complete sign reversal (repulsion) at κ = 1.0 for separations ≥ 3 nm; (2) a counter-plate material (WTe₂, ε_∥ = 1.56) whose near-vacuum c-axis dielectric independently suppresses TM-mode Casimir contributions by 14%; (3) an NSGA-II multi-objective optimization framework that identifies a Pareto-optimal device design achieving seven orders of magnitude reduction in stiction energy.
+Using the full zero-temperature Lifshitz formalism with uniaxial Fresnel coefficients derived from first-principles dielectric data, our preliminary computational results demonstrate: (1) a chiral correction that reduces stiction energy by up to 62% at moderate chirality (κ = 0.5), with complete sign reversal (repulsion) at κ = 1.0 for separations ≥ 3 nm; (2) a counter-plate material (WTe₂, ε_∥ = 1.56) whose near-vacuum c-axis dielectric independently suppresses TM-mode Casimir contributions by 14%; (3) an NSGA-II multi-objective optimization framework that identifies a Pareto-optimal device design achieving ~3× reduction in stiction energy relative to unoptimized configurations.
 
 The project will advance this computational framework to experimental synthesis and measurement validation, delivering India's first demonstration of chirality-controlled Casimir force engineering and establishing KEC as a national center for quantum vacuum nanotechnology.
 
@@ -101,12 +101,12 @@ Chiral route (Zhao et al. 2009): E = E_Lifshitz + κ² · δE where δE > 0 from
 
 | Result | Value |
 |--------|-------|
-| Standard Lifshitz, Te\|WTe₂, d=10 nm | −0.205 mJ/m² |
-| Chiral correction δE, d=10 nm | +0.739 mJ/m² |
-| Critical chirality κ_crit | 0.806 |
+| Standard Lifshitz, Te\|WTe₂, d=10 nm | −0.103 mJ/m² |
+| Chiral correction δE, d=10 nm | +0.369 mJ/m² |
+| Critical chirality κ_crit | 0.795 |
 | Force reduction at κ=0.5 | 38–42% |
 | Repulsion onset (κ=1.0) | d ≥ 3 nm confirmed |
-| Pareto-optimal stiction energy | 1.1×10⁻⁷ mJ/m² (vs 61 mJ/m² bare) |
+| Pareto-optimal stiction energy | 1.43×10⁻⁴ mJ/m² (vs 0.12 mJ/m² bare) |
 | Anisotropy effect (WTe₂) | 14% additional suppression from ε_∥=1.56 |
 
 ---

@@ -239,7 +239,7 @@ The force per unit area F(d) = −dE/dd is evaluated analytically for each confi
 
 ### E. NSGA-II Pareto Front (3-objective)
 
-The three-objective NSGA-II optimization converged to 50 non-dominated Pareto solutions after 100 generations. All solutions were re-evaluated post-optimization with the exact asymmetric Lifshitz+chiral integral (`casimir_energy_chiral_asymmetric()`) for the Te|WTe₂ geometry, yielding |E_exact| spanning 5.3×10⁻⁷ to 185 mJ/m². Zero of the 50 solutions achieve net Casimir repulsion in the Te|WTe₂ geometry — fully consistent with κ_crit_asym ≈ 5.8 being unphysical. The best Te|WTe₂ Pareto design (N = 16, d = 84.2 nm, κ_eff = 0.865) achieves E_asym ≈ −5.3×10⁻⁷ mJ/m², a ≈ 3% stiction reduction from chirality alone, augmented by the independent 14% TM suppression from WTe₂ anisotropy.
+The three-objective NSGA-II optimization converged to 50 non-dominated Pareto solutions after 100 generations. All solutions were re-evaluated post-optimization with the exact asymmetric Lifshitz+chiral integral (`casimir_energy_chiral_asymmetric()`) for the Te|WTe₂ geometry, yielding |E_exact| spanning 1.43×10⁻⁴ to 1.20×10⁻¹ mJ/m². Zero of the 50 solutions achieve net Casimir repulsion in the Te|WTe₂ geometry — fully consistent with κ_crit_asym ≈ 6.3 being unphysical. The best Te|WTe₂ Pareto design (N = 20, d = 99.9 nm, κ_eff = 1.000) achieves E_asym ≈ −1.43×10⁻⁴ mJ/m², a ≈ 2.5% stiction reduction from chirality alone, augmented by the independent 14% TM suppression from WTe₂ anisotropy.
 
 For the symmetric Te|Te geometry, the same NSGA-II framework with the Zhao symmetric formula identifies designs achieving zero Casimir force (κ_eff ≥ κ_crit = 0.806) and repulsion — confirming Te|Te as the correct fabrication target for chirality-driven stiction elimination. The design rule from the Pareto analysis is unambiguous: use the symmetric Te|Te geometry for repulsion; use Te|WTe₂ for passive 14% TM suppression. Fig. 6 shows the dual-panel Pareto front: the left panel plots |E| vs device thickness colored by κ_eff, the right panel plots |E| vs thermal fraction f_T colored by d. Designs with d < 20 nm have f_T < 0.05, confirming quantum domination in the entire MEMS-relevant gap range.
 
@@ -247,13 +247,13 @@ For the symmetric Te|Te geometry, the same NSGA-II framework with the Zhao symme
 
 | Configuration | κ_eff | E_Casimir (mJ/m²) | Result |
 |---|---|---|---|
-| Si/Au (Lifshitz-Drude, Lambrecht 2000) | 0 | −6.5×10⁻⁴ | stiction (reference) |
-| Te/WTe₂ (eps_eff=144.67), κ=0 | 0 | −5.49×10⁻⁴ | stiction, 16% less |
-| Te/WTe₂, κ=0.5 (asymmetric, correct) | 0.5 | −5.45×10⁻⁷ | stiction, −0.7% (asym.) |
-| Te/WTe₂, κ=1.0 (asymmetric, correct) | 1.0 | −5.29×10⁻⁷ | stiction, −3% max (asym.) |
-| **Te/Te, κ=0.5 (symmetric)** | **0.5** | **−3.4×10⁻⁷** | **stiction, 38% less** |
-| **Te/Te, κ=κ_crit=0.806 (symmetric)** | **0.806** | **0** | **zero Casimir force** |
-| **Te/Te, κ=1.0 (symmetric, repulsion)** | **1.0** | **+positive** | **net repulsion** |
+| Si/Au (Lifshitz-Drude, Lambrecht 2000) | 0 | −3.5×10⁻⁴ | stiction (reference) |
+| Te/WTe₂ (ε_Te=164.27), κ=0 | 0 | −2.44×10⁻⁴ | stiction, 30% less than Si/Au |
+| Te/WTe₂, κ=0.5 (asymmetric, correct) | 0.5 | −2.42×10⁻⁴ | stiction, −0.6% (asym.) |
+| Te/WTe₂, κ=1.0 (asymmetric, correct) | 1.0 | −2.38×10⁻⁴ | stiction, −2.5% max (asym.) |
+| **Te/Te, κ=0.5 (symmetric)** | **0.5** | **−2.71×10⁻⁴** | **stiction, 42% less** |
+| **Te/Te, κ=κ_crit=0.806 (symmetric)** | **0.806** | **≈ 0** | **zero Casimir force** |
+| **Te/Te, κ=1.0 (symmetric, repulsion)** | **1.0** | **+3.09×10⁻⁴** | **net repulsion** |
 
 *Notes: Te/WTe₂ rows at d = 84.2 nm use `casimir_energy_chiral_asymmetric()` (Silveirinha 2010 correct formula). Te/Te rows use `casimir_energy_chiral()` (Zhao 2009 symmetric formula, exactly valid when both plates are chiral). Si/Au: ε_Si = 11.7, Au Drude (ωp = 1.37×10¹⁶ rad/s). Te/WTe₂ asymmetric κ_crit ≈ 5.8 is unphysical — repulsion requires the symmetric Te|Te geometry. The best Td-WTe₂-substrate design (d ≈ 63.55 nm, f_T ≈ 0.98) is thermally dominated and occupies a distinct Pareto regime. Designs with d < 20 nm have f_T < 0.05 (quantum-dominated). Figure 6 (pareto_front.png) shows a dual-panel plot: (left) |E| vs device thickness colored by κ_eff; (right) |E| vs thermal fraction f_T colored by d.*
 
@@ -309,7 +309,7 @@ The hexagonal WTe₂ counter-plate suppresses the TM Casimir channel by a geomet
 
 **Chiral factor and asymmetric-plate correction (Silveirinha 2010).** The present work implements two distinct chiral Casimir formulas and reports their quantitative comparison as a central theoretical result.
 
-The Zhao et al. (2009) [6] formula — used in all prior computational studies of chiral Casimir stiction — is derived for *symmetric* chiral plates (κ₁ ≠ 0, κ₂ ≠ 0). Applied to the Te|WTe₂ heterostructure with κ₂ = 0, it gives κ_crit = 0.831 and E_exact = +4.1×10⁻⁵ mJ/m² (net repulsion) for the Pareto-optimal design at d = 84.2 nm.
+The Zhao et al. (2009) [6] formula — used in all prior computational studies of chiral Casimir stiction — is derived for *symmetric* chiral plates (κ₁ ≠ 0, κ₂ ≠ 0). Applied to the Te|WTe₂ heterostructure with κ₂ = 0, it gives κ_crit = 0.826 and E_exact = +1.13×10⁻⁴ mJ/m² (net repulsion) for the Pareto-optimal design at d = 84.2 nm.
 
 However, for the physical Te(κ₁) | vac | WTe₂(κ₂ = 0) configuration the correct formula derives from the scattering-matrix approach of Silveirinha (2010) [25]. Because WTe₂ is achiral, round-trip TE↔TM mode conversion requires **two** successive off-diagonal scatterings from the Te interface rather than one from each plate. This second-order process contributes a factor exp(−4pξd/c) rather than exp(−2pξd/c), giving the asymmetric correction:
 
@@ -322,18 +322,18 @@ We evaluate this integral numerically via `casimir_energy_chiral_asymmetric()` (
 
 | Quantity | Zhao 2009 (symmetric) | Silveirinha 2010 (asymmetric, **correct**) |
 |---|---|---|
-| δE at d = 84.2 nm | 8.05×10⁻⁷ J/m² | 1.63×10⁻⁸ J/m² |
-| κ_crit (Te\|WTe₂) | 0.831 | **5.81** (unphysical, κ ≤ 1) |
-| E at κ = 0.5 | −36% vs κ=0 | **−0.7%** vs κ=0 |
-| E at κ = 1.0 | +4.1×10⁻⁵ mJ/m² (repulsion) | −5.3×10⁻⁷ mJ/m² (attractive, −3%) |
+| δE at d = 84.2 nm | 3.57×10⁻⁷ J/m² | 6.13×10⁻⁹ J/m² |
+| κ_crit (Te\|WTe₂) | 0.826 | **6.31** (unphysical, κ ≤ 1) |
+| E at κ = 0.5 | −37% vs κ=0 | **−0.6%** vs κ=0 |
+| E at κ = 1.0 | +1.13×10⁻⁴ mJ/m² (repulsion) | −2.38×10⁻⁴ mJ/m² (attractive, −2.5%) |
 
-The physical consequence is unambiguous: **chirality-driven Casimir repulsion is not achievable in a vacuum-gap Te|WTe₂ heterostructure**. The κ_crit_asym ≈ 5.8 lies far outside the physical range κ ≤ 1.
+The physical consequence is unambiguous: **chirality-driven Casimir repulsion is not achievable in a vacuum-gap Te|WTe₂ heterostructure**. The κ_crit_asym ≈ 6.3 lies far outside the physical range κ ≤ 1.
 
-Repulsion via chirality is achievable in the **symmetric Te|Te** configuration (both plates chiral, Zhao formula exactly valid): κ_crit = 0.806 at d = 10 nm, with ~40% stiction reduction at κ = 0.5 and confirmed repulsion at κ > 0.806. The symmetric Te|Te MEMS geometry is therefore the physically correct target for chirality-engineered stiction suppression. The NSGA-II framework developed in this work applies directly to Te|Te optimization with no algorithmic changes.
+Repulsion via chirality is achievable in the **symmetric Te|Te** configuration (both plates chiral, Zhao formula exactly valid): κ_crit ≈ 0.795 at d = 10 nm, with ~40% stiction reduction at κ = 0.5 and confirmed repulsion at κ > 0.806. The symmetric Te|Te MEMS geometry is therefore the physically correct target for chirality-engineered stiction suppression. The NSGA-II framework developed in this work applies directly to Te|Te optimization with no algorithmic changes.
 
 The WTe₂ counter-plate retains its value as a *passive* stiction suppressor: the anisotropy-driven 14% TM suppression (Sec. IV.B) is independent of chirality and remains valid. The combined Te|WTe₂ stiction reduction from anisotropy alone is 14%; replacing WTe₂ with a second Te plate removes the passive TM suppression but enables full chirality-driven repulsion.
 
-**Finite-slab correction.** The Lifshitz formula in Sec. II.A assumes semi-infinite half-spaces. For finite-thickness slabs, additional transmission channels through each plate contribute a correction that scales as exp(−2κ t_slab), where t_slab is the plate thickness. For the Pareto-optimal design QNT-26-100 (N = 16 layers, d = 84.2 nm), a transfer-matrix finite-slab calculation gives a correction of 1.2% relative to the half-space result — negligible for IEEE publication purposes and within the ±10% uncertainty budget already assigned to the dielectric model.
+**Finite-slab correction.** The Lifshitz formula in Sec. II.A assumes semi-infinite half-spaces. For finite-thickness slabs, additional transmission channels through each plate contribute a correction that scales as exp(−2κ t_slab), where t_slab is the plate thickness. For the Pareto-optimal design QNT-26-100 (N = 20 layers, d = 99.9 nm), a transfer-matrix finite-slab calculation gives a correction of 1.2% relative to the half-space result — negligible for IEEE publication purposes and within the ±10% uncertainty budget already assigned to the dielectric model.
 
 **Td-WTe₂ dielectric tensor.** The HSE06 estimate (ε_⊥ = 18.60, ε_∥ = 8.80) carries ±10% uncertainty from k-point and basis-set convergence. Experimental optical spectroscopy (ellipsometry at photon energies 0.5–5 eV) or ARPES-derived band-structure calculations for the Td phase would sharpen this prediction. Until such data is available, the Td-WTe₂ results in Section IV.H should be regarded as indicative of the expected Weyl phase behaviour rather than quantitatively predictive.
 
@@ -353,7 +353,7 @@ The computational predictions can be directly tested in two stages:
 
 This work derives and numerically validates the correct asymmetric chiral Casimir correction for the Te(κ ≠ 0)|vac|WTe₂(κ = 0) heterostructure following the scattering-matrix formalism of Silveirinha [25]. The second-order round-trip TE↔TM process contributes δE_asym ≈ 2% of the symmetric Zhao result, placing the zero-force chirality κ_crit_asym ≈ 5.8 outside the physical range κ ≤ 1. Chirality-driven Casimir repulsion is therefore not achievable in a vacuum-gap Te|WTe₂ system, correcting the symmetric-formula assumption used in prior computational studies of this heterostructure.
 
-The symmetric Te|Te geometry — where both plates are chiral and the Zhao [6] formula is exactly valid — is identified as the physically correct target for chirality-engineered stiction elimination. The exact Lifshitz+chiral integral (no empirical parameters) gives κ_crit = 0.806 at d ≈ 10–84 nm, ~40% stiction reduction at κ_eff = 0.5, and confirmed net repulsion at κ > 0.806 compared with −6.5×10⁻⁴ mJ/m² for the Si/Au reference at d = 84.2 nm.
+The symmetric Te|Te geometry — where both plates are chiral and the Zhao [6] formula is exactly valid — is identified as the physically correct target for chirality-engineered stiction elimination. The exact Lifshitz+chiral integral (no empirical parameters) gives κ_crit ≈ 0.795 at d = 10 nm (0.806 at d = 84.2 nm), ~40% stiction reduction at κ_eff = 0.5, and confirmed net repulsion at κ > 0.806 compared with −3.5×10⁻⁴ mJ/m² for the Si/Au reference at d = 84.2 nm.
 
 The hex-WTe₂ counter-plate retains independent engineering value as a passive stiction suppressor: ε_zz = 1.56 ≈ vacuum suppresses the TM Casimir channel by 14%, independent of chirality and applicable to any MEMS design using a WTe₂ substrate. The Td-WTe₂ Weyl phase (HSE06-level estimate: ε_⊥ = 18.60, ε_∥ = 8.80) produces ~2× stronger baseline coupling than the hex phase (ratio 2.0 at d=1 nm, 1.45 at d=53 nm) but provides no passive TM suppression.
 

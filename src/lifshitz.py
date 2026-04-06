@@ -787,7 +787,7 @@ def casimir_energy_chiral_asymmetric(eps_static1: float, eps_static2: float,
 
     Physical consequence:
     - δE_asym << δE_sym at all separations (extra exp(−2d) suppression)
-    - κ_crit_asym = sqrt(|E_Lifshitz| / δE_asym) >> κ_crit_sym ≈ 0.831
+    - κ_crit_asym = sqrt(|E_Lifshitz| / δE_asym) >> κ_crit_sym ≈ 0.826
     - Repulsion requires κ_eff > κ_crit_asym; may exceed unity (unphysical range)
 
     Args:
