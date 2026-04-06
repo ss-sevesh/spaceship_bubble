@@ -31,7 +31,7 @@ const PLOTS = [
   { id: 'finite-T', title: 'Thermal Casimir', file: 'casimir_finite_T.png', desc: 'Finite-temperature Matsubara summation at T=300 K — classical thermal regime emerges beyond the 1.2 µm thermal length.' },
 ];
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = '/api'; // routed through Vite proxy → localhost:8000
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -188,9 +188,23 @@ const App = () => {
     setSimulating(true);
     try {
       await fetch(`${API_URL}/run-simulation`, { method: 'POST' });
-      setTimeout(() => {
-        fetchData().catch(() => {}).finally(() => setSimulating(false));
-      }, 15000);
+      // Poll /api/status every 3s until the background task completes,
+      // then refresh data. Optimizer takes 2-5 min so a fixed timeout is wrong.
+      const poll = setInterval(async () => {
+        try {
+          const r = await fetch(`${API_URL}/status`);
+          if (!r.ok) throw new Error('offline');
+          const s = await r.json();
+          if (s.status === 'idle') {
+            clearInterval(poll);
+            await fetchData();
+            setSimulating(false);
+          }
+        } catch {
+          clearInterval(poll);
+          setSimulating(false);
+        }
+      }, 3000);
     } catch (err) { setSimulating(false); }
   };
 
