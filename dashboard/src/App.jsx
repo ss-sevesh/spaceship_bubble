@@ -119,7 +119,7 @@ const App = () => {
       `  ε substrate         : ${selectedDesign.eps_substrate?.toFixed(3)}`,
       '',
       '── Performance Objectives ───────────────────────────────',
-      `  Casimir Energy      : ${(obj.E_Casimir_T300K_mJm2 ?? obj.E_Casimir_mJm2)?.toExponential(4)} mJ/m²`,
+      `  Casimir Energy      : ${(obj.E_Casimir_chiral_asymm_mJm2 ?? obj.E_Casimir_mJm2)?.toExponential(4)} mJ/m²`,
       `  Total Thickness     : ${obj.thickness_nm?.toFixed(2)} nm`,
       '',
       '── Physical Constants (SI) ──────────────────────────────',
@@ -366,7 +366,7 @@ const App = () => {
                               {v.kappa_eff?.toFixed(3) ?? '—'}
                            </div>
                         </td>
-                        <td style={{ color: '#f43f5e', fontWeight: 700 }}>{(obj.E_Casimir_T300K_mJm2 ?? obj.E_Casimir_mJm2)?.toExponential(2) ?? '—'}</td>
+                        <td style={{ color: '#f43f5e', fontWeight: 700 }}>{(obj.E_Casimir_chiral_asymm_mJm2 ?? obj.E_Casimir_mJm2)?.toExponential(2) ?? '—'}</td>
                         <td>{obj.thickness_nm?.toFixed(1) ?? '—'} nm</td>
                         {showThermal && (
                           <td style={{ color: tfColor ?? 'var(--text-dim)', fontWeight: 700, fontSize: '0.85rem' }}>

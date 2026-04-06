@@ -173,7 +173,10 @@ def casimir_energy(eps_static1: float, eps_static2: float, d: float,
 
 # ── Chiral Casimir energy ─────────────────────────────────────────────────────
 
-CHIRAL_FACTOR = 2.0   # κ² coefficient calibrated to full Lifshitz integral
+CHIRAL_FACTOR = 2.0   # κ² coefficient for Hamaker fast model only.
+# Used in casimir_energy_fast, casimir_force_chiral, compute_asymmetric_kappa_crit.
+# NOT used in casimir_energy_chiral (which uses the full Lifshitz double integral).
+# Value differs from src/lifshitz.py (1.0); both are rough upper bounds for speed.
 
 
 def _hamaker(eps1: float, eps2: float, omega_uv: float = OMEGA_UV) -> float:
@@ -195,20 +198,88 @@ def casimir_energy_fast(eps1: float, eps2: float, d: float,
     return -A / (12.0 * np.pi * d ** 2) * (1.0 - CHIRAL_FACTOR * kappa ** 2)
 
 
+def _inner_chiral_symmetric(p: float, xi: float,
+                            eps_fn1: Callable, eps_fn2: Callable,
+                            d: float) -> float:
+    """
+    Inner integrand for the symmetric chiral Casimir correction (Zhao et al. 2009).
+
+    Computes the TE-TM cross-coupling product (κ² coefficient) for two chiral plates:
+
+        p · (r₁^TM·r₂^TE + r₁^TE·r₂^TM) · exp(−2·p·ξ·d/c)
+
+    For identical chirality: r^TM > 0, r^TE < 0 → cross term negative
+    → _casimir_chiral_correction_symmetric returns positive δE (reduces attraction).
+    """
+    e1 = eps_fn1(xi)
+    e2 = eps_fn2(xi)
+    r1_te = _r_te(e1, p)
+    r1_tm = _r_tm(e1, p)
+    r2_te = _r_te(e2, p)
+    r2_tm = _r_tm(e2, p)
+    cross = r1_tm * r2_te + r1_te * r2_tm
+    return p * cross * np.exp(-2.0 * p * xi * d / C)
+
+
+def _casimir_chiral_correction_symmetric(eps_static1: float, eps_static2: float,
+                                          d: float,
+                                          omega_uv: float = OMEGA_UV) -> float:
+    """
+    Full Lifshitz κ² coefficient for the symmetric chiral correction (Zhao 2009).
+
+    Returns δE_sym in J/m². Positive = correction reduces attraction.
+
+        δE_sym = −2·(ħ/4π²c²) · ∫₀^∞ ξ² dξ ∫₁^∞ p dp
+                    (r₁^TM·r₂^TE + r₁^TE·r₂^TM) · exp(−2pξd/c)
+
+    Use casimir_energy_chiral() which calls this for the full non-retarded result.
+    """
+    eps_fn1 = lambda xi: epsilon_imaginary(eps_static1, xi, omega_uv)
+    eps_fn2 = lambda xi: epsilon_imaginary(eps_static2, xi, omega_uv)
+
+    def outer(xi: float) -> float:
+        if xi == 0.0:
+            return 0.0
+        p_max = min(max(20.0, 5.0 * C / (xi * d)), 1.0e6)
+        I, _ = quad(_inner_chiral_symmetric, 1.0, p_max,
+                    args=(xi, eps_fn1, eps_fn2, d),
+                    limit=200, epsrel=1e-4)
+        return xi ** 2 * I
+
+    xi_max = 10.0 * omega_uv
+    raw, _ = quad(outer, 0.0, xi_max, limit=80, epsrel=1e-3, points=[omega_uv])
+    prefactor = HBAR / (4.0 * np.pi ** 2 * C ** 2)
+    # Negative of raw: cross term integrand is negative, delta_E is positive
+    return -2.0 * prefactor * raw
+
+
 def casimir_energy_chiral(eps_static1: float, eps_static2: float,
-                          d: float, kappa: float,
+                          d: float, kappa: float = 0.0,
                           omega_uv: float = OMEGA_UV) -> float:
     """
-    Casimir energy with chiral κ² correction (full Lifshitz + perturbative term).
+    Casimir energy with symmetric chiral κ² correction (full Lifshitz double integral).
 
-        E_chiral = E_Lifshitz + kappa^2 * delta_E
+    Correct for two chiral plates with the same chirality κ (Zhao et al. 2009,
+    PRL 103, 103602). For the asymmetric Te|WTe₂ heterostructure (only plate 1
+    chiral), use casimir_energy_chiral_asymmetric() instead.
 
-    where delta_E > 0 (chiral correction reduces or reverses the force).
+        E_chiral(d, κ) = E_Lifshitz(d) + κ² · δE_sym(d)
+
+    where δE_sym > 0 (reduces or reverses the Casimir attraction).
+
+    Args:
+        eps_static1, eps_static2: Static dielectric constants.
+        d:          Gap separation (m).
+        kappa:      Effective chirality parameter κ = κ₀·sin(θ). Default 0.0.
+        omega_uv:   UV oscillator pole frequency (rad/s).
+
+    Returns:
+        E (J/m²). Negative = attractive, positive = chiral repulsion.
     """
-    E_std    = casimir_energy(eps_static1, eps_static2, d, omega_uv)
-    E_vdw    = casimir_energy_fast(eps_static1, eps_static2, d, kappa=0.0,
-                                    omega_uv=omega_uv)
-    delta_E  = -CHIRAL_FACTOR * E_vdw
+    E_std = casimir_energy(eps_static1, eps_static2, d, omega_uv)
+    if kappa == 0.0:
+        return E_std
+    delta_E = _casimir_chiral_correction_symmetric(eps_static1, eps_static2, d, omega_uv)
     return E_std + kappa ** 2 * delta_E
 
 

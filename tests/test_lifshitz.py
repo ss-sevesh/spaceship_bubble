@@ -20,6 +20,7 @@ from lifshitz import (
     casimir_energy,
     casimir_energy_aniso,
     casimir_energy_chiral,
+    casimir_energy_chiral_asymmetric,
     casimir_energy_finite_T,
     casimir_energy_fast,
     casimir_energy_2osc,
@@ -309,3 +310,41 @@ class TestTwoOscillatorModel:
             wte2["C1"], wte2["omega1"], wte2["C2"], wte2["omega2"], d)
         E_1osc = casimir_energy(EPS_TE, EPS_WTE2, d)
         assert np.sign(E_2osc) == np.sign(E_1osc)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 10. Asymmetric chiral correction (Silveirinha 2010) — Te|WTe2 heterostructure
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestAsymmetricChiralCorrection:
+    """casimir_energy_chiral_asymmetric — Te chiral, WTe2 non-chiral."""
+
+    def test_kappa0_returns_standard(self):
+        """At kappa=0, asymmetric chiral energy == standard Lifshitz."""
+        d = 20e-9
+        E_std  = casimir_energy(EPS_TE, EPS_WTE2, d)
+        E_asym = casimir_energy_chiral_asymmetric(EPS_TE, EPS_WTE2, d, kappa=0.0)
+        assert E_asym == pytest.approx(E_std, rel=1e-10)
+
+    def test_te_wte2_stays_attractive_at_kappa1(self):
+        """Te|WTe2 must remain attractive at kappa=1.0 (kappa_crit_asym ≈ 5.8)."""
+        E = casimir_energy_chiral_asymmetric(EPS_TE, EPS_WTE2, 20e-9, kappa=1.0)
+        assert E < 0.0, "Te|WTe2 must be attractive at kappa=1 (asymmetric formula)"
+
+    def test_asymm_correction_smaller_than_symm(self):
+        """delta_E_asym << delta_E_sym for Te|WTe2 (Silveirinha: ~2% ratio)."""
+        d = 10e-9
+        E_std  = casimir_energy(EPS_TE, EPS_WTE2, d)
+        E_sym  = casimir_energy_chiral(EPS_TE, EPS_WTE2, d, kappa=0.5)
+        E_asym = casimir_energy_chiral_asymmetric(EPS_TE, EPS_WTE2, d, kappa=0.5)
+        delta_sym  = abs(E_std) - abs(E_sym)
+        delta_asym = abs(E_std) - abs(E_asym)
+        assert abs(delta_asym) < abs(delta_sym), (
+            "Asymmetric correction must be smaller than symmetric")
+
+    def test_asymm_correction_reduces_magnitude(self):
+        """Even small asymmetric correction must reduce |E| vs kappa=0."""
+        d = 10e-9
+        E0   = casimir_energy_chiral_asymmetric(EPS_TE, EPS_WTE2, d, kappa=0.0)
+        E05  = casimir_energy_chiral_asymmetric(EPS_TE, EPS_WTE2, d, kappa=0.5)
+        assert abs(E05) < abs(E0)

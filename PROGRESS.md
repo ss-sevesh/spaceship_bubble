@@ -6,7 +6,50 @@
 
 ---
 
-## Session 32 — Final Verification Pass (Current)
+## Session 33 — Critical Bug Fix: Chiral Validation Pipeline + Package Integrity (Current)
+
+### Summary
+
+Full codebase audit (every file, end-to-end data flow) uncovered 10 bugs spanning 7 files. Most critical: the validation pipeline was silently stripping kappa from all post-optimization Casimir energies, meaning pareto_results.json and all Pareto front plots were publishing non-chiral results labeled as chirally-validated. Additionally, the published PyPI package (`casimir_tools`) used a Hamaker fast approximation for `casimir_energy_chiral` while the docstring claimed "full Lifshitz integral." All bugs fixed, test suite passes 82/82.
+
+### Bugs Fixed
+
+| # | File | Bug | Fix |
+|---|------|-----|-----|
+| 1 | `src/optimizer.py` | `validate_pareto_finite_T()` called non-chiral functions — kappa silently dropped | Now calls `casimir_energy_chiral_asymmetric(kappa=kappa_eff)`; stores as `E_Casimir_chiral_asymm_mJm2` |
+| 2 | `src/optimizer.py` | "conservative" comment backwards (overestimating suppression = optimistic, not conservative) | Corrected to "OPTIMISTIC" |
+| 3 | `src/visualize.py` | Pareto plot preferred non-chiral T300K value over chiral fast-model value | Now prefers `E_Casimir_chiral_asymm_mJm2` |
+| 4 | `dashboard/src/App.jsx` | Two display fields read the non-chiral field | Updated to `E_Casimir_chiral_asymm_mJm2` |
+| 5 | `main.py` | Sanity-check table used symmetric Zhao formula for Te\|WTe₂ heterostructure | Replaced with `casimir_energy_chiral_asymmetric` |
+| 6 | `casimir_tools/tests/test_core.py` | 3 tests used symmetric formula on Te\|WTe₂ with non-zero kappa; 1 falsely asserted repulsion | Moved to Te\|Te (correct geometry) |
+| 7 | `casimir_tools/_core.py` | `casimir_energy_chiral` used Hamaker approximation; docstring claimed "full Lifshitz" | Added `_casimir_chiral_correction_symmetric` full double integral; function now correct |
+| 8 | `casimir_tools/_core.py` | `CHIRAL_FACTOR` comment claimed "calibrated to full Lifshitz" — misleading | Updated: CHIRAL_FACTOR documented as fast-model only |
+| 9 | `casimir_tools/_core.py` | `casimir_energy_chiral` had no `kappa=0.0` default — API inconsistency | Added default |
+| 10 | `tests/test_lifshitz.py` | Zero test coverage for `casimir_energy_chiral_asymmetric` | Added `TestAsymmetricChiralCorrection` with 4 tests |
+
+### Physics Finding (from Bug 7 fix)
+
+For real Te (ε=164.27 trace average) symmetric Te\|Te pair, the full Lifshitz integral gives χ ≈ 0.72–0.79 at MEMS separations (d=5–10nm), yielding **κ_crit ≈ 1.12–1.18 > 1**. Chirality-driven repulsion is NOT achievable in the physical κ∈[0,1] range for this material pair. The old Hamaker model (CHIRAL_FACTOR=2.0) falsely showed repulsion at κ=1.0. This must be clearly stated in the IEEE paper.
+
+### Test Results
+
+```
+casimir_tools test suite: 82 passed, 0 failed, 5 skipped
+```
+
+### Files Changed
+
+`src/optimizer.py`, `src/visualize.py`, `main.py`, `dashboard/src/App.jsx`, `casimir_tools/casimir_tools/_core.py`, `casimir_tools/tests/test_core.py`, `tests/test_lifshitz.py`
+
+### Action Required
+
+- [ ] Re-run `uv run python main.py --optimize` to regenerate `pareto_results.json` with corrected chiral validation energies
+- [ ] Bump `casimir_tools` to **v0.1.6** and push to PyPI (breaking change: `casimir_energy_chiral` now uses full integral, different numeric results)
+- [ ] Update IEEE draft Section IV.C: state κ_crit > 1 for Te\|WTe₂ and symmetric Te\|Te at MEMS separations
+
+---
+
+## Session 32 — Final Verification Pass
 
 ### Summary
 

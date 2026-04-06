@@ -56,7 +56,7 @@ def run_lifshitz_check() -> bool:
     """Quick Lifshitz-Casimir energy and force check at selected separations."""
     print("\n[Step 2/4] Lifshitz-Casimir sanity check...")
     try:
-        from lifshitz import (casimir_energy, casimir_energy_chiral,
+        from lifshitz import (casimir_energy, casimir_energy_chiral_asymmetric,
                               casimir_energy_aniso, casimir_force,
                               casimir_energy_2osc, casimir_energy_finite_T,
                               load_eps_static, load_eps_tensor,
@@ -74,7 +74,7 @@ def run_lifshitz_check() -> bool:
               f"(tensor: perp={wte2_perp:.2f}, par={wte2_par:.2f})")
 
         hdr = (f"  {'d (nm)':>8}  {'E_iso':>12}  {'E_aniso':>12}  "
-               f"{'E_chiral k=0.5':>15}  {'E_2osc':>12}  "
+               f"{'E_asym k=0.5':>15}  {'E_2osc':>12}  "
                f"{'E_T300K':>12}  {'F_std':>12}")
         print(f"\n{hdr}   [all mJ/m^2 except F in mN/m^2]")
         print("  " + "-" * 96)
@@ -82,7 +82,7 @@ def run_lifshitz_check() -> bool:
             d_m      = d_nm * 1e-9
             E_iso    = casimir_energy(eps_te, eps_wte2, d_m)
             E_aniso  = casimir_energy_aniso(te_perp, te_par, wte2_perp, wte2_par, d_m)
-            E_chiral = casimir_energy_chiral(eps_te, eps_wte2, d_m, kappa=0.5)
+            E_chiral = casimir_energy_chiral_asymmetric(eps_te, eps_wte2, d_m, kappa=0.5)
             E_2osc   = casimir_energy_2osc(
                 TE_2OSC["C1"], TE_2OSC["omega1"], TE_2OSC["C2"], TE_2OSC["omega2"],
                 WTE2_2OSC["C1"], WTE2_2OSC["omega1"], WTE2_2OSC["C2"], WTE2_2OSC["omega2"],

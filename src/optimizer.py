@@ -50,7 +50,7 @@ from pymoo.optimize import minimize
 from pymoo.termination import get_termination
 
 from lifshitz import (casimir_energy, casimir_energy_fast, casimir_energy_finite_T,
-                      casimir_energy_multilayer,
+                      casimir_energy_multilayer, casimir_energy_chiral_asymmetric,
                       epsilon_imaginary, epsilon_imaginary_drude_lorentz,
                       WTE2_TD_DRUDE, OMEGA_UV as _OMEGA_UV,
                       load_eps_static, KB as _KB, HBAR as _HBAR, C as _C)
@@ -220,12 +220,13 @@ class CasimirOptimizationProblem(Problem):
             eps_eff        = maxwell_garnett(eps_sub, EPS_TE, layer_fraction)
             d_m            = d_nm * 1e-9
 
-            # F1: stiction energy via fast Hamaker model (conservative upper-bound).
+            # F1: stiction energy via fast Hamaker model (NSGA-II inner loop, speed only).
             # CHIRAL_FACTOR=1.0 is calibrated for symmetric Te|Te (Zhao 2009);
             # for Te|WTe₂ the exact Silveirinha (2010) asymmetric formula gives
             # χ_asym ≈ 2% of χ_sym — repulsion is not achievable (κ_crit≈5.8).
-            # The Hamaker approximation overestimates the chiral suppression,
-            # making these optimizer designs conservative/robust upper bounds.
+            # WARNING: CHIRAL_FACTOR=1.0 overestimates chiral suppression for Te|WTe₂,
+            # making optimizer designs OPTIMISTIC (not conservative) for this heterostructure.
+            # Publication validation uses casimir_energy_chiral_asymmetric() — see below.
             E_quantum = casimir_energy_fast(eps_eff, self.eps_sub2, d_m, kappa_eff)
 
             if self.T > 0.0:
@@ -282,31 +283,26 @@ def validate_pareto_finite_T(pareto: dict, T: float = 300.0) -> dict:
     Uses the full Matsubara summation (casimir_energy_finite_T) which is too
     slow for NSGA-II evaluation loops but appropriate for validating the
     final Pareto front (~50 solutions).  Results are added to each objective
-    dict as 'E_Casimir_T300K_mJm2'.
+    dict as 'E_Casimir_chiral_asymm_mJm2'.
 
-    FIX 1 — Ghost number: Each solution is evaluated independently with its
-        own eps_eff and d_nm; the loop variable is never shared or cached.
-        The previous code was correct structurally but the casimir_energy_finite_T
-        function itself had a missing (xi_n/c)^2 factor causing all results to
-        collapse to the same tiny value (~1e-16 mJ/m²).
+    Chiral validation: uses casimir_energy_chiral_asymmetric() (Silveirinha 2010)
+        which is the correct formula for Te|WTe₂ (Te chiral, WTe₂ non-chiral).
+        Each solution is evaluated with its own eps_eff, d_nm, and kappa_eff.
+        A non-chiral Matsubara baseline is also stored as E_Casimir_T300K_nonchiral_mJm2
+        for thermal reference only — do NOT use it as the validated chiral energy.
 
-    FIX 2 — Transparent stack: casimir_energy_multilayer() replaces the
-        semi-infinite slab approximation.  The finite slab thickness
-        h_slab = N_layers * LAYER_THICKNESS_NM is used in the Airy (transfer-
-        matrix) reflection formula for the Te metamaterial plate.
-
-    FIX 3 — Drude model: for substrate="td" (Td-WTe2 Weyl semimetal), the
-        Drude+Lorentz eps function is used instead of the Cauchy insulator model.
-        This correctly accounts for the metallic free-carrier (Weyl pocket)
-        response of the Td phase.
+    Transparent stack: casimir_energy_multilayer() gives the slab-thickness
+        correction factor via Airy (transfer-matrix) reflection for the finite
+        Te metamaterial slab, stored as E_Casimir_multilayer_mJm2.
 
     Args:
         pareto: Dict returned by run_optimization.
-        T:      Temperature for validation (K). Default 300 K.
+        T:      Temperature for non-chiral Matsubara baseline (K). Default 300 K.
 
     Returns:
-        Updated pareto dict with 'E_Casimir_T300K_mJm2' and
-        'E_Casimir_multilayer_mJm2' in each objective entry.
+        Updated pareto dict with 'E_Casimir_chiral_asymm_mJm2',
+        'E_Casimir_T300K_nonchiral_mJm2', and 'E_Casimir_multilayer_mJm2'
+        in each objective entry.
     """
     n_sol     = len(pareto["variables"])
     l_T       = _thermal_length_nm(T)
@@ -320,30 +316,38 @@ def validate_pareto_finite_T(pareto: dict, T: float = 300.0) -> dict:
           f"{'Drude+Lorentz (metallic Weyl)' if substrate == 'td' else 'Cauchy (insulator)'}")
 
     for i, (v, o) in enumerate(zip(pareto["variables"], pareto["objectives"])):
-        eps_eff  = v["eps_eff"]
-        d_m      = v["d_nm"] * 1e-9
-        n_layers = int(v["N_layers"])
-        h_slab_m = n_layers * LAYER_THICKNESS_NM * 1e-9   # physical slab thickness
+        eps_eff   = v["eps_eff"]
+        d_m       = v["d_nm"] * 1e-9
+        kappa_eff = v["kappa_eff"]
+        n_layers  = int(v["N_layers"])
+        h_slab_m  = n_layers * LAYER_THICKNESS_NM * 1e-9   # physical slab thickness
 
-        # FIX 1 + 2: full Matsubara sum (corrected formula) + semi-infinite baseline
+        # Non-chiral Matsubara baseline (T=300 K, no kappa) — thermal reference only.
+        # Do NOT use this as the "validated" chiral energy; see E_chiral_asymm below.
         E_T = casimir_energy_finite_T(eps_eff, eps_sub2, d_m, T=T, n_max=400)
-        o["E_Casimir_T300K_mJm2"] = float(E_T * 1e3)
+        o["E_Casimir_T300K_nonchiral_mJm2"] = float(E_T * 1e3)
 
-        # FIX 3 (transparent-stack): Airy transfer-matrix reflection for finite slab
+        # High-fidelity chiral validation: asymmetric Silveirinha formula (Te chiral,
+        # WTe₂ non-chiral).  This is the physically correct model for Te|WTe₂ and
+        # is the value that should appear in publication plots.
+        E_chiral_asymm = casimir_energy_chiral_asymmetric(
+            eps_eff, eps_sub2, d_m, kappa=kappa_eff)
+        o["E_Casimir_chiral_asymm_mJm2"] = float(E_chiral_asymm * 1e3)
+        o["is_repulsive"] = bool(E_chiral_asymm > 0.0)
+
+        # Transparent-stack: Airy transfer-matrix reflection for finite slab
         E_ml = casimir_energy_multilayer(eps_eff, h_slab_m, eps_sub2, d_m)
         o["E_Casimir_multilayer_mJm2"] = float(E_ml * 1e3)
 
         # Slab-thickness correction factor (finite slab / semi-infinite at T=0)
-        # Use casimir_energy() (Cauchy integral, T=0) as the semi-infinite baseline.
-        # Matsubara sum at T→0 needs ~c/(2d*ξ_1) modes and is impractical here.
         E_semi = casimir_energy(eps_eff, eps_sub2, d_m)   # T=0, no chiral factor
         correction = (E_ml / E_semi) if abs(E_semi) > 1e-60 else float("nan")
         o["slab_thickness_correction"] = float(correction)
 
         if (i + 1) % 10 == 0:
-            print(f"    {i+1}/{n_sol}  d={v['d_nm']:.1f}nm  "
-                  f"E_T300={E_T*1e3:.4e} mJ/m²  "
-                  f"E_multilayer={E_ml*1e3:.4e} mJ/m²  "
+            print(f"    {i+1}/{n_sol}  d={v['d_nm']:.1f}nm  kappa={kappa_eff:.4f}  "
+                  f"E_chiral={E_chiral_asymm*1e3:.4e} mJ/m²  "
+                  f"E_T300_nonchiral={E_T*1e3:.4e} mJ/m²  "
                   f"correction={correction:.4f}")
 
     pareto["meta"]["T_validation_K"]         = T
@@ -373,7 +377,7 @@ def run_optimization(n_gen: int = 100, pop_size: int = 50,
 
     Returns:
         dict with keys "variables" and "objectives" — each a list of dicts.
-        Objective dicts include 'E_Casimir_T300K_mJm2' from full Matsubara.
+        Objective dicts include 'E_Casimir_chiral_asymm_mJm2' from Silveirinha validation.
     """
     eps_sub2    = SUBSTRATE_EPS[substrate]
     problem     = CasimirOptimizationProblem(T=T, substrate=substrate)
@@ -466,10 +470,10 @@ def print_pareto_summary(pareto: dict) -> None:
     print(f"\n  Pareto front  ({n} solutions, T={T:.0f} K, substrate={substrate}):")
     print(f"  {'theta(deg)':>10}  {'d(nm)':>7}  {'N_lay':>5}  "
           f"{'kappa_eff':>10}  "
-          f"{'|E|T=0':>12}  {'|E|T=300K':>12}  {'therm_frac':>11}  {'thick(nm)':>10}")
+          f"{'|E|fast':>12}  {'|E|chiral':>12}  {'therm_frac':>11}  {'thick(nm)':>10}")
     print("  " + "-" * 100)
     for v, o in zip(pareto["variables"], pareto["objectives"]):
-        e_t300  = o.get("E_Casimir_T300K_mJm2", float("nan"))
+        e_t300  = o.get("E_Casimir_chiral_asymm_mJm2", float("nan"))
         th_frac = o.get("thermal_fraction", float("nan"))
         print(
             f"  {v['theta_deg']:>10.1f}  {v['d_nm']:>7.1f}  "

@@ -423,8 +423,10 @@ def plot_pareto_front(pareto_path: Path, out_path: Path) -> None:
     with open(pareto_path) as f:
         data = json.load(f)
 
-    # Prefer exact Lifshitz+chiral integral values when available
-    E_raw    = [o.get("E_Casimir_T300K_mJm2") or o["E_Casimir_mJm2"]
+    # Prefer asymmetric chiral validation (Silveirinha formula, kappa included).
+    # Fall back to fast-model optimizer energy (also has kappa via CHIRAL_FACTOR).
+    # Never use E_Casimir_T300K_nonchiral_mJm2 here — that field has no kappa.
+    E_raw    = [o.get("E_Casimir_chiral_asymm_mJm2") or o["E_Casimir_mJm2"]
                 for o in data["objectives"]]
     E_vals   = [abs(e) for e in E_raw]
     is_rep   = [o.get("is_repulsive", False) for o in data["objectives"]]
