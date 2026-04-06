@@ -51,9 +51,11 @@ E_aniso = ct.casimir_energy_aniso(eps_perp1=te["eps_perp"], eps_par1=te["eps_par
                                    d=10e-9)
 
 # ── 2-oscillator Sellmeier model ──────────────────────────────────────────────
-E_2osc = ct.casimir_energy_2osc(**ct.TE_2OSC,
-                                 **{f"{k}_2": v for k, v in ct.WTE2_2OSC.items()},
-                                 d=10e-9)
+E_2osc = ct.casimir_energy_2osc(
+    **{f"{k}_1": v for k, v in ct.TE_2OSC.items()},
+    **{f"{k}_2": v for k, v in ct.WTE2_2OSC.items()},
+    d=10e-9
+)
 ```
 
 ## Force Sweep & Plotting
@@ -104,8 +106,8 @@ Extensions:
   author  = {Sevesh SS},
   title   = {casimir-tools: Lifshitz-Casimir Force Engineering Toolkit},
   year    = {2026},
-  url     = {https://github.com/seveshss/casimir-tools},
-  version = {0.1.0},
+  url     = {https://github.com/ss-sevesh/spaceship_bubble/tree/master/casimir_tools},
+  version = {0.1.3},
 }
 ```
 
