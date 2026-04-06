@@ -2,11 +2,54 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-06 (Session 32)
+**Last updated**: 2026-04-06 (Session 34)
 
 ---
 
-## Session 33 — Critical Bug Fix: Chiral Validation Pipeline + Package Integrity (Current)
+## Session 34 — Prefactor Bug in casimir_tools + v0.1.6 Release (Current)
+
+### Summary
+
+During v0.1.6 release prep, a factor-of-2 bug was discovered in `casimir_tools/_core.py`: `casimir_energy()` (and `casimir_energy_aniso`, `casimir_energy_2osc`) used prefactor `HBAR/(2π²c²)` — exactly 2x larger than the correct `HBAR/(4π²c²)`. Verified against the analytical perfect-conductor Casimir limit (-0.4334 mJ/m² at d=10nm), which only matches with the `4π²` denominator. The chiral correction `_casimir_chiral_correction_symmetric` already used `HBAR/(4π²c²)` (correct), so the 2x error in the base energy made χ appear half its true value, inflating κ_crit to 1.12–1.18 (wrong). After the fix, `casimir_tools` and `src/lifshitz.py` agree exactly: χ≈1.58, κ_crit≈0.795 — repulsion IS achievable at κ>0.795 for symmetric Te|Te. The IEEE draft's κ_crit=0.806 and repulsion claims were correct all along.
+
+### Bugs Fixed
+
+| # | File | Bug | Fix |
+|---|------|-----|-----|
+| 11 | `casimir_tools/_core.py` | `casimir_energy`, `casimir_energy_aniso`, `casimir_energy_2osc` used prefactor `HBAR/(2π²c²)` → 2× too large | Changed all three to `HBAR/(4π²c²)` |
+| 12 | `casimir_tools/tests/test_core.py` | `test_chiral_correction_positive_and_kappa_crit_defined` asserted κ_crit > 1 based on wrong prefactor | Redesigned: now asserts χ>1, κ_crit<1, and E(κ=1)>0 (repulsion confirmed) |
+
+### Physics Re-Confirmed
+
+With correct prefactor, for symmetric Te|Te (ε=164.27 trace avg):
+
+| d (nm) | E_std (mJ/m²) | χ = δE/\|E_std\| | κ_crit | E at κ=0.5 | E at κ=1.0 |
+|--------|--------------|-----------------|--------|------------|------------|
+| 5 | -1.510 | 1.439 | 0.834 | -0.967 (36% red.) | +0.663 (repulsion) |
+| 10 | -0.234 | 1.580 | 0.795 | -0.141 (40% red.) | +0.136 (repulsion) |
+| 20 | -0.033 | 1.638 | 0.781 | -0.019 (41% red.) | +0.021 (repulsion) |
+| 84.2 | -0.000465 | 1.665 | 0.775 | -0.000271 (42% red.) | +0.000309 (repulsion) |
+
+**IEEE draft claims (κ_crit≈0.806, ~40% reduction at κ=0.5, repulsion at κ>0.806) are confirmed correct.**
+
+### Test Results
+
+```
+Total: 124 passed, 0 failed, 5 skipped
+```
+
+### Actions Completed
+
+- [x] Fix 3× prefactor bugs in `casimir_tools/_core.py`
+- [x] Redesign `test_chiral_correction_positive_and_kappa_crit_defined` with correct physics
+- [x] Re-run optimizer → fresh `pareto_results.json` with `E_Casimir_chiral_asymm_mJm2` field
+- [x] Rebuild `casimir_tools` v0.1.6 dist (built successfully)
+- [x] Committed Session 33 fixes to GitHub (commit `09a90b2`)
+- [ ] PyPI upload v0.1.6 (needs `! python -m twine upload dist/casimir_tools-0.1.6* --username __token__ --password <API_TOKEN>`)
+
+---
+
+## Session 33 — Critical Bug Fix: Chiral Validation Pipeline + Package Integrity
 
 ### Summary
 
@@ -27,9 +70,9 @@ Full codebase audit (every file, end-to-end data flow) uncovered 10 bugs spannin
 | 9 | `casimir_tools/_core.py` | `casimir_energy_chiral` had no `kappa=0.0` default — API inconsistency | Added default |
 | 10 | `tests/test_lifshitz.py` | Zero test coverage for `casimir_energy_chiral_asymmetric` | Added `TestAsymmetricChiralCorrection` with 4 tests |
 
-### Physics Finding (from Bug 7 fix)
+### Physics Finding (from Bug 7 fix — subsequently corrected in Session 34)
 
-For real Te (ε=164.27 trace average) symmetric Te\|Te pair, the full Lifshitz integral gives χ ≈ 0.72–0.79 at MEMS separations (d=5–10nm), yielding **κ_crit ≈ 1.12–1.18 > 1**. Chirality-driven repulsion is NOT achievable in the physical κ∈[0,1] range for this material pair. The old Hamaker model (CHIRAL_FACTOR=2.0) falsely showed repulsion at κ=1.0. This must be clearly stated in the IEEE paper.
+~~For real Te (ε=164.27 trace average) symmetric Te\|Te pair, the full Lifshitz integral gives χ ≈ 0.72–0.79 at MEMS separations (d=5–10nm), yielding **κ_crit ≈ 1.12–1.18 > 1**. Chirality-driven repulsion is NOT achievable.~~ **RETRACTED — Session 33 finding was based on a factor-of-2 prefactor bug in `_core.py`. Correct result: χ ≈ 1.58, κ_crit ≈ 0.795 < 1. Repulsion IS achievable at κ>0.795 for symmetric Te|Te. See Session 34.**
 
 ### Test Results
 
@@ -41,11 +84,11 @@ casimir_tools test suite: 82 passed, 0 failed, 5 skipped
 
 `src/optimizer.py`, `src/visualize.py`, `main.py`, `dashboard/src/App.jsx`, `casimir_tools/casimir_tools/_core.py`, `casimir_tools/tests/test_core.py`, `tests/test_lifshitz.py`
 
-### Action Required
+### Action Required (resolved in Session 34)
 
-- [ ] Re-run `uv run python main.py --optimize` to regenerate `pareto_results.json` with corrected chiral validation energies
-- [ ] Bump `casimir_tools` to **v0.1.6** and push to PyPI (breaking change: `casimir_energy_chiral` now uses full integral, different numeric results)
-- [ ] Update IEEE draft Section IV.C: state κ_crit > 1 for Te\|WTe₂ and symmetric Te\|Te at MEMS separations
+- [x] Re-run `uv run python main.py --optimize` to regenerate `pareto_results.json`
+- [x] Bump `casimir_tools` to **v0.1.6** (built; PyPI upload pending user action)
+- [x] IEEE draft Section IV.C confirmed correct — no changes needed (κ_crit≈0.806 was always right)
 
 ---
 

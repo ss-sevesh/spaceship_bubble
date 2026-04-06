@@ -173,13 +173,13 @@ class TestCasimirEnergyChiral:
         E_chiral = casimir_energy_chiral(EPS_TE, EPS_WTE2, D_10NM, kappa=0.0)
         assert E_chiral == pytest.approx(E_std, rel=1e-4)
 
-    def test_chiral_correction_positive_and_kappa_crit_defined(self):
-        """δE_sym > 0 and κ_crit = 1/√χ is well-defined for Te|Te.
+    def test_chiral_correction_positive_and_kappa_crit_physical(self):
+        """δE_sym > 0 and κ_crit < 1 for Te|Te (repulsion achievable in physical range).
 
-        For EPS_TE=164.27 (trace average), χ = δE/|E_std| ≈ 0.72–0.79 at
-        d=5–10nm, giving κ_crit ≈ 1.12–1.18.  Repulsion therefore requires
-        κ > κ_crit > 1, which is outside the physical range [0,1].  The test
-        verifies the sign and formula, not a physically unachievable threshold.
+        For EPS_TE=164.27 (trace average), χ = δE/|E_std| ≈ 1.58 at d=10nm,
+        giving κ_crit ≈ 0.795.  Repulsion is therefore achievable for κ > 0.795,
+        which is within the physical range [0,1].
+        At κ=1.0, E > 0 (net repulsion confirmed).
         """
         from casimir_tools._core import _casimir_chiral_correction_symmetric
         d = 10e-9
@@ -187,12 +187,14 @@ class TestCasimirEnergyChiral:
         delta_E = _casimir_chiral_correction_symmetric(EPS_TE, EPS_TE, d)
         assert delta_E > 0.0, "Chiral correction must be positive (reduces attraction)"
         chi = delta_E / abs(E_std)
-        assert 0.0 < chi, "χ must be positive"
+        assert chi > 1.0, f"χ={chi:.3f} must exceed 1 for Te|Te (repulsion achievable)"
         kappa_crit = 1.0 / chi ** 0.5
-        assert kappa_crit > 1.0, (
-            f"For EPS_TE={EPS_TE} Te|Te, κ_crit={kappa_crit:.3f} must exceed 1 "
-            "(repulsion not achievable in physical κ∈[0,1] range)"
+        assert kappa_crit < 1.0, (
+            f"κ_crit={kappa_crit:.3f} must be < 1 (repulsion achievable in physical range)"
         )
+        # Confirm actual repulsion at κ=1
+        E_k1 = casimir_energy_chiral(EPS_TE, EPS_TE, d, kappa=1.0)
+        assert E_k1 > 0.0, f"E(κ=1)={E_k1:.3e} must be positive (net repulsion)"
 
     def test_kappa_reduces_magnitude_te_te(self):
         """For Te|Te symmetric pair, kappa=0.5 reduces |E| vs kappa=0."""

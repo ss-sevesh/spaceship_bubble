@@ -168,7 +168,7 @@ def casimir_energy(eps_static1: float, eps_static2: float, d: float,
     result, _ = quad(_outer, 0.0, xi_max, args=(f1, f2, d),
                      limit=100, epsabs=1e-60, epsrel=1e-4,
                      points=[omega_uv])
-    return HBAR / (2.0 * np.pi ** 2 * C ** 2) * result
+    return HBAR / (4.0 * np.pi ** 2 * C ** 2) * result
 
 
 # ── Chiral Casimir energy ─────────────────────────────────────────────────────
@@ -326,7 +326,7 @@ def casimir_energy_aniso(eps_perp1: float, eps_par1: float,
     xi_max = 10.0 * omega_uv
     result, _ = quad(outer_aniso, 0.0, xi_max, limit=100,
                      epsabs=1e-60, epsrel=1e-4, points=[omega_uv])
-    return HBAR / (2.0 * np.pi ** 2 * C ** 2) * result
+    return HBAR / (4.0 * np.pi ** 2 * C ** 2) * result
 
 
 # ── 2-oscillator dielectric Lifshitz ─────────────────────────────────────────
@@ -345,7 +345,7 @@ def casimir_energy_2osc(C1_1: float, omega1_1: float, C2_1: float, omega2_1: flo
     ))
     result, _ = quad(_outer, 0.0, xi_max, args=(f1, f2, d),
                      limit=150, epsabs=1e-60, epsrel=1e-4, points=pts)
-    return HBAR / (2.0 * np.pi ** 2 * C ** 2) * result
+    return HBAR / (4.0 * np.pi ** 2 * C ** 2) * result
 
 
 # ── Finite-temperature Lifshitz (Matsubara) ───────────────────────────────────
