@@ -89,7 +89,7 @@ plt.show()
 The library implements the **Lifshitz (1956)** formula for Casimir energy between two planar dielectric half-spaces:
 
 ```
-E(d) = (ħ/2π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
+E(d) = (ħ/4π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
          × Σ_pol ln(1 − r₁^pol r₂^pol e^{−2pξd/c})
 ```
 

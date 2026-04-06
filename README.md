@@ -59,7 +59,7 @@ Open http://localhost:5173. The dashboard shows:
 - 3D metamaterial visualizer (React Three Fiber)
 - Pareto-optimal design table with thermal fraction column
 - 12-plot gallery (Casimir curves, aniso, chiral, force, Pareto, finite-T, 2-osc, Td-WTe₂, Au/SiO₂ benchmark)
-- "Re-Optimize" button triggers `main.py --all` via FastAPI and live-syncs results
+- "Re-Optimize" button triggers `main.py --optimize --plot` via FastAPI, polls `/api/status` every 3s, and live-syncs results when complete
 - Download Report exports selected Pareto design as a `.txt` spec file
 
 ---
@@ -127,12 +127,12 @@ pip install "casimir-tools[plot]"   # with matplotlib
 ```python
 import casimir_tools as ct
 
-E        = ct.casimir_energy(eps_static1=164.27, eps_static2=8.46, d=10e-9)
-E_chiral = ct.casimir_energy_chiral(eps_static1=164.27, eps_static2=8.46, d=10e-9, kappa=0.5)
-d_nm, F  = ct.sweep_force(eps1=164.27, eps2=8.46, d_min_nm=5.0, d_max_nm=100.0, n_points=100)
+E        = ct.casimir_energy(eps_static1=164.27, eps_static2=6.16, d=10e-9)
+E_chiral = ct.casimir_energy_chiral(eps_static1=164.27, eps_static2=6.16, d=10e-9, kappa=0.5)
+d_nm, F  = ct.sweep_force(eps1=164.27, eps2=6.16, d_min_nm=5.0, d_max_nm=100.0, n_points=100)
 ```
 
-Current version: `v0.1.5` — to publish next release: `git tag casimir-tools-v0.X.X && git push --tags`
+Current version: `v0.1.6` — live on PyPI.
 
 ---
 
