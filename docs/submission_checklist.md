@@ -58,8 +58,8 @@
 
 ### Technical
 - [ ] **Re-run pipeline** after any new optimizer run: `uv run python main.py --lifshitz --plot && uv run python sync_assets.py`
-- [ ] **PyPI publish**: `git tag casimir-tools-v0.1.0 && git push --tags`
-- [ ] **GitHub repository** — make public, add README link in cover letter
+- [x] **PyPI publish**: `casimir-tools v0.1.3` live at pypi.org/project/casimir-tools/
+- [x] **GitHub repository** — public at github.com/ss-sevesh/spaceship_bubble, add README link in cover letter
 - [ ] **Verify all 12 figures are 300 dpi** — run `python -c "from PIL import Image; img=Image.open('plots/casimir_tellurium.png'); print(img.info.get('dpi'))"`
 
 ### Cover Letter

@@ -73,7 +73,7 @@ spaceship_bubble/
 - [x] **2-oscillator Sellmeier model** (IR phonon + UV electronic, `casimir_2osc_model.png`)
 - [x] **3-objective NSGA-II** (F3 = thermal_fraction, dual-panel Pareto plot)
 - [x] **Td-WTe₂ substrate** (DFT-HSE06 tensor, ε_⊥=18.60, ε_∥=8.80, `casimir_td_wte2.png`)
-- [x] **casimir-tools PyPI package** (scaffold + CI workflow; publish pending user git tag)
+- [x] **casimir-tools PyPI package** (v0.1.3 live — pypi.org/project/casimir-tools/)
 - [x] **Download Report** (exports selected Pareto design as `.txt` with full metadata)
 
 ---
