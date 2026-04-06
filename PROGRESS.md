@@ -2,11 +2,64 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-06 (Session 34)
+**Last updated**: 2026-04-06 (Session 35)
 
 ---
 
-## Session 34 — Prefactor Bug in casimir_tools + v0.1.6 Release (Current)
+## Session 35 — Full Codebase Audit + Frontend-Backend Fix (Current)
+
+### Summary
+
+Performed end-to-end audit of every file (physics, logic, data flow) without trusting comments. Found and fixed 4 more bugs across `casimir_tools/_core.py` and the dashboard. Frontend-backend connection had 3 broken behaviors that prevented Re-Optimize from ever working correctly.
+
+### Bugs Fixed
+
+| # | File | Bug | Fix |
+|---|------|-----|-----|
+| 13 | `casimir_tools/_core.py:462` | `casimir_force()` prefactor `HBAR/(2π²c²)` — 2× too large. Numerical check: force/(-dE/dd) ratio = 1.999 | Changed to `HBAR/(4π²c²)`; ratio now 0.9994 |
+| 14 | `casimir_tools/_core.py:537` | `_casimir_chiral_correction_asymmetric()` prefactor `HBAR/(2π²c²)` — 2× too large vs `src/lifshitz.py` | Changed to `HBAR/(4π²c²)`; ct/src ratio now 1.000 |
+| 15 | `casimir_tools/__init__.py` | Version string still said `0.1.5` after pyproject.toml was bumped | Updated to `0.1.6` |
+| 16 | `dashboard/src/App.jsx` | `API_URL = 'http://localhost:8000/api'` bypassed Vite proxy — broke on port changes, made CORS config load-bearing | Changed to `'/api'` (goes through `vite.config.js` proxy) |
+| 17 | `dashboard/src/App.jsx` | `handleRunSimulation` waited 15s then gave up — optimizer takes 2-5 min, so Re-Optimize never loaded fresh data | Replaced with poll loop: checks `/api/status` every 3s, refreshes data when `status='idle'` |
+| 18 | `dashboard/server.py` | `simulate()` ran `main.py --all` — includes `--fetch` (Materials Project API key required, slow) and `--lifshitz` (unnecessary). Timeout was 300s (too short for optimizer) | Changed to `--optimize --plot`, timeout raised to 600s |
+
+### Audit Results — Confirmed Correct
+
+| Component | Status |
+|-----------|--------|
+| `src/lifshitz.py` all prefactors | ✅ All `HBAR/(4π²c²)` throughout |
+| Fresnel coefficients TE/TM | ✅ Correct in both files |
+| Anisotropic uniaxial TM formula | ✅ Correct |
+| Matsubara n=0 half-weight | ✅ Correct in both files |
+| Maxwell-Garnett EMA (optimizer) | ✅ Correct |
+| JSON schema: optimizer → pareto_results.json → dashboard | ✅ All field names consistent |
+| Vite proxy config | ✅ Was correct, just unused |
+| Fallback to static `/data/pareto_results.json` | ✅ Works when backend offline |
+| Material constants (ε_Te=164.27, ε_WTe₂=6.16) | ✅ Correct in tests + data files |
+
+### casimir_tools v0.1.6 Status
+
+- Built: `casimir_tools/dist/casimir_tools-0.1.6-py3-none-any.whl` ✅
+- PyPI upload: **pending** (needs API token — run `! python -m twine upload casimir_tools/dist/casimir_tools-0.1.6* --username __token__ --password pypi-<token>`)
+
+### Tests
+
+```
+124 passed, 0 failed, 5 skipped
+```
+
+### Commits This Session
+
+| Hash | Description |
+|------|-------------|
+| `09a90b2` | fix: correct chiral validation pipeline + casimir_tools package integrity |
+| `6cdda73` | fix: casimir_tools prefactor bug + bump v0.1.6 |
+| `e041e49` | fix: casimir_tools force and asymmetric chiral prefactors |
+| `27de64b` | fix: frontend-backend connection — proxy, polling, and command |
+
+---
+
+## Session 34 — Prefactor Bug in casimir_tools + v0.1.6 Release
 
 ### Summary
 
