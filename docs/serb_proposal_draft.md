@@ -82,7 +82,7 @@ India's MEMS market is growing rapidly (IoT sensors, accelerometers, RF MEMS for
 The Lifshitz (1956) formula for Casimir energy between two planar dielectric half-spaces:
 
 ```
-E(d) = (ℏ/2π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
+E(d) = (ℏ/4π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
          Σ_{pol} ln(1 − r₁^pol r₂^pol e^{−2pξd/c})
 ```
 
@@ -103,7 +103,7 @@ Chiral route (Zhao et al. 2009): E = E_Lifshitz + κ² · δE where δE > 0 from
 |--------|-------|
 | Standard Lifshitz, Te\|WTe₂, d=10 nm | −0.205 mJ/m² |
 | Chiral correction δE, d=10 nm | +0.739 mJ/m² |
-| Critical chirality κ_crit | 0.796 |
+| Critical chirality κ_crit | 0.806 |
 | Force reduction at κ=0.5 | 38–42% |
 | Repulsion onset (κ=1.0) | d ≥ 3 nm confirmed |
 | Pareto-optimal stiction energy | 1.1×10⁻⁷ mJ/m² (vs 61 mJ/m² bare) |

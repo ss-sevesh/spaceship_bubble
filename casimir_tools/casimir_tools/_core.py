@@ -514,7 +514,7 @@ def _casimir_chiral_correction_asymmetric(eps_static1: float, eps_static2: float
 
     Returns δE_asym in J/m².  Positive = asymmetric correction reduces attraction.
 
-        δE_asym = 2·(ħ/2π²c²) · ∫ ξ² dξ ∫ p dp
+        δE_asym = 2·(ħ/4π²c²) · ∫ ξ² dξ ∫ p dp
                     r₁^TM·r₁^TE·r₂^TM·r₂^TE · exp(−4pξd/c)
 
     Physical consequence for Te|WTe₂:
@@ -555,8 +555,8 @@ def casimir_energy_chiral_asymmetric(eps_static1: float, eps_static2: float,
     symmetric Te|Te geometry for repulsion (κ_crit_sym ≈ 0.806).
 
     Args:
-        eps_static1: Static dielectric of chiral plate (Te, ε_eff ≈ 130–145).
-        eps_static2: Static dielectric of non-chiral plate (WTe₂, ε ≈ 8.46).
+        eps_static1: Static dielectric of chiral plate (Te, ε_static = 164.27).
+        eps_static2: Static dielectric of non-chiral plate (WTe₂, ε_static = 6.16).
         d:           Gap separation (m).
         kappa:       Chirality parameter κ = κ₀ · sin(θ).
         omega_uv:    UV oscillator frequency (rad/s).

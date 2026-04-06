@@ -100,7 +100,7 @@ Reduces to isotropic Lifshitz when ε_⊥ = ε_∥.
 
 ### D. Casimir Force
 ```
-F(d) = −dE/dd = −(ℏ/2π²c²) ∫ ξ² dξ ∫ p dp
+F(d) = −dE/dd = −(ℏ/4π²c²) ∫ ξ² dξ ∫ p dp
         × Σ_{pol} (2pξ/c) r₁^pol r₂^pol e^{−2pξd/c} / (1 − r₁^pol r₂^pol e^{−2pξd/c})
 ```
 
@@ -114,7 +114,7 @@ E(d, κ) = E_Lifshitz(d) + κ² · δE(d)
 where κ = κ₀ sin(θ) (chirality parameter as function of crystal orientation θ) and:
 
 ```
-δE(d) = −2(ℏ/2π²c²) ∫ ξ² dξ ∫ p dp
+δE(d) = −2(ℏ/4π²c²) ∫ ξ² dξ ∫ p dp
           (r₁^TM r₂^TE + r₁^TE r₂^TM) e^{−2pξd/c}
 ```
 
@@ -127,7 +127,7 @@ Critical chirality: κ_crit = √(|E_Lifshitz|/δE) at which E = 0 (zero-force c
 The formula in Sec. II.E is derived for symmetric chiral plates (κ₁ ≠ 0, κ₂ ≠ 0). For the physical Te|WTe₂ system, plate 2 (WTe₂) is achiral (κ₂ = 0). In this asymmetric case, round-trip TE↔TM mode conversion requires two successive off-diagonal scatterings from the chiral Te interface rather than one from each plate. Following Silveirinha [25], the leading second-order scattering process yields:
 
 ```
-δE_asym(d) = 2·(ħ/2π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
+δE_asym(d) = 2·(ħ/4π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
                × r₁^TM·r₁^TE·r₂^TM·r₂^TE·exp(−4pξd/c)
 ```
 
@@ -314,7 +314,7 @@ The Zhao et al. (2009) [6] formula — used in all prior computational studies o
 However, for the physical Te(κ₁) | vac | WTe₂(κ₂ = 0) configuration the correct formula derives from the scattering-matrix approach of Silveirinha (2010) [25]. Because WTe₂ is achiral, round-trip TE↔TM mode conversion requires **two** successive off-diagonal scatterings from the Te interface rather than one from each plate. This second-order process contributes a factor exp(−4pξd/c) rather than exp(−2pξd/c), giving the asymmetric correction:
 
 ```
-δE_asym = 2·(ħ/2π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
+δE_asym = 2·(ħ/4π²c²) ∫₀^∞ ξ² dξ ∫₁^∞ p dp
             × r₁^TM·r₁^TE·r₂^TM·r₂^TE·exp(−4pξd/c)
 ```
 
