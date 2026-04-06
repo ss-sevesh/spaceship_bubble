@@ -2,7 +2,7 @@
 ## AI-driven Casimir Stiction Suppression via Chiral Tellurium Metamaterials
 
 **Target journal**: IEEE Transactions on Nanotechnology  
-**Author**: Sevesh SS, KEC 2026  
+**Author**: Sevesh SS, Kongu Engineering College 2026 | seveshss.24aim@kongu.edu | ORCID: 0009-0007-5498-8076  
 **Status**: Full draft (Session 22, April 2026)
 
 ---
@@ -363,7 +363,7 @@ A three-objective NSGA-II framework simultaneously minimizes stiction energy, de
 
 ## ACKNOWLEDGMENTS
 
-This work was supported by the Science and Engineering Research Board (SERB), Department of Science and Technology, Government of India, under the Core Research Grant (CRG) scheme [Grant No. TBD]. The computational resources were provided by the High-Performance Computing facility at Kumaraguru College of Engineering and Technology (KEC), Coimbatore. The author thanks the Materials Project (DOE BES DE-AC02-05CH11231) for the open-access dielectric tensor database used in this work.
+This work was supported by the Science and Engineering Research Board (SERB), Department of Science and Technology, Government of India, under the Core Research Grant (CRG) scheme [Grant No. TBD]. The computational resources were provided by the computational facilities at Kongu Engineering College (KEC), Erode. The author thanks the Materials Project (DOE BES DE-AC02-05CH11231) for the open-access dielectric tensor database used in this work.
 
 ---
 

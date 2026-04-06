@@ -2,7 +2,7 @@
 ## AI-Driven Casimir Stiction Suppression via Chiral Tellurium Metamaterials
 
 **Scheme**: SERB Core Research Grant (CRG)  
-**PI**: Sevesh SS, KEC (Kumaraguru College of Engineering and Technology), 2026  
+**PI**: Sevesh SS, Kongu Engineering College (KEC), 2026  
 **Duration**: 3 years  
 **Status**: Draft (Session 12, April 2026)
 
@@ -15,8 +15,8 @@
 | **Project Title** | AI-Driven Engineering of Casimir Stiction Suppression Using Chiral Tellurium Metamaterials for MEMS/NEMS Reliability |
 | **Scheme** | SERB Core Research Grant (CRG) |
 | **Principal Investigator** | Sevesh SS |
-| **Institution** | Kumaraguru College of Engineering and Technology (KEC), Coimbatore |
-| **Department** | [To fill: Dept of ECE / Physics / Nanotechnology] |
+| **Institution** | Kongu Engineering College (KEC), Erode |
+| **Department** | Artificial Intelligence and Machine Learning |
 | **Duration** | 36 months |
 | **Total Budget Requested** | ₹ [To fill: ~₹45–60 Lakhs] |
 | **Scientific Area** | Condensed Matter Physics / MEMS Engineering / Quantum Vacuum Effects |
@@ -193,17 +193,17 @@ Chiral route (Zhao et al. 2009): E = E_Lifshitz + κ² · δE where δE > 0 from
 ## PART H: TEAM AND FACILITIES
 
 ### Principal Investigator
-- **Sevesh SS**, B.E. (Electronics & Communication Engineering), KEC (Kumaraguru College of Engineering and Technology), 2026
+- **Sevesh SS**, B.E. (Artificial Intelligence and Machine Learning), Kongu Engineering College (KEC), 2026
 - Research area: quantum vacuum effects, computational materials science, MEMS reliability engineering
 - Relevant prior work: AI-driven Casimir stiction suppression framework (this project); NSGA-II Pareto optimisation of chiral metamaterial geometries; full anisotropic Lifshitz implementation for uniaxial heterostructures
 - GitHub / code artefacts: open-source `casimir-tools` (in preparation, target PyPI Month 12)
 
 ### Co-Investigator / Mentor (Proposed)
-- **[TBD]** Faculty member, Dept. of ECE / Physics, KEC (Kumaraguru College of Engineering and Technology), Coimbatore — confirm name with HOD prior to portal submission
+- **[TBD]** Faculty member, Dept. of AI & ML / Physics, Kongu Engineering College (KEC), Erode — confirm name with HOD prior to portal submission
 
-### Institutional Facilities Available at KCET, Coimbatore
+### Institutional Facilities Available at KEC, Erode
 
-#### Characterisation Laboratory (Central Research Facility, KEC)
+#### Characterisation Laboratory (Central Research Facility, Kongu Engineering College)
 | Equipment | Model / Spec | Relevance to Project |
 |-----------|-------------|---------------------|
 | X-Ray Diffractometer (XRD) | Rigaku MiniFlex 600, Cu Kα, 2θ range 3°–145° | Phase identification of Te nanowires; chirality verification via peak splitting |

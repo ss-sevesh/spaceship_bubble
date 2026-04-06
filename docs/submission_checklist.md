@@ -52,7 +52,7 @@
 - [ ] **Fill in your real full name** in `docs/cover_letter.md` and `docs/ieee_draft_outline.md` author line
 - [ ] **Add email address** (correspondence author)
 - [x] **ORCID** — 0009-0007-5498-8076 (registered)
-- [ ] **Full institution name** — e.g. "Dept. of ECE, Kumaraguru College of Technology, Coimbatore 641049, Tamil Nadu, India"
+- [x] **Full institution name** — "Dept. of Artificial Intelligence and Machine Learning, Kongu Engineering College, Perundurai, Erode 638060, Tamil Nadu, India"
 - [ ] **Faculty advisor/PI** — consider adding as co-author for credibility (IEEE allows UG solo papers but faculty co-author helps)
 - [ ] **SERB grant number** — replace `[Grant No. TBD]` in Acknowledgments once assigned
 
