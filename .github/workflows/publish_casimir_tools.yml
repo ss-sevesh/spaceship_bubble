@@ -8,6 +8,7 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    environment: pypi
     permissions:
       id-token: write   # required for trusted PyPI publishing (OIDC)
       contents: read    # required for actions/checkout under restricted repo settings
