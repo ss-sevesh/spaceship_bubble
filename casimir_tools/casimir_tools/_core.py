@@ -459,7 +459,7 @@ def casimir_force(eps_static1: float, eps_static2: float, d: float,
     xi_max = 10.0 * omega_uv
     result, _ = quad(outer_f, 0.0, xi_max, args=(),
                      limit=100, epsabs=1e-60, epsrel=1e-4, points=[omega_uv])
-    return -HBAR / (2.0 * np.pi ** 2 * C ** 2) * result
+    return -HBAR / (4.0 * np.pi ** 2 * C ** 2) * result
 
 
 def casimir_force_chiral(eps_static1: float, eps_static2: float,
@@ -534,7 +534,7 @@ def _casimir_chiral_correction_asymmetric(eps_static1: float, eps_static2: float
 
     xi_max = 10.0 * omega_uv
     raw, _ = quad(outer, 0.0, xi_max, limit=80, epsrel=1e-3, points=[omega_uv])
-    prefactor = HBAR / (2.0 * np.pi ** 2 * C ** 2)
+    prefactor = HBAR / (4.0 * np.pi ** 2 * C ** 2)
     return 2.0 * prefactor * raw
 
 
