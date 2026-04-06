@@ -5,7 +5,7 @@ Implements the zero-temperature Lifshitz formula for Casimir interaction
 energy per unit area between two planar dielectric half-spaces separated
 by a vacuum gap of width d:
 
-    E(d) = (hbar / 2*pi^2 * c^2)
+    E(d) = (hbar / 4*pi^2 * c^2)
              * int_0^inf xi^2 dxi
              * int_1^inf p dp
              * sum_pol ln(1 - r1^pol * r2^pol * exp(-2*p*xi*d/c))
@@ -274,7 +274,7 @@ def casimir_energy(eps_static1: float, eps_static2: float, d: float,
     Full double integral (TE + TM) over imaginary frequency and
     normalised perpendicular wavevector:
 
-        E(d) = (hbar / 2*pi^2 * c^2)
+        E(d) = (hbar / 4*pi^2 * c^2)
                  * int_0^xi_max xi^2 dxi
                  * int_1^p_max p dp
                  * [ln(1 - r1^TE r2^TE e^{-2pxid/c})
@@ -411,11 +411,11 @@ def _hamaker_constant(eps1: float, eps2: float,
 #   chi(d) = delta_E(d) / |E_vdW(d)|
 #   where delta_E uses the corrected prefactor ħ/(4π²c²) and E_vdW uses Hamaker.
 #
-#   Te|Te (symmetric, eps1=eps2=130.86):
+#   Te|Te (symmetric, eps1=eps2=164.27):
 #     d=5 nm  -> chi=1.70   d=10 nm -> chi=1.19
 #     d=20 nm -> chi=0.70   d=50 nm -> chi=0.30
 #
-#   Te|WTe2 (heterostructure, eps1=130.86, eps2=8.46):
+#   Te|WTe2 (heterostructure, eps1=164.27, eps2=6.16):
 #     d=5 nm  -> chi=0.75   d=10 nm -> chi=0.64
 #     d=20 nm -> chi=0.43   d=50 nm -> chi=0.20
 #
@@ -438,8 +438,8 @@ def _hamaker_constant(eps1: float, eps2: float,
 CHIRAL_FACTOR = 1.0   # dimensionless kappa^2 coefficient in Hamaker fast model
 
 
-def compute_chiral_factor_ratio(eps_static1: float = 130.86,
-                                 eps_static2: float = 8.46,
+def compute_chiral_factor_ratio(eps_static1: float = 164.27,
+                                 eps_static2: float = 6.16,
                                  d_nm_list: list | None = None,
                                  omega_uv: float = OMEGA_UV) -> dict:
     """
@@ -455,7 +455,7 @@ def compute_chiral_factor_ratio(eps_static1: float = 130.86,
     For Te|WTe₂ it overestimates chi, biasing NSGA-II toward higher kappa_eff.
 
     The cross-coupling integral is (Zhao et al. 2009, PRL 103, 103602):
-        delta_E(d) = -2*(ħ/2π²c²) ∫ ξ² dξ ∫ p dp
+        delta_E(d) = -2*(ħ/4π²c²) ∫ ξ² dξ ∫ p dp
                      (r₁^TM·r₂^TE + r₁^TE·r₂^TM) exp(-2pξd/c)
 
     The Hamaker fast-model approximates this as:
@@ -463,8 +463,8 @@ def compute_chiral_factor_ratio(eps_static1: float = 130.86,
     where E_vdW = -A/(12πd²) is the non-retarded vdW energy.
 
     Args:
-        eps_static1: Static dielectric of material 1 (default: Te, 130.86).
-        eps_static2: Static dielectric of material 2 (default: WTe₂, 8.46).
+        eps_static1: Static dielectric of material 1 (default: Te, 164.27).
+        eps_static2: Static dielectric of material 2 (default: WTe₂, 6.16).
         d_nm_list:   List of separations in nm to evaluate (default: [5, 10, 20]).
         omega_uv:    UV pole frequency for Cauchy model (rad/s).
 
@@ -581,7 +581,7 @@ def _casimir_chiral_correction(eps_static1: float, eps_static2: float,
     without repeating the expensive integral.
 
     Physical formula (leading order, Zhao et al. 2009):
-        delta_E = -2 * (hbar / 2*pi^2*c^2) * int xi^2 dxi int p dp
+        delta_E = -2 * (hbar / 4*pi^2*c^2) * int xi^2 dxi int p dp
                     (r1^TM*r2^TE + r1^TE*r2^TM) * exp(-2pxid/c)
 
     Args:
@@ -669,7 +669,7 @@ def casimir_energy_chiral(eps_static1: float, eps_static2: float,
 # about the non-chiral diagonal part M̂₀ and collecting the κ₁² contribution
 # from −½ Tr(M̂₁²) in the log expansion:
 #
-#   δE_asym = 2 · (ħ/2π²c²)
+#   δE_asym = 2 · (ħ/4π²c²)
 #             × ∫₀^∞ ξ² dξ ∫₁^∞ p dp
 #             × r₁^TM(ε₁,p) · r₁^TE(ε₁,p) · r₂^TM(ε₂,p) · r₂^TE(ε₂,p)
 #             × exp(−4·p·ξ·d/c)
@@ -738,7 +738,7 @@ def _casimir_chiral_correction_asymmetric(eps_static1: float, eps_static2: float
     where δE_asym > 0 (reduces attraction; can drive repulsion for large κ).
 
     Physical formula (asymmetric, Silveirinha 2010 Eq. 15):
-        δE_asym = 2 · (ħ/2π²c²) · ∫ ξ² dξ ∫ p dp
+        δE_asym = 2 · (ħ/4π²c²) · ∫ ξ² dξ ∫ p dp
                     r₁^TM·r₁^TE·r₂^TM·r₂^TE · exp(−4pξd/c)
 
     Args:
@@ -791,8 +791,8 @@ def casimir_energy_chiral_asymmetric(eps_static1: float, eps_static2: float,
     - Repulsion requires κ_eff > κ_crit_asym; may exceed unity (unphysical range)
 
     Args:
-        eps_static1: Static dielectric of chiral plate (Te, ε_eff ≈ 130–145).
-        eps_static2: Static dielectric of non-chiral plate (WTe₂, ε ≈ 8.46).
+        eps_static1: Static dielectric of chiral plate (Te, ε_eff ≈ 164.27).
+        eps_static2: Static dielectric of non-chiral plate (WTe₂, ε ≈ 6.16).
         d:           Gap separation (m).
         kappa:       Chirality parameter κ = κ₀ · sin(θ).
         omega_uv:    UV oscillator frequency (rad/s).

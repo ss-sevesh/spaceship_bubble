@@ -37,6 +37,7 @@ node_modules/
 
 # Misc generated
 *.log
+*_output.txt
 
 # Claude Code session cache (local only)
 .claude/
