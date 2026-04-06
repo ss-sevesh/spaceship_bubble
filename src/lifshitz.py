@@ -1359,7 +1359,7 @@ def casimir_force(eps_static1: float, eps_static2: float, d: float,
 
     Analytically differentiated from the Lifshitz energy integral:
 
-        F(d) = -(hbar / 2*pi^2 * c^2)
+        F(d) = -(hbar / 4*pi^2 * c^2)
                  * int_0^xi_max xi^2 dxi
                  * int_1^p_max p dp
                  * sum_pol (2*p*xi/c) * r1^pol * r2^pol * exp(-2*p*xi*d/c)
@@ -1410,7 +1410,7 @@ def _casimir_chiral_force_correction(eps_static1: float, eps_static2: float,
     Compute the kappa^2 coefficient of the chiral Casimir force correction.
 
     delta_F = -d(delta_E)/dd
-            = 2 * (hbar / 2*pi^2*c^2) * int xi^2 dxi int p dp
+            = 2 * (hbar / 4*pi^2*c^2) * int xi^2 dxi int p dp
               * (r1^TM*r2^TE + r1^TE*r2^TM) * (2*p*xi/c) * exp(-2pxid/c)
 
     F_chiral(d, kappa) = F_std(d) + kappa^2 * delta_F(d)

@@ -3,7 +3,7 @@
 
 **Target journal**: IEEE Transactions on Nanotechnology  
 **Author**: Sevesh SS, Kongu Engineering College 2026 | seveshss.24aim@kongu.edu | ORCID: 0009-0007-5498-8076  
-**Status**: Full draft (Session 22, April 2026)
+**Status**: Full draft (Session 35, April 2026)
 
 ---
 
@@ -79,7 +79,7 @@ The Casimir energy per unit area between two planar half-spaces separated by vac
 - Te: C₁ = 45.77, ω₁ = 3×10¹³ rad/s (IR phonon, Caldwell & Fan 1959, 160 cm⁻¹);
        C₂ = 117.5, ω₂ = 4.5×10¹⁵ rad/s (UV electronic, Stuke 1965, ~3 eV)
 - Cross-check: C₂ ≈ n² − 1 = 118.4 − 1 ✓; ε(0) = 1 + 45.77 + 117.5 = 164.27 ✓
-- WTe₂: C₁ = 0.30, ω₁ = 5×10¹³ rad/s; C₂ = 4.86, ω₂ = 6×10¹⁵ rad/s; oscillator strengths fitted to reproduce ε_static = {8.46, 1.56} from Materials Project (mp-1023926) [9]; ω₂ = 6×10¹⁵ rad/s (~4 eV) assigned to the dominant interband transition onset consistent with the DFT-PBE band structure of WTe₂ [15][20]
+- WTe₂: C₁ = 0.30, ω₁ = 5×10¹³ rad/s; C₂ = 4.86, ω₂ = 6×10¹⁵ rad/s; oscillator strengths fitted to reproduce ε_perp = 8.46, ε_par = 1.56 from Materials Project (mp-1023926) [9]; ω₂ = 6×10¹⁵ rad/s (~4 eV) assigned to the dominant interband transition onset consistent with the DFT-PBE band structure of WTe₂ [15][20]
 
 ### C. Uniaxial Fresnel Coefficients
 For a uniaxial medium with optic axis along z (interface normal):
@@ -440,4 +440,4 @@ This work was supported by the Science and Engineering Research Board (SERB), De
 
 ---
 
-*Draft updated: 2026-04-06 (Session 28). Status: All 7 IEEE submission blockers resolved — abstract trimmed to ≤150 words; I.E corrected to 5-section list (II–VI); III.B Matsubara ξ_n² weight factor added explicitly; V.C [refs needed] replaced with [16]; IV.E stray bullets converted to prose table note; footer updated to Session 28; finite-slab correction (1.2% for QNT-26-100) added in V.C. Physics engine bugs fixed: p_max clamped to 1e6 in all 9 outer-integrand functions (src/lifshitz.py + casimir_tools/_core.py); HBAR/(4π²c²) prefactor confirmed correct; 2-osc `points` list sorted. Author details complete: Sevesh SS, seveshss.24aim@kongu.edu, ORCID 0009-0007-5498-8076, Kongu Engineering College. PyPI: casimir-tools v0.1.5 published. Remaining: faculty co-author, LaTeX/PDF conversion.*
+*Draft updated: 2026-04-07 (Session 35). Status: All IEEE submission blockers resolved. Physics engine fully audited — all prefactors HBAR/(4π²c²) confirmed correct in src/lifshitz.py and casimir_tools/_core.py. Frontend-backend Re-Optimize fixed (proxy, poll loop, --optimize --plot). Author details complete: Sevesh SS, seveshss.24aim@kongu.edu, ORCID 0009-0007-5498-8076, Kongu Engineering College. PyPI: casimir-tools v0.1.6 published. Remaining: faculty co-author, LaTeX/PDF conversion.*
