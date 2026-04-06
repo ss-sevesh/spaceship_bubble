@@ -2,11 +2,43 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-06 (Session 31)
+**Last updated**: 2026-04-06 (Session 32)
 
 ---
 
-## Session 31 — Author Details, Institution Fix, GitHub Polish, v0.1.5 (Current)
+## Session 32 — Final Verification Pass (Current)
+
+### Summary
+
+Full end-to-end verification that GitHub, PyPI, and all docs are consistent and correct. Two remaining stale version references found and fixed (v0.1.3 → v0.1.5). Everything confirmed green.
+
+### Actions Completed
+
+| Action | Detail |
+|--------|--------|
+| `docs/submission_checklist.md` | PyPI version updated v0.1.3 → v0.1.5 |
+| `docs/ieee_draft_outline.md` | Footer updated: author details marked complete, v0.1.5 |
+| Full verification | GitHub ✅ PyPI ✅ Workflows ✅ all confirmed |
+
+### Verified State (as of Session 32)
+
+| System | Status |
+|--------|--------|
+| GitHub repo | ✅ Public, correct description, 14 topics, PyPI homepage, MIT license |
+| GitHub latest release | ✅ casimir-tools v0.1.5 |
+| GitHub Actions | ✅ All workflows completed success |
+| PyPI latest | ✅ v0.1.5 — correct email, institution, README |
+| All docs | ✅ No stale emails, institutions, placeholders, or wrong versions |
+
+### Remaining (user action only)
+
+- [ ] **Faculty co-author** — approach IIT professor (Madras/Bombay/Delhi, MEMS/nanophotonics); ask on request for draft email
+- [ ] **Convert IEEE draft to LaTeX/PDF** for ScholarOne upload
+- [ ] **Add college to ORCID** — orcid.org → Edit Profile → Employment (optional)
+
+---
+
+## Session 31 — Author Details, Institution Fix, GitHub Polish, v0.1.5
 
 ### Summary
 
