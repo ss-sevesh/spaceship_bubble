@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name        = "casimir-tools"
-version     = "0.1.4"
+version     = "0.1.5"
 description = "Open-source toolkit for Lifshitz-Casimir force engineering in anisotropic and chiral dielectric heterostructures"
 readme      = "README_PKG.md"
 license     = { text = "MIT" }
