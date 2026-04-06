@@ -97,13 +97,14 @@ spaceship_bubble/
 
 | Result | Value |
 |--------|-------|
-| Pareto-optimal design (hex) | N=16 layers, d=84.2 nm, κ_eff=0.865 |
+| Pareto-optimal design (hex WTe₂) | N=20 layers, d=99.9 nm, κ_eff=0.937, E=−1.44×10⁻⁴ mJ/m² |
 | Best Te/Te stiction reduction | ~40% at κ_eff=0.5; zero force at κ_crit=0.806 |
 | Te/WTe₂ chiral correction (asymmetric) | ≈3% max (κ_crit_asym≈5.8, unphysical) |
 | WTe₂ anisotropy passive suppression | 14% TM-mode reduction (independent of chirality) |
 | Td-WTe₂ vs hex-WTe₂ Casimir coupling | ~2× stronger (ratio 2.01 at d=1 nm, 1.45 at d=53 nm) |
-| Thermal fraction at d=63 nm (Td) | f_T ≈ 0.98 (thermally dominated) |
-| Quantum-safe regime | d < 190 nm, f_T < 0.1 |
+| Thermal fraction — hex WTe₂ substrate | f_T ≈ 0.003 across all Pareto solutions (d=3–100 nm); quantum-dominated |
+| Thermal fraction — Td-WTe₂ substrate | f_T ≈ 0.98 at d=63 nm (thermally dominated; large ε_∥=8.80) |
+| Quantum-classical crossover | l_T = ħc/2k_BT = 1215 nm at T=300 K → crossover at d ~ 193 nm |
 
 ---
 
