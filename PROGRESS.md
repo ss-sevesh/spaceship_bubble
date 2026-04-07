@@ -2,11 +2,43 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-07 (Session 36)
+**Last updated**: 2026-04-07 (Session 37)
 
 ---
 
-## Session 36 — Comprehensive Physics Value Audit (Current)
+## Session 37 — Frontend & Download Report Fixes (Current)
+
+### Summary
+
+Completed three pending fixes that were found but not applied in Session 36. Fixed stale `f_T` claim in README, expanded Pareto table visibility in dashboard, and corrected four bugs in the Download Report generator — wrong field displayed for `ε substrate`, missing thermal fraction, missing slab correction, and misleading Materials section that mixed isotropic ε_eff with uniaxial tensor values.
+
+### Fixes Applied
+
+| # | File | Bug | Fix |
+|---|------|-----|-----|
+| 1 | `README.md:105` | `f_T ≈ 0.003 across all Pareto solutions` — FALSE; top-10 min-stiction designs have f_T=10–173 | Updated to `f_T = 0.003–173 across Pareto front` with per-class breakdown |
+| 2 | `dashboard/src/App.jsx:366` | `slice(0, 10)` — κ_eff=0.937 balanced design at index 11 was invisible | Changed to `slice(0, 20)` |
+| 3 | `dashboard/src/App.jsx` Download Report | Showed `eps_substrate` (~1.1, optimizer design var) labelled as `ε substrate` — meaningless to any reader | Replaced with `eps_eff` (Maxwell-Garnett EMA composite, ~164.25) — the dielectric actually used in Lifshitz |
+| 4 | `dashboard/src/App.jsx` Download Report | `thermal_fraction` missing from Performance Objectives | Added `f_T` with formula label |
+| 5 | `dashboard/src/App.jsx` Download Report | `slab_thickness_correction` missing from report | Added as `%` deviation from thin-film limit |
+| 6 | `dashboard/src/App.jsx` Download Report | Materials section mixed isotropic ε_eff and uniaxial tensor; no Td-WTe₂ distinction | Clarified isotropic vs uniaxial for each material; Td-WTe₂ listed as distinct variant |
+
+### Tests
+
+```
+124 passed, 5 skipped — all green
+```
+
+### Commits
+
+| Hash | Description |
+|------|-------------|
+| `f82333c` | fix: correct f_T claim in README and show 20 Pareto rows in dashboard |
+| `c264b35` | fix: download report — correct fields, add thermal fraction and slab correction |
+
+---
+
+## Session 36 — Comprehensive Physics Value Audit
 
 ### Summary
 
