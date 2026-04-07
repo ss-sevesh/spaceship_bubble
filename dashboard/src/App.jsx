@@ -363,7 +363,7 @@ const App = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {!loading && data?.variables?.slice(0, 10).map((v, i) => {
+                  {!loading && data?.variables?.slice(0, 20).map((v, i) => {
                     const obj = data.objectives?.[i] ?? {};
                     const tf = obj?.thermal_fraction ?? null;
                     const tfColor = tf != null ? (tf < 0.1 ? '#10b981' : tf < 0.3 ? '#f59e0b' : '#f43f5e') : null;

@@ -102,7 +102,7 @@ spaceship_bubble/
 | Te/WTe₂ chiral correction (asymmetric) | ≈3% max (κ_crit_asym≈6.3, unphysical) |
 | WTe₂ anisotropy passive suppression | 14% TM-mode reduction (independent of chirality) |
 | Td-WTe₂ vs hex-WTe₂ Casimir coupling | ~2× stronger (ratio 2.01 at d=1 nm, 1.45 at d=53 nm) |
-| Thermal fraction — hex WTe₂ substrate | f_T ≈ 0.003 across all Pareto solutions (d=3–100 nm); quantum-dominated |
+| Thermal fraction — hex WTe₂ substrate | f_T = 0.003–173 across Pareto front; balanced design (κ_eff=0.937, d≈99.9nm) has f_T=0.023; min-stiction designs (κ_eff=1.000) have f_T=10–173 |
 | Thermal fraction — Td-WTe₂ substrate | f_T ≈ 0.98 at d=63 nm (thermally dominated; large ε_∥=8.80) |
 | Quantum-classical crossover | l_T = ħc/2k_BT = 1215 nm at T=300 K → crossover at d ~ 193 nm |
 
