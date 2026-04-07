@@ -434,7 +434,7 @@ def _hamaker_constant(eps1: float, eps2: float,
 # only used in the fast-model inner loop of the NSGA-II optimizer.
 # For the Te|WTe₂ asymmetric heterostructure the correct formula (Silveirinha
 # 2010) gives χ_asym ≈ 2% of χ_sym; use casimir_energy_chiral_asymmetric()
-# for physical Te|WTe₂ results (κ_crit_asym ≈ 5.8, repulsion not achievable).
+# for physical Te|WTe₂ results (κ_crit_asym ≈ 6.3, repulsion not achievable).
 CHIRAL_FACTOR = 1.0   # dimensionless kappa^2 coefficient in Hamaker fast model
 
 

@@ -42,12 +42,12 @@ of the Casimir force at the material level using chiral metamaterials.
 1. **Correct asymmetric chiral formula**: Prior computational work (Zhao et al. 2009) applies
    the symmetric-plate formula to the Te|WTe₂ system where WTe₂ is achiral (κ₂ = 0).
    We derive and implement the physically correct asymmetric second-order scattering formula
-   (Silveirinha 2010), showing that κ_crit_asym ≈ 5.8 — far outside the physical range —
+   (Silveirinha 2010), showing that κ_crit_asym ≈ 6.3 — far outside the physical range —
    making chirality-driven repulsion *impossible* in Te|WTe₂. This is a critical correction
    to the prior literature.
 
 2. **Symmetric Te|Te design target**: We identify the symmetric Te|Te geometry as the correct
-   fabrication target, where κ_crit = 0.806 enables full Casimir repulsion and ~40% stiction
+   fabrication target, where κ_crit ≈ 0.795 enables full Casimir repulsion and ~40% stiction
    reduction at κ_eff = 0.5 — practically achievable via oblique-angle PVD.
 
 3. **Three-objective NSGA-II framework**: A five-variable multi-objective optimizer

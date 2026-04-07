@@ -223,7 +223,7 @@ class CasimirOptimizationProblem(Problem):
             # F1: stiction energy via fast Hamaker model (NSGA-II inner loop, speed only).
             # CHIRAL_FACTOR=1.0 is calibrated for symmetric Te|Te (Zhao 2009);
             # for Te|WTe₂ the exact Silveirinha (2010) asymmetric formula gives
-            # χ_asym ≈ 2% of χ_sym — repulsion is not achievable (κ_crit≈5.8).
+            # χ_asym ≈ 2% of χ_sym — repulsion is not achievable (κ_crit≈6.3).
             # WARNING: CHIRAL_FACTOR=1.0 overestimates chiral suppression for Te|WTe₂,
             # making optimizer designs OPTIMISTIC (not conservative) for this heterostructure.
             # Publication validation uses casimir_energy_chiral_asymmetric() — see below.

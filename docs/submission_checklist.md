@@ -27,13 +27,13 @@
 ## ✅ DONE — Paper Draft
 
 - [x] Abstract ≤ 150 words (143 words ✓)
-- [x] Abstract uses asymmetric Silveirinha formula result (κ_crit_asym ≈ 5.8)
+- [x] Abstract uses asymmetric Silveirinha formula result (κ_crit_asym ≈ 6.3)
 - [x] Section I.E: 5-section list II–VI (no phantom Section III)
 - [x] Section II.F: Asymmetric chiral formula derived and presented
 - [x] Section II.A: Correct prefactor `ħ/(4π²c²)` in formula display
 - [x] Section III.B: Matsubara `ξ_n²/c²` spectral weight factor explicit
 - [x] Section III.D: χ table has separate symmetric/asymmetric columns
-- [x] Section IV.C: κ_crit = 0.806 for Te|Te (not 0.831 from wrong formula)
+- [x] Section IV.C: κ_crit ≈ 0.795 at d=10nm for Te|Te (not 0.831 from wrong formula; 0.806 was also stale)
 - [x] Section IV.E: 0/50 Pareto solutions repulsive for Te|WTe₂
 - [x] Section IV.H: Td/hex ratio ~2× (not ~4×); chirality NOT achievable for Td either
 - [x] Section V.C: Reference [16] (Antezza 2008) in place of `[refs needed]`

@@ -528,7 +528,7 @@ class TestCasimirEnergyChiralAsymmetric:
     """
     Tests for casimir_energy_chiral_asymmetric() — the correct formula for
     Te (chiral, κ≠0) | vac | WTe₂ (non-chiral, κ=0) per Silveirinha (2010).
-    Paper claims: δE_asym/δE_sym ≈ 2%; κ_crit_asym ≈ 5.8 (unphysical).
+    Paper claims: δE_asym/δE_sym ≈ 2%; κ_crit_asym ≈ 6.3 (unphysical).
     """
 
     D = 10e-9  # 10 nm reference separation
@@ -555,7 +555,7 @@ class TestCasimirEnergyChiralAsymmetric:
 
     def test_still_attractive_at_kappa1_te_wte2(self):
         """
-        For Te|WTe₂, repulsion is NOT achievable (κ_crit_asym ≈ 5.8 > 1).
+        For Te|WTe₂, repulsion is NOT achievable (κ_crit_asym ≈ 6.3 > 1).
         Even at maximum physical κ=1.0 the energy stays negative (attractive).
         """
         E_asym = casimir_energy_chiral_asymmetric(EPS_TE, EPS_WTE2, self.D, kappa=1.0)
@@ -576,8 +576,8 @@ class TestCasimirEnergyChiralAsymmetric:
 class TestComputeAsymmetricKappaCrit:
     """
     Tests for compute_asymmetric_kappa_crit() — validates paper claims:
-      - κ_crit_sym(Te|Te) ≈ 0.806  (sub-unity → repulsion achievable)
-      - κ_crit_asym(Te|WTe₂) ≈ 5.8 (unphysical → repulsion NOT achievable)
+      - κ_crit_sym(Te|Te) ≈ 0.795  (sub-unity → repulsion achievable)
+      - κ_crit_asym(Te|WTe₂) ≈ 6.3 (unphysical → repulsion NOT achievable)
       - δE_asym/δE_sym ≈ 2% for Te|WTe₂ at MEMS separations
     """
 

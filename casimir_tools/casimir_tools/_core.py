@@ -518,7 +518,7 @@ def _casimir_chiral_correction_asymmetric(eps_static1: float, eps_static2: float
                     r₁^TM·r₁^TE·r₂^TM·r₂^TE · exp(−4pξd/c)
 
     Physical consequence for Te|WTe₂:
-        δE_asym / δE_sym ≈ 2%  →  κ_crit_asym ≈ 5.8 (unphysical, κ ≤ 1)
+        δE_asym / δE_sym ≈ 2%  →  κ_crit_asym ≈ 6.3 (unphysical, κ ≤ 1)
     """
     eps_fn1 = lambda xi: epsilon_imaginary(eps_static1, xi, omega_uv)
     eps_fn2 = lambda xi: epsilon_imaginary(eps_static2, xi, omega_uv)
@@ -549,10 +549,10 @@ def casimir_energy_chiral_asymmetric(eps_static1: float, eps_static2: float,
 
         E(d, κ) = E_Lifshitz(d) + κ² · δE_asym(d)
 
-    Note: δE_asym << δE_sym (≈ 2% ratio).  For Te|WTe₂, κ_crit_asym ≈ 5.8
+    Note: δE_asym << δE_sym (≈ 2% ratio).  For Te|WTe₂, κ_crit_asym ≈ 6.3
     lies outside the physical range κ ≤ 1 — chirality-driven repulsion is NOT
     achievable in this heterostructure.  Use casimir_energy_chiral() with a
-    symmetric Te|Te geometry for repulsion (κ_crit_sym ≈ 0.806).
+    symmetric Te|Te geometry for repulsion (κ_crit_sym ≈ 0.795 at d=10 nm).
 
     Args:
         eps_static1: Static dielectric of chiral plate (Te, ε_static = 164.27).

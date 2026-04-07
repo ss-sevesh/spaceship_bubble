@@ -327,7 +327,7 @@ class TestAsymmetricChiralCorrection:
         assert E_asym == pytest.approx(E_std, rel=1e-10)
 
     def test_te_wte2_stays_attractive_at_kappa1(self):
-        """Te|WTe2 must remain attractive at kappa=1.0 (kappa_crit_asym ≈ 5.8)."""
+        """Te|WTe2 must remain attractive at kappa=1.0 (kappa_crit_asym ≈ 6.3)."""
         E = casimir_energy_chiral_asymmetric(EPS_TE, EPS_WTE2, 20e-9, kappa=1.0)
         assert E < 0.0, "Te|WTe2 must be attractive at kappa=1 (asymmetric formula)"
 
