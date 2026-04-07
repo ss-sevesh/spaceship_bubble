@@ -2,11 +2,52 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-06 (Session 35)
+**Last updated**: 2026-04-07 (Session 36)
 
 ---
 
-## Session 35 — Full Codebase Audit + Frontend-Backend Fix (Current)
+## Session 36 — Comprehensive Physics Value Audit (Current)
+
+### Summary
+
+Full ground-truth audit of every physics value across all files. Corrected two systematically stale κ_crit values that propagated from the old 2× prefactor era. All 124 tests pass. Git clean.
+
+### Values Corrected
+
+| Value | Was | Now | Files Fixed |
+|-------|-----|-----|-------------|
+| κ_crit_asym (Te\|WTe₂) | ≈ 5.8 | ≈ 6.3 (code: 6.309) | 9 files |
+| κ_crit_sym (Te\|Te) | = 0.806 | ≈ 0.795 at d=10nm, 0.775 at d=84.2nm | 8 files |
+| δE (Te\|Te, d=10nm) ratio in ieee draft | √(0.4433/0.6827) | √(0.2338/0.3694) = 0.795 | ieee_draft |
+| δE (Te\|Te, d=10nm) energy | +0.683 mJ/m² | +0.369 mJ/m² | ieee_draft |
+
+### Verified Correct — Ground Truth Table
+
+| Quantity | Value |
+|----------|-------|
+| E(Te\|WTe₂, d=10nm) | −0.1026 mJ/m² |
+| E(Te\|WTe₂, d=84.2nm) | −2.44×10⁻⁴ mJ/m² |
+| E(Si/Au, d=84.2nm) | −3.47×10⁻⁴ mJ/m² |
+| E(Te\|Te, κ=0.5, d=84.2nm) | −2.71×10⁻⁴ mJ/m² |
+| E(Te\|Te, κ=1.0, d=84.2nm) | +3.09×10⁻⁴ mJ/m² |
+| δE_sym (Zhao wrong on Te\|WTe₂, d=84.2nm) | 3.57×10⁻⁷ J/m² ✓ |
+| δE_asym (Silveirinha, d=84.2nm) | 6.13×10⁻⁹ J/m² ✓ |
+| κ_crit_sym (Te\|Te, d=10nm) | 0.7955 |
+| κ_crit_sym (Te\|Te, d=84.2nm) | 0.7750 |
+| κ_crit_asym (Te\|WTe₂) | 6.309 |
+| Pareto best | N=20, d=99.9nm, κ_eff=1.000, E=−1.43×10⁻⁴ mJ/m² |
+| casimir-tools | v0.1.6 — **live on PyPI** ✅ |
+
+### Commits
+
+| Hash | Description |
+|------|-------------|
+| `574f7b4` | docs: fix stale physics values across all docs after prefactor audit |
+| `aee763e` | fix: correct stale kappa_crit values across all files |
+
+---
+
+## Session 35 — Full Codebase Audit + Frontend-Backend Fix
 
 ### Summary
 
@@ -40,7 +81,7 @@ Performed end-to-end audit of every file (physics, logic, data flow) without tru
 ### casimir_tools v0.1.6 Status
 
 - Built: `casimir_tools/dist/casimir_tools-0.1.6-py3-none-any.whl` ✅
-- PyPI upload: **pending** (needs API token — run `! python -m twine upload casimir_tools/dist/casimir_tools-0.1.6* --username __token__ --password pypi-<token>`)
+- PyPI upload: **✅ published** — live at pypi.org/project/casimir-tools/
 
 ### Tests
 
@@ -140,7 +181,7 @@ casimir_tools test suite: 82 passed, 0 failed, 5 skipped
 ### Action Required (resolved in Session 34)
 
 - [x] Re-run `uv run python main.py --optimize` to regenerate `pareto_results.json`
-- [x] Bump `casimir_tools` to **v0.1.6** (built; PyPI upload pending user action)
+- [x] Bump `casimir_tools` to **v0.1.6** (built and published to PyPI ✅)
 - [x] IEEE draft Section IV.C confirmed correct — no changes needed (κ_crit≈0.806 was always right)
 
 ---
