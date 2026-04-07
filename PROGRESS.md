@@ -2,11 +2,50 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-07 (Session 37)
+**Last updated**: 2026-04-07 (Session 38)
 
 ---
 
-## Session 37 — Frontend & Download Report Fixes (Current)
+## Session 38 — Full End-to-End Audit + Sidebar False Claim Fix (Current)
+
+### Summary
+
+Full 4-dimension audit: ran live code vs every .md number claim, traced every Download Report field back to `pareto_results.json`, simulated the user's dashboard view (table visibility, color coding, report contents), and fixed everything found.
+
+### Audit Results
+
+| Dimension | Findings |
+|-----------|----------|
+| .md numeric claims | All CORRECT: E=−1.44×10⁻⁴ mJ/m² (README), f_T=0.003–173, balanced design f_T=0.023, material constants Te/WTe₂/Td-WTe₂ ✓ |
+| Download Report field tracing | All fields use correct JSON keys: `E_Casimir_chiral_asymm_mJm2`, `thickness_nm`, `thermal_fraction`, `slab_thickness_correction`, `eps_eff`, `kappa_eff` ✓ |
+| Dashboard UX simulation | 20 rows visible, correct energy column, f_T color coding (green<0.1, yellow<0.3, red otherwise), Substrate badge, 3-Objective badge all correct ✓ |
+| False claim found | Sidebar "RESEARCH INSIGHT" claimed "repulsion at 3.2nm" — FALSE (0/50 Pareto solutions repulsive; κ_crit_asym=6.3 for Te\|WTe₂ is physically impossible) |
+
+### Bugs Fixed
+
+| # | File | Bug | Fix |
+|---|------|-----|-----|
+| 1 | `dashboard/src/App.jsx:433` | Sidebar claimed "confirmed stable repulsion at 3.2nm separation" — contradicted by actual data (0/50 repulsive, all small-d designs have κ_eff≈0) | Replaced with accurate statement: −1.43×10⁻⁴ mJ/m² at d=100nm, κ_eff≈1.0; repulsion only for Te\|Te at κ_crit≈0.795 |
+| 2 | `dashboard/src/App.jsx:412` | Te material card said "enabling Casimir repulsion" — misleading for Te\|WTe₂ heterostructure context where repulsion is impossible | Changed to "~40% Casimir stiction reduction (Te\|Te, κ_crit≈0.795)" |
+
+### Ground-Truth Verification Table (Live Code vs .md Claims)
+
+| Claim | Source | Live Code | Status |
+|-------|--------|-----------|--------|
+| E(Te\|WTe₂, d=10nm) = −0.1026 mJ/m² | PROGRESS.md S36 | −0.1026 mJ/m² | ✓ |
+| E(Te\|WTe₂, d=84.2nm) = −2.44×10⁻⁴ mJ/m² | PROGRESS.md S36 | −2.44×10⁻⁴ mJ/m² | ✓ |
+| Pareto best: d=99.9nm, κ_eff=1.000, E=−1.43×10⁻⁴ mJ/m² | PROGRESS.md S36 | idx=0: E=−1.430×10⁻⁴ | ✓ |
+| Balanced design: κ_eff=0.937, E=−1.44×10⁻⁴, f_T=0.023 | README + PROGRESS | idx=11: E=−1.435×10⁻⁴, f_T=0.0228 | ✓ |
+| f_T range 0.003–173 | README | min=0.0028, max=173.21 | ✓ |
+| ε_Te=164.27, n=10.88 | data files | 164.272, 10.882 | ✓ |
+| Te uniaxial ε_⊥=130.86, ε_∥=231.09 | Download Report | 130.864, 231.089 | ✓ |
+| WTe₂ ε=6.16, ε_⊥=8.46, ε_∥=1.56 | Download Report | 6.161, 8.461, 1.563 | ✓ |
+| Td-WTe₂ ε=15.33, ε_⊥=18.60, ε_∥=8.80 | Download Report | 15.33, 18.60, 8.80 | ✓ |
+| 0/50 repulsive Pareto solutions | physics | confirmed 0/50 is_repulsive=False | ✓ |
+
+---
+
+## Session 37 — Frontend & Download Report Fixes
 
 ### Summary
 

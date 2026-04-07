@@ -409,7 +409,7 @@ const App = () => {
                   <CompoundCard 
                     icon={<Atom size={24} />} 
                     title="Tellurium (Te)" 
-                    desc="High chirality parameter (κ) enabling Casimir repulsion."
+                    desc="High chirality parameter (κ) enabling ~40% Casimir stiction reduction (Te|Te, κ_crit≈0.795)."
                     color="var(--primary)"
                   />
                   <CompoundCard 
@@ -430,8 +430,8 @@ const App = () => {
              <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem' }}>
                 <div style={{ fontSize: '0.7rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--accent)' }}>RESEARCH INSIGHT</div>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-dim)', lineHeight: 1.6 }}>
-                  By aligning the chiral optic axis of Tellurium metamaterials, we have confirmed stable repulsion at 
-                  <span style={{ color: '#fff' }}> 3.2nm separation</span>, effectively eliminating NEMS stiction.
+                  Pareto-optimized Te metamaterial achieves minimum stiction of
+                  <span style={{ color: '#fff' }}> −1.43×10⁻⁴ mJ/m²</span> at d=100 nm, κ_eff≈1.0. Chiral repulsion (κ_crit≈0.795) confirmed for symmetric Te|Te geometry.
                 </p>
              </div>
 
