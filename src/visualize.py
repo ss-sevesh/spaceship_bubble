@@ -1,12 +1,19 @@
 """
 visualize.py — Casimir energy plots for spaceship_bubble project.
 
-Generates publication-quality plots:
-  1. casimir_tellurium.png   — E vs d, Te | vac | Te
-  2. casimir_wte2.png        — E vs d, WTe2 | vac | WTe2
-  3. casimir_comparison.png  — overlay of Te and WTe2 symmetric configs
-  4. casimir_chiral.png      — E vs theta at fixed d, kappa0 sweep
-  5. pareto_front.png        — Pareto front scatter (|E| vs thickness)
+Generates 12 publication-quality plots (saved to plots/):
+  1.  casimir_tellurium.png        — E vs d, Te | vac | Te
+  2.  casimir_wte2.png             — E vs d, WTe2 | vac | WTe2
+  3.  casimir_comparison.png       — overlay Te and WTe2 (isotropic)
+  4.  casimir_chiral.png           — E vs theta (kappa0 = 0.1/0.3/0.5/1.0)
+  5.  pareto_front.png             — NSGA-II Pareto scatter
+  6.  casimir_force.png            — |F| vs d log-log (three configs)
+  7.  casimir_force_chiral.png     — |F| vs d, kappa=0/0.5/1.0
+  8.  casimir_aniso.png            — anisotropic vs isotropic comparison
+  9.  casimir_td_wte2.png          — Td (Weyl) vs hex WTe2 phase comparison
+  10. casimir_2osc_model.png       — 2-oscillator Sellmeier vs Cauchy model
+  11. casimir_finite_T.png         — T=0 vs T=300 K Matsubara summation
+  12. casimir_benchmark_au_sio2.png — Au/SiO2 code validation (Drude model)
 """
 
 import json
@@ -448,7 +455,6 @@ def plot_pareto_front(pareto_path: Path, out_path: Path) -> None:
 
     # ── Left panel: |E_exact| vs F2, coloured by κ_eff ──────────────────────
     # Split into attractive and repulsive subsets for distinct markers
-    import numpy as _np
     idx_attr = [i for i, r in enumerate(is_rep) if not r]
     idx_rep  = [i for i, r in enumerate(is_rep) if r]
 

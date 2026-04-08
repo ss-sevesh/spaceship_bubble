@@ -511,10 +511,16 @@ def casimir_energy_fast(eps1: float, eps2: float, d: float,
 
     CHIRAL_FACTOR = 1.0 is calibrated to the full Lifshitz chiral integral
     with the corrected prefactor ħ/(4π²c²) (delta_E / |E_vdw| ≈ 1.2 at
-    d = 10 nm for Te | vac | Te).  Critical chirality: kappa_critical = 1.0.
+    d = 10 nm for Te | vac | Te).
+
+    Fast-model critical chirality: kappa_critical_fast = 1/sqrt(CHIRAL_FACTOR) = 1.0.
+    This is the FAST MODEL estimate only — the exact Lifshitz integral gives
+    kappa_crit(Te|Te, d=10 nm) ≈ 0.795 and kappa_crit(Te|Te, d=84 nm) ≈ 0.775.
+    Never use kappa_critical = 1.0 as the exact value in publication results.
 
     NOTE: phenomenological approximation for the optimizer inner loop.
-    Use casimir_energy_chiral for publication-quality curves.
+    Use casimir_energy_chiral() for exact symmetric (Te|Te) results.
+    Use casimir_energy_chiral_asymmetric() for Te|WTe₂ results.
 
     Args:
         eps1:      Static dielectric of material 1.
@@ -600,10 +606,10 @@ def _casimir_chiral_correction(eps_static1: float, eps_static2: float,
         if xi == 0.0:
             return 0.0
         p_max = min(max(20.0, 5.0 * C / (xi * d)), 1.0e6)
-        I, _ = quad(_inner_chiral, 1.0, p_max,
+        integral_val, _ = quad(_inner_chiral, 1.0, p_max,
                     args=(xi, eps_fn1, eps_fn2, d),
                     limit=200, epsrel=1e-4)
-        return xi ** 2 * I
+        return xi ** 2 * integral_val
 
     xi_max = 10.0 * omega_uv
     # epsrel=1e-3 (looser than main Lifshitz 1e-4): acceptable because δE ~ κ²×E_base
@@ -758,10 +764,10 @@ def _casimir_chiral_correction_asymmetric(eps_static1: float, eps_static2: float
             return 0.0
         # p_max: exponential exp(-4pξd/c) suppresses integrand even faster
         p_max = min(max(20.0, 2.5 * C / (xi * d)), 1.0e6)
-        I, _ = quad(_inner_chiral_asymmetric, 1.0, p_max,
+        integral_val, _ = quad(_inner_chiral_asymmetric, 1.0, p_max,
                     args=(xi, eps_fn1, eps_fn2, d),
                     limit=150, epsrel=1e-4)
-        return xi ** 2 * I
+        return xi ** 2 * integral_val
 
     xi_max = 10.0 * omega_uv
     raw, _ = quad(outer, 0.0, xi_max, limit=80, epsrel=1e-3, points=[omega_uv])
@@ -787,8 +793,11 @@ def casimir_energy_chiral_asymmetric(eps_static1: float, eps_static2: float,
 
     Physical consequence:
     - δE_asym << δE_sym at all separations (extra exp(−2d) suppression)
-    - κ_crit_asym = sqrt(|E_Lifshitz| / δE_asym) >> κ_crit_sym ≈ 0.826
-    - Repulsion requires κ_eff > κ_crit_asym; may exceed unity (unphysical range)
+    - κ_crit_asym = sqrt(|E_Lifshitz| / δE_asym) ≈ 6.3, far outside physical range
+    - κ_crit_sym reference values (Zhao formula — exact for symmetric Te|Te geometry):
+        d=10 nm → 0.795;  d=84 nm → 0.775  (NOT ≈ 0.826; that figure is for the
+        Zhao formula incorrectly applied to Te|WTe₂ at d=84.2 nm — see IEEE §V.B)
+    - Repulsion requires κ_eff > κ_crit_asym; impossible for physical κ ≤ 1
 
     Args:
         eps_static1: Static dielectric of chiral plate (Te, ε_eff ≈ 164.27).
@@ -1202,7 +1211,6 @@ def casimir_energy_multilayer(eps_slab: float, h_slab: float,
             # Correct geometry: one plate is the slab+substrate assembly.
             # The LEFT plate in the standard Lifshitz setup is the Te slab;
             # r1 = r_eff^TE (slab + substrate seen from vacuum gap).
-            r1 = _airy_reflection_te(e_slab, e_sub, p, xi, h_slab)
             # No right plate; but Lifshitz for TWO half-spaces needs r2 too.
             # Here we model: Te_slab_on_substrate | gap | vacuum (no second plate).
             # The Casimir energy between two slabs: left = Te_slab+sub, right = vacuum.
@@ -1441,8 +1449,8 @@ def _casimir_chiral_force_correction(eps_static1: float, eps_static2: float,
         if xi == 0.0:
             return 0.0
         p_max = min(max(20.0, 5.0 * C / (xi * d)), 1.0e6)
-        I, _ = quad(inner, 1.0, p_max, args=(xi,), limit=150, epsrel=1e-4)
-        return xi ** 2 * I
+        integral_val, _ = quad(inner, 1.0, p_max, args=(xi,), limit=150, epsrel=1e-4)
+        return xi ** 2 * integral_val
 
     xi_max = 10.0 * omega_uv
     raw, _ = quad(outer, 0.0, xi_max, limit=80, epsrel=1e-3, points=[omega_uv])

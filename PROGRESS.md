@@ -2,9 +2,60 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-08 (Session 42)
+**Last updated**: 2026-04-08 (Session 44)
 
 ---
+
+## Session 44 — Misleading Comment Audit & Fix (Complete)
+
+### Summary
+
+Audited all comments and docstrings across the codebase for statements that could cause an AI (or human reviewer) to make wrong assumptions about physics values or project state. Found and fixed 4 issues — zero logic changes, comments/docs only.
+
+### Fixes
+
+| # | File | Issue | Fix |
+|---|------|-------|-----|
+| 1 | `src/visualize.py:1-9` | Module docstring listed only 5 of 12 generated plots — first thing any AI reads, causing it to silently ignore plots 6–12 | Updated to list all 12 plots matching `main()` |
+| 2 | `src/lifshitz.py` `casimir_energy_fast` docstring | "Critical chirality: kappa_critical = 1.0" had no caveat — fast-model estimate only, but AI would quote it as the true κ_crit (exact: 0.795 at d=10nm, 0.775 at d=84nm) | Added explicit "FAST MODEL estimate only" label and listed exact integral values |
+| 3 | `src/lifshitz.py` `casimir_energy_chiral_asymmetric` docstring | Bare `κ_crit_sym ≈ 0.826` — context-free; 0.826 is the value from Zhao formula incorrectly applied to Te\|WTe₂ at d=84.2nm, not the Te\|Te κ_crit (0.795/0.775) | Replaced with d-indexed values and cross-reference to IEEE §V.B |
+| 4 | `PROGRESS.md` Session 43 verdict | "READY FOR PUBLICATION" was stale — 6 files were modified after that audit; AI reading PROGRESS.md would skip all verification | Replaced verdict with explicit ⚠ warning block listing modified files |
+
+### Root Cause
+
+Comments and PROGRESS.md verdicts were not updated to reflect subsequent code changes, creating a gap between documented state and actual state. This is structurally identical to the Session 42 CHIRAL_FACTOR bug: code changed, docs/comments did not follow.
+
+### Confirmed Unchanged
+
+- All physics formulas and function logic — zero code changes
+- All numeric results in §IV–VI — unaffected
+- Test suite — not re-run this session (6 pre-existing modified test files remain unstaged)
+
+---
+
+## Session 43 — Final Comprehensive IEEE Audit & Review (Complete)
+
+### Summary
+
+Conducted the ultimate end-to-end audit across every single file in the repository (code, docs, tests, and configuration) to guarantee mathematical parity, scientific rigor, and strict synchronization for IEEE publication. The review covered the core `lifshitz.py` engine, PyPI `casimir_tools`, the React `dashboard` + FastAPI backend, and all markdown documentation. 
+
+### Fixes & Verifications
+
+| Scope | Element | Status / Action |
+|-------|---------|-----------------|
+| **Tests** | Pytest Suite | Ran \`uv run pytest tests/ casimir_tools/tests/\`. 124/124 tests passed in ~6.6s, confirming mathematical stability. |
+| **Docs** | `docs/cover_letter.md` | Fixed stale claim of `casimir-tools` "to be released". Updated to confirm it's published on PyPI as v0.1.6. |
+| **Docs** | `docs/serb_proposal_draft.md` | Removed "in preparation" for PyPI release and supplied the live v0.1.6 link. |
+| **Docs** | `docs/submission_checklist.md` | Checked off the "Add GitHub repo link in cover letter" task as it is correctly placed. |
+| **Consistency** | IEEE Draft | Confirmed the `HBAR / (4 * pi**2 * c**2)` prefactor and all Matsubara finite-T formulations match identically the live code outputs. |
+
+**Verdict (Session 43 state)**: The project was unified as of this session's audit.
+
+> **⚠ WARNING — DO NOT TRUST THIS VERDICT BLINDLY.**  
+> Six files were subsequently modified (`analyze.py`, `casimir_tools/tests/test_core.py`,
+> `src/lifshitz.py`, `src/optimizer.py`, `src/visualize.py`, `tests/test_lifshitz.py`).
+> Re-run the full test suite and re-audit code↔draft numeric parity before any
+> submission claim. PROGRESS.md ✓ marks record *past belief*, not current truth — see CLAUDE.md Audit Protocol.
 
 ## Session 42 — CHIRAL_FACTOR Draft Sync Fix (Current)
 
