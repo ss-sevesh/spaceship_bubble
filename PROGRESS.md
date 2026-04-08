@@ -2,11 +2,33 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-08 (Session 40)
+**Last updated**: 2026-04-07 (Session 41)
 
 ---
 
-## Session 40 — Complete File Inventory Audit: 6 Additional Fixes (Current)
+## Session 41 — GitHub Display Audit: 1 Fix (Current)
+
+### Summary
+
+Quick audit to confirm GitHub repo (description, topics, README) accurately reflects current project state. Verified all 12 plots, dashboard endpoints, casimir-tools version, and key results table. Found one structural omission in README.
+
+### Fix
+
+| # | File | Issue | Fix |
+|---|------|-------|-----|
+| 1 | `README.md` project structure | `docs/` listed only 2 files (`ieee_draft_outline.md`, `serb_proposal_draft.md`); actual directory has 4 | Added `submission_checklist.md` and `cover_letter.md` to structure listing |
+
+### Confirmed Clean
+
+- GitHub repo description + 14 topics — accurate ✓
+- All 12 PNGs in `plots/` match `App.jsx` PLOTS array and README gallery description ✓
+- `casimir-tools v0.1.6` — matches `casimir_tools/pyproject.toml` ✓
+- Root `pyproject.toml` description — accurate ✓
+- `origin/master` fully in sync, working tree clean ✓
+
+---
+
+## Session 40 — Complete File Inventory Audit: 6 Additional Fixes
 
 ### Summary
 
