@@ -191,29 +191,29 @@ Algorithm: pymoo NSGA-II, population = 50, generations = 100, seed = 42
 Post-optimization: full Matsubara T = 300 K validation on all ~50 Pareto solutions
 
 ### D. Chiral Factor Calibration
-The NSGA-II inner loop uses the fast Hamaker model E_fast = E_vdW(1 − χκ²) with χ = CHIRAL_FACTOR = 2.0. We verify this value numerically by computing χ(d) = δE(d)/|E_vdW(d)| via the exact TE-TM cross-coupling integral. Two configurations are evaluated separately, corresponding to their physically correct formulas:
+The NSGA-II inner loop uses the fast Hamaker model E_fast = E_vdW(1 − χκ²) with χ = CHIRAL_FACTOR = 1.0. We verify this value numerically by computing χ(d) = δE(d)/|E_vdW(d)| via the exact TE-TM cross-coupling integral. Two configurations are evaluated separately, corresponding to their physically correct formulas:
 
 **Symmetric Te|Te** (Zhao 2009, both plates chiral — formula exactly valid for this geometry):
 
 | d (nm) | χ, Te\|Te (symmetric, Zhao 2009) |
 |--------|----------------------------------|
-| 5      | 3.39                             |
-| 10     | 2.37                             |
-| 20     | 1.40                             |
-| 50     | 0.60                             |
+| 5      | 1.70                             |
+| 10     | 1.19                             |
+| 20     | 0.70                             |
+| 50     | 0.30                             |
 
 **Asymmetric Te|WTe₂** (Silveirinha 2010, κ₂ = 0 — see Sec. II.F for derivation):
 
 | d (nm) | χ_sym (Zhao, inapplicable) | χ_asym (Silveirinha, **correct**) | ratio χ_asym/χ_sym |
 |--------|---------------------------|-----------------------------------|---------------------|
-| 5      | 1.49                      | ≈ 0.030                           | ≈ 2%               |
-| 10     | 1.27                      | ≈ 0.025                           | ≈ 2%               |
-| 20     | 0.85                      | ≈ 0.017                           | ≈ 2%               |
-| 50     | 0.40                      | ≈ 0.008                           | ≈ 2%               |
+| 5      | 0.745                     | ≈ 0.015                           | ≈ 2%               |
+| 10     | 0.635                     | ≈ 0.013                           | ≈ 2%               |
+| 20     | 0.425                     | ≈ 0.009                           | ≈ 2%               |
+| 50     | 0.200                     | ≈ 0.004                           | ≈ 2%               |
 
 The χ_sym column (Zhao formula applied to Te|WTe₂) is tabulated for historical reference only; it is physically incorrect for the asymmetric κ₂ = 0 case and must not be used for Te|WTe₂ design calculations. All Te|WTe₂ Casimir results in this paper use χ_asym from the Silveirinha formula.
 
-CHIRAL_FACTOR = 2.0 is an upper bound on χ for the Te|Te symmetric geometry across the optimizer's design space (d ≥ 10 nm; χ exceeds 2.0 only at d < 8 nm). This biases NSGA-II toward conservatively higher κ_eff targets. All publication-quality Casimir curves are computed with `casimir_energy_chiral()` (Te|Te, exact symmetric integral) or `casimir_energy_chiral_asymmetric()` (Te|WTe₂, exact asymmetric integral), with no empirical prefactor.
+CHIRAL_FACTOR = 1.0 is a conservative upper bound on χ for the Te|Te symmetric geometry across the optimizer's design space (d ≥ 9 nm; χ ≈ 1.19 at d = 10 nm and falls monotonically). For d < 9 nm, χ exceeds 1.0 in the exact integral, but the optimizer's design space is constrained to d ≥ 10 nm, so the fast model never underestimates chiral suppression. This biases NSGA-II toward conservatively higher κ_eff targets. All publication-quality Casimir curves are computed with `casimir_energy_chiral()` (Te|Te, exact symmetric integral) or `casimir_energy_chiral_asymmetric()` (Te|WTe₂, exact asymmetric integral), with no empirical prefactor. Note: the published casimir-tools PyPI package (v0.1.6) retains CHIRAL_FACTOR = 2.0 as an independently calibrated conservative bound and does not affect these results.
 
 ---
 

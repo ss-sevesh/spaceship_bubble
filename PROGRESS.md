@@ -2,11 +2,39 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-07 (Session 41)
+**Last updated**: 2026-04-08 (Session 42)
 
 ---
 
-## Session 41 — GitHub Display Audit: 1 Fix (Current)
+## Session 42 — CHIRAL_FACTOR Draft Sync Fix (Current)
+
+### Summary
+
+Root-cause audit of CHIRAL_FACTOR inconsistency between `src/lifshitz.py` and `docs/ieee_draft_outline.md`. A prefactor bug fix (commit `0f5bf4a`) had correctly halved CHIRAL_FACTOR in code (2.0 → 1.0) and halved all chi table values, but §III.D of the IEEE draft was never updated. Left uncorrected, a reviewer running the code would see CHIRAL_FACTOR=1.0 and χ≈1.19 at d=10nm while the paper claimed 2.0 and 2.37 — a reproducibility failure.
+
+### Fix
+
+| # | File | Issue | Fix |
+|---|------|-------|-----|
+| 1 | `docs/ieee_draft_outline.md` §III.D opening | `χ = CHIRAL_FACTOR = 2.0` — pre-fix stale value | Updated to `1.0` |
+| 2 | `docs/ieee_draft_outline.md` §III.D Table I | Te\|Te χ values 3.39/2.37/1.40/0.60 — pre-fix (un-halved) | Updated to 1.70/1.19/0.70/0.30 (from `src/lifshitz.py` lines 414–420) |
+| 3 | `docs/ieee_draft_outline.md` §III.D Table II χ_sym | Te\|WTe₂ χ_sym values 1.49/1.27/0.85/0.40 — pre-fix | Updated to 0.745/0.635/0.425/0.200 |
+| 4 | `docs/ieee_draft_outline.md` §III.D Table II χ_asym | Te\|WTe₂ χ_asym values 0.030/0.025/0.017/0.008 — pre-fix | Updated to 0.015/0.013/0.009/0.004 (ratio ≈2% preserved) |
+| 5 | `docs/ieee_draft_outline.md` §III.D closing paragraph | "CHIRAL_FACTOR = 2.0 is an upper bound (d ≥ 10nm; χ > 2.0 only at d < 8nm)" — factually wrong even with old values (χ=2.37 at d=10nm) | Rewritten: CHIRAL_FACTOR = 1.0 is conservative upper bound for d ≥ 9nm; note added that casimir-tools PyPI (v0.1.6) retains 2.0 independently |
+
+### Confirmed Unchanged
+
+- `casimir_tools/_core.py` CHIRAL_FACTOR = 2.0 — published PyPI package, independently calibrated, out of scope
+- κ_crit = 0.795 (d=10nm), 0.775 (d=84.2nm) — exact integral values, unaffected by CHIRAL_FACTOR; verified present in §IV/V/VI
+- All results sections §IV–VI — computed from `casimir_energy_chiral()` / `casimir_energy_chiral_asymmetric()`, no empirical prefactor
+
+### Root Cause
+
+The Session 35 bug fix updated `src/lifshitz.py` and PROGRESS.md (marking "intentional, documented ✓") but did not include a draft sync step. The audit that declared the project "publication ready" checked code-to-code consistency but not code-to-draft numerical consistency.
+
+---
+
+## Session 41 — GitHub Display Audit: 1 Fix
 
 ### Summary
 
