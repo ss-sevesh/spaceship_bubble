@@ -25,7 +25,7 @@ Objectives (3, all minimised):
 
 Substrate options (--substrate flag):
     "hex"   — WTe₂ hexagonal phase  (mp-1023926, eps=6.16)   [default]
-    "td"    — Td-WTe₂ Weyl phase    (DFT-HSE06,  eps=15.33)
+    "td"    — Td-WTe₂ Weyl phase    (DFT-HSE06,  ε_⊥=18.60, ε_∥=8.80)
 
 Casimir energy uses casimir_energy_fast (Hamaker + kappa^2 chiral factor)
 for speed.  After convergence, full Matsubara T=300 K energies are computed
@@ -91,7 +91,7 @@ def casimir_energy_fast_finite_T(eps1: float, eps2: float,
     E_quantum = casimir_energy_fast(eps1, eps2, d, kappa)
     beta1 = (eps1 - 1.0) / (eps1 + 1.0)
     beta2 = (eps2 - 1.0) / (eps2 + 1.0)
-    # DLP classical n=0 Matsubara limit: E_{n=0} = -k_BT β₁β₂ / (8π d²)
+    # DLP classical n=0 Matsubara limit: E_{n=0} = -k_BT β₁β₂ / (16π d²)
     # (Dzyaloshinskii, Lifshitz & Pitaevskii 1961; Parsegian 2006 eq. 2.17)
     # Negative sign: thermal contribution adds to attraction (more negative total).
     E_classical = -_KB * T / (16.0 * np.pi * d ** 2) * beta1 * beta2
@@ -165,7 +165,7 @@ class CasimirOptimizationProblem(Problem):
 
     Substrate:
         "hex"  — WTe₂ hex P-6m2  (eps ≈ 6.16,  mp-1023926)
-        "td"   — Td-WTe₂ Weyl   (eps ≈ 15.33, DFT-HSE06)
+        "td"   — Td-WTe₂ Weyl   (ε_⊥≈18.60, ε_∥≈8.80, DFT-HSE06)
 
     Temperature:
         T > 0 adds the classical n=0 Matsubara correction to F1.

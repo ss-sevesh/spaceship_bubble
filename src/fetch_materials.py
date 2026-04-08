@@ -3,7 +3,7 @@ fetch_materials.py — Materials Project data fetcher.
 
 Fetches dielectric tensor + crystal structure for:
   - Tellurium (mp-19)
-  - WTe2 (mp-1019717)
+  - WTe2 (mp-1023926)
 
 Saves results to data/tellurium.json and data/wte2.json.
 """
