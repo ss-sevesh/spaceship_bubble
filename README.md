@@ -73,7 +73,7 @@ spaceship_bubble/
 ├── src/
 │   ├── lifshitz.py           # Core physics: Lifshitz integrals, chiral/aniso/2osc/finite-T
 │   ├── optimizer.py          # NSGA-II 3-objective optimizer (pymoo)
-│   ├── visualize.py          # 11 plot generators
+│   ├── visualize.py          # 12 plot generators
 │   └── fetch_materials.py    # Materials Project API fetch
 ├── data/                     # JSON dielectric data (Te, WTe₂, Td-WTe₂)
 ├── outputs/                  # pareto_results.json (NSGA-II output)

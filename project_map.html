@@ -91,31 +91,46 @@
         // Data structure representing your project components
         const data = {
             nodes: [
-                { id: "API", group: "External", name: "Materials Project API", desc: "The external source for crystal structures and dielectric data." },
-                { id: "Fetch", group: "Logic", name: "fetch_materials.py", desc: "Pulls data from API and caches it locally." },
-                { id: "Data", group: "Storage", name: "data/*.json", desc: "Local JSON files containing material properties." },
-                { id: "Physics", group: "Core", name: "Physics Engine (Lifshitz)", desc: "Calculates Casimir forces using the Lifshitz formula." },
-                { id: "Tools", group: "Core", name: "casimir_tools/", desc: "High-performance core library for force calculations." },
-                { id: "Optimizer", group: "Logic", name: "optimizer.py (NSGA-II)", desc: "Genetic algorithm that evolves optimal material designs." },
-                { id: "Outputs", group: "Storage", name: "outputs/pareto_results.json", desc: "Results of optimization (the best trade-offs found)." },
-                { id: "Dashboard", group: "UI", name: "React Dashboard", desc: "Web UI to visualize the results and 3D scenes." },
-                { id: "ThreeJS", group: "UI", name: "Three.js / Canvas", desc: "Renders physical geometry of nano-layers in 3D." },
-                { id: "Main", group: "Logic", name: "main.py", desc: "The entry point script that orchestrates the entire pipeline." }
+                { id: "API", group: "External", name: "Materials Project API", desc: "External source for DFT crystal structures and dielectric tensors (Te mp-19, WTe₂ mp-1023926)." },
+                { id: "Fetch", group: "Logic", name: "fetch_materials.py", desc: "Pulls dielectric data from Materials Project API and caches as data/tellurium.json, data/wte2.json, data/td_wte2_dft.json." },
+                { id: "Data", group: "Storage", name: "data/*.json", desc: "Local JSON files: tellurium.json (ε=164.27), wte2.json (ε=6.16), td_wte2_dft.json (ε_⊥=18.60, ε_∥=8.80)." },
+                { id: "Physics", group: "Core", name: "src/lifshitz.py", desc: "Core physics engine: Lifshitz zero-T, chiral correction (Zhao 2009 symmetric + Silveirinha 2010 asymmetric), finite-T Matsubara, 2-oscillator Sellmeier, anisotropic uniaxial, Airy transfer-matrix." },
+                { id: "Tools", group: "External", name: "casimir-tools (PyPI v0.1.6)", desc: "Open-source package published to PyPI. Mirrors src/lifshitz.py for external use. pip install casimir-tools." },
+                { id: "Optimizer", group: "Logic", name: "src/optimizer.py (NSGA-II)", desc: "3-objective NSGA-II (pymoo): minimize |E_Casimir|, device thickness, thermal fraction f_T. Population 50, generations 100, seed 42." },
+                { id: "Visualize", group: "Logic", name: "src/visualize.py", desc: "Generates all 12 publication-quality plots (300 DPI): Pareto front, chiral force, anisotropy, finite-T, 2-osc model, Td-WTe₂, Au/SiO₂ benchmark, and baseline sweeps." },
+                { id: "Outputs", group: "Storage", name: "outputs/pareto_results.json", desc: "NSGA-II result: 50 Pareto solutions with variables (N_layers, d_nm, kappa_eff, theta_deg, kappa0, eps_eff) and objectives (E_Casimir, thickness_nm, thermal_fraction, slab_correction)." },
+                { id: "Plots", group: "Storage", name: "plots/ (12 PNGs)", desc: "Generated figures: casimir_tellurium, casimir_wte2, casimir_comparison, casimir_chiral, pareto_front, casimir_force, casimir_force_chiral, casimir_aniso, casimir_td_wte2, casimir_2osc_model, casimir_finite_T, casimir_benchmark_au_sio2." },
+                { id: "Sync", group: "Logic", name: "sync_assets.py", desc: "Copies plots/ → dashboard/public/plots/ and outputs/pareto_results.json → dashboard/public/data/ so the React dev server serves them." },
+                { id: "FastAPI", group: "UI", name: "dashboard/server.py (FastAPI :8000)", desc: "Backend bridge: GET /api/results returns pareto JSON; POST /api/run-simulation triggers optimizer+plots+sync; GET /api/status returns idle/busy state." },
+                { id: "Dashboard", group: "UI", name: "React Dashboard (:5173)", desc: "Immersive research UI: 3D Three.js metamaterial visualizer, 12-plot gallery, 50-row Pareto table with thermal fraction color coding, Download Report button." },
+                { id: "ThreeJS", group: "UI", name: "CasimirScene.jsx (Three.js)", desc: "3D scene: Te chiral hexagonal plate (P3₁21 helical chains), WTe₂ substrate (hex P-6m2 or Td Pmn2₁ dynamically labeled), N metamaterial layers with chirality-based opacity." },
+                { id: "Tests", group: "Logic", name: "tests/ (34 physics tests)", desc: "Validates Lifshitz prefactor, dielectric models, chiral corrections, force formula, anisotropic limits, finite-T Matsubara, and material constants. casimir_tools/ has 82 additional tests." },
+                { id: "Main", group: "Logic", name: "main.py", desc: "Pipeline orchestrator: --fetch | --lifshitz | --optimize | --plot | --all. OPTIMIZER_SUBSTRATE=td selects Td-WTe₂ variant." }
             ],
             links: [
                 { source: "API", target: "Fetch" },
                 { source: "Fetch", target: "Data" },
                 { source: "Data", target: "Physics" },
                 { source: "Physics", target: "Tools" },
-                { source: "Tools", target: "Physics" },
                 { source: "Data", target: "Optimizer" },
                 { source: "Physics", target: "Optimizer" },
                 { source: "Optimizer", target: "Outputs" },
-                { source: "Outputs", target: "Dashboard" },
+                { source: "Physics", target: "Visualize" },
+                { source: "Outputs", target: "Visualize" },
+                { source: "Visualize", target: "Plots" },
+                { source: "Plots", target: "Sync" },
+                { source: "Outputs", target: "Sync" },
+                { source: "Sync", target: "Dashboard" },
+                { source: "FastAPI", target: "Outputs" },
+                { source: "FastAPI", target: "Dashboard" },
                 { source: "Dashboard", target: "ThreeJS" },
                 { source: "Main", target: "Fetch" },
                 { source: "Main", target: "Physics" },
-                { source: "Main", target: "Optimizer" }
+                { source: "Main", target: "Optimizer" },
+                { source: "Main", target: "Visualize" },
+                { source: "Main", target: "Sync" },
+                { source: "Physics", target: "Tests" },
+                { source: "Tools", target: "Tests" }
             ]
         };
 

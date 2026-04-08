@@ -44,16 +44,30 @@ Use chiral Tellurium (Te) metamaterials to engineer the dielectric response such
 spaceship_bubble/
 ├── CLAUDE.md
 ├── PROGRESS.md
+├── README.md
 ├── main.py                <- Entry point / orchestrator
-├── sync_assets.py         <- Syncs data to dashboard/public
+├── sync_assets.py         <- Syncs plots/ and outputs/ to dashboard/public/
+├── analyze.py             <- Quick Pareto results analysis utility
+├── pyproject.toml         <- Project dependencies (uv)
+├── data/                  <- DFT dielectric JSON (tellurium, wte2, td_wte2_dft)
+├── outputs/               <- NSGA-II output (pareto_results.json)
+├── plots/                 <- Generated publication figures (12 PNGs, 300 DPI)
+├── docs/                  <- ieee_draft_outline.md, serb_proposal_draft.md, cover_letter.md
+├── tests/                 <- Physics unit tests (test_lifshitz.py)
+├── casimir_tools/         <- PyPI package (pip install casimir-tools, v0.1.6)
 ├── dashboard/             <- React Research Dashboard (Vite)
 │   ├── server.py          <- FastAPI Backend Bridge (Port 8000)
 │   ├── LAUNCH.md          <- Deployment instructions
+│   ├── index.html         <- Entry HTML (title: Spaceship Bubble)
 │   └── src/
 │       ├── components/
 │       │   └── CasimirScene.jsx <- 3D Fiber Visualizer
 │       └── App.jsx        <- Dashboard Engine
-└── src/                   <- Core Python Logic (lifshitz, optimizer, etc.)
+└── src/                   <- Core Python Logic
+    ├── lifshitz.py        <- Casimir physics engine
+    ├── optimizer.py       <- NSGA-II 3-objective optimizer
+    ├── visualize.py       <- 12 plot generators
+    └── fetch_materials.py <- Materials Project API fetch
 ```
 
 ---

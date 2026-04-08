@@ -1,7 +1,7 @@
 [project]
 name = "spaceship-bubble"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI-driven Casimir stiction-suppressing chiral Tellurium metamaterials research pipeline — Lifshitz engine, NSGA-II optimizer, and React dashboard"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

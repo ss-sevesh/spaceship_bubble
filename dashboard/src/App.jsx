@@ -26,9 +26,14 @@ const PLOTS = [
   { id: 'chiral-force', title: 'Chiral Repulsion', file: 'casimir_force_chiral.png', desc: 'Symmetry breaking confirmed: Chiral Tellurium metamaterials enable stable repulsive vacuum force.' },
   { id: 'aniso', title: 'Tensor Anisotropy', file: 'casimir_aniso.png', desc: 'Uniaxial dielectric response analysis: How crystalline orientation modulates quantum stiction.' },
   { id: 'force', title: 'Force Dynamics', file: 'casimir_force.png', desc: 'Comparative force curves for Te/WTe₂ heterostructures across the nanometer regime.' },
-  { id: 'td-wte2', title: 'Td-WTe₂ Weyl Phase', file: 'casimir_td_wte2.png', desc: 'Type-II Weyl semimetal vs hexagonal WTe₂ — DFT-HSE06 dielectric reveals 4× stronger TM coupling in Td phase.' },
+  { id: 'td-wte2', title: 'Td-WTe₂ Weyl Phase', file: 'casimir_td_wte2.png', desc: 'Type-II Weyl semimetal vs hexagonal WTe₂ — DFT-HSE06 dielectric reveals ~2× stronger Casimir coupling in Td phase (ratio 2.01 at d=1 nm, 1.45 at d=53 nm).' },
   { id: '2osc', title: '2-Oscillator Model', file: 'casimir_2osc_model.png', desc: 'Sellmeier 2-oscillator vs Cauchy single-pole: IR phonon and UV electronic contributions resolved for Tellurium.' },
   { id: 'finite-T', title: 'Thermal Casimir', file: 'casimir_finite_T.png', desc: 'Finite-temperature Matsubara summation at T=300 K — classical thermal regime emerges beyond the 1.2 µm thermal length.' },
+  { id: 'tellurium', title: 'Te Casimir Energy', file: 'casimir_tellurium.png', desc: 'Lifshitz zero-temperature energy sweep for symmetric Tellurium (ε=164.27, mp-19) plates — baseline attraction profile across 1–100 nm separation.' },
+  { id: 'wte2', title: 'WTe₂ Casimir Energy', file: 'casimir_wte2.png', desc: 'Lifshitz energy sweep for symmetric hexagonal WTe₂ (ε=6.16, mp-1023926) plates — lower dielectric constant yields weaker stiction vs Tellurium.' },
+  { id: 'comparison', title: 'Te vs WTe₂ Comparison', file: 'casimir_comparison.png', desc: 'Side-by-side Casimir energy for Te (ε=164.27) and WTe₂ (ε=6.16) — the ~26× dielectric contrast defines the optimization design space for the heterostructure.' },
+  { id: 'benchmark', title: 'Au/SiO₂ Benchmark', file: 'casimir_benchmark_au_sio2.png', desc: 'Lifshitz code validation against Au/SiO₂: force lies between the perfect-conductor limit (ℏcπ²/240d⁴) and the non-retarded Hamaker approximation in the retarded regime (100–500 nm).' },
+  { id: 'chiral', title: 'Chiral κ Sweep', file: 'casimir_chiral.png', desc: 'Energy vs chiral orientation angle θ for κ₀ = 0.1, 0.3, 0.5, 1.0 — shows how crystal orientation and chirality amplitude jointly set the stiction-suppression operating point.' },
 ];
 
 const API_URL = '/api'; // routed through Vite proxy → localhost:8000
@@ -144,6 +149,7 @@ const App = () => {
       '  [2] Zhao et al. (2009) PRL 103, 103602  [chiral Casimir]',
       '  [3] Bimonte et al. (2009) PRA 79, 042906  [uniaxial Lifshitz]',
       '  [4] NSGA-II: Deb et al. (2002) IEEE Trans. Evol. Comp. 6, 182',
+      '  [5] Silveirinha (2010) PRB 82, 085101  [asymmetric chiral Casimir, Te|WTe₂]',
       '',
       '  Lead: Sevesh SS, KEC 2026',
       '  Project: spaceship_bubble | IEEE + SERB CRG',
@@ -279,7 +285,7 @@ const App = () => {
             <AnimatePresence mode="wait">
               {viewMode === '3d' ? (
                 <motion.div key="3d" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ width: '100%', height: '100%' }}>
-                  <CasimirScene selectedDesign={selectedDesign} />
+                  <CasimirScene selectedDesign={selectedDesign} substrate={data?.meta?.substrate ?? 'hex'} />
                 </motion.div>
               ) : (
                 <motion.div key="2d" initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} style={{ padding: '2.5rem', display: 'flex', gap: '2.5rem', height: '100%' }}>

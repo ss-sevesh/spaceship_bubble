@@ -82,7 +82,7 @@
 1. **Td-WTe₂ dielectric tensor** is a model estimate (HSE06-level), not from a published ab initio run. ±10% uncertainty assigned. Experimental ellipsometry would replace it.
 2. **Finite-slab correction** is 1.2% for the primary design — negligible; stated in V.C.
 3. **κ_eff ∝ N scaling** is a first-order model; inter-layer coupling corrections are O(κ₀²d/λ) and negligible for d ≪ λ_UV.
-4. **Au/SiO₂ benchmark**: Our/PC ≈ 0.21 at d=100nm is physically correct (not a bug).
+4. **Au/SiO₂ benchmark**: Our/PC ≈ 0.35–0.55 across d=100–500 nm is physically correct (retarded regime; lies between PC limit and Hamaker non-retarded).
 
 ---
 

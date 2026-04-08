@@ -27,9 +27,9 @@
 
 Stiction — irreversible adhesion caused by Casimir and van der Waals forces — is one of the most severe reliability challenges in micro- and nanoelectromechanical systems (MEMS/NEMS). As device dimensions shrink below 100 nm, quantum vacuum fluctuations generate attractive Lifshitz-Casimir forces strong enough to permanently bond surfaces, causing catastrophic device failure. Existing mitigation strategies (surface coatings, geometry modification) offer only incremental improvement and do not address the fundamental quantum nature of the force.
 
-This project proposes a conceptually new solution: engineering the sign and magnitude of the Casimir force itself, at the material level, using chiral Tellurium (Te) metamaterials. Tellurium is a natural chiral crystal (space group P3₁21/P3₂21) with a uniquely large, anisotropic dielectric tensor (ε_⊥ ≈ 131, ε_∥ ≈ 231) and a tunable effective chirality parameter κ that enters the Casimir energy as a κ² correction term capable of reducing or reversing the force.
+This project proposes a conceptually new solution: engineering the sign and magnitude of the Casimir force itself, at the material level, using chiral Tellurium (Te) metamaterials. Tellurium is a natural chiral crystal (space group P3₁21/P3₂21) with a uniquely large, anisotropic dielectric tensor (ε_⊥ = 130.86, ε_∥ = 231.09) and a tunable effective chirality parameter κ that enters the Casimir energy as a κ² correction term capable of reducing or reversing the force.
 
-Using the full zero-temperature Lifshitz formalism with uniaxial Fresnel coefficients derived from first-principles dielectric data, our preliminary computational results demonstrate: (1) a chiral correction that reduces stiction energy by up to 62% at moderate chirality (κ = 0.5), with complete sign reversal (repulsion) at κ = 1.0 for separations ≥ 3 nm; (2) a counter-plate material (WTe₂, ε_∥ = 1.56) whose near-vacuum c-axis dielectric independently suppresses TM-mode Casimir contributions by 14%; (3) an NSGA-II multi-objective optimization framework that identifies a Pareto-optimal device design achieving ~3× reduction in stiction energy relative to unoptimized configurations.
+Using the full zero-temperature Lifshitz formalism with uniaxial Fresnel coefficients derived from first-principles dielectric data, our preliminary computational results demonstrate: (1) a chiral correction that reduces stiction energy by 38–42% at moderate chirality (κ = 0.5), with complete sign reversal (repulsion) for symmetric Te|Te geometry at κ_crit ≈ 0.795 (d = 10 nm); (2) a counter-plate material (WTe₂, ε_∥ = 1.56) whose near-vacuum c-axis dielectric independently suppresses TM-mode Casimir contributions by 14%; (3) an NSGA-II multi-objective optimization framework that identifies a Pareto-optimal device design achieving ~3× reduction in stiction energy relative to unoptimized configurations.
 
 The project will advance this computational framework to experimental synthesis and measurement validation, delivering India's first demonstration of chirality-controlled Casimir force engineering and establishing KEC as a national center for quantum vacuum nanotechnology.
 
@@ -53,7 +53,7 @@ India's MEMS market is growing rapidly (IoT sensors, accelerometers, RF MEMS for
 - Natural chiral crystal: chirality hardwired into crystal symmetry, no external field needed
 - Topological semimetal-adjacent band structure: large, tunable dielectric response
 - Grown in India: Te synthesis well-established (solvothermal, CVD); no strategic materials import required
-- Anisotropic ε: ε_∥ = 231 gives large Casimir effect; ε_⊥ = 131 provides TE-TM asymmetry essential for chiral correction
+- Anisotropic ε: ε_∥ = 231.09 gives large Casimir effect; ε_⊥ = 130.86 provides TE-TM asymmetry essential for chiral correction
 - WTe₂ counter-plate: ε_zz = 1.56 provides passive TM suppression without active chirality
 
 ---
@@ -102,7 +102,7 @@ Chiral route (Zhao et al. 2009): E = E_Lifshitz + κ² · δE where δE > 0 from
 | Result | Value |
 |--------|-------|
 | Standard Lifshitz, Te\|WTe₂, d=10 nm | −0.103 mJ/m² |
-| Chiral correction δE, d=10 nm | +0.369 mJ/m² |
+| Chiral correction δE (Te\|Te symmetric, Zhao 2009), d=10 nm | +0.369 mJ/m² |
 | Critical chirality κ_crit | 0.795 |
 | Force reduction at κ=0.5 | 38–42% |
 | Repulsion onset (κ=1.0) | d ≥ 3 nm confirmed |

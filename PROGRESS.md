@@ -2,11 +2,74 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-07 (Session 38)
+**Last updated**: 2026-04-08 (Session 39)
 
 ---
 
-## Session 38 — Full End-to-End Audit + Sidebar False Claim Fix (Current)
+## Session 39 — Full-Depth Audit (Two Passes): 16 Issues Found & Fixed (Current)
+
+### Summary
+
+Two-pass pre-IEEE-submission audit across every layer: frontend (App.jsx, CasimirScene.jsx, index.html), backend (server.py, analyze.py, pyproject.toml), all docs (README.md, dashboard/README.md, docs/ieee_draft_outline.md, docs/serb_proposal_draft.md, docs/submission_checklist.md, docs/cover_letter.md), casimir_tools PyPI package (all Python files, 82 tests, CI workflows), and project_map.html. Six parallel explore agents ran across all files.
+
+### Pass 1 — Frontend + Backend + Root Docs (7 fixes)
+
+| # | File | Issue | Fix |
+|---|------|-------|-----|
+| 1 | `dashboard/src/App.jsx:29` | PLOTS desc for `casimir_td_wte2.png` said "4× stronger TM coupling" — stale pre-Session-36 value | Changed to "~2× stronger Casimir coupling (ratio 2.01 at d=1 nm, 1.45 at d=53 nm)" |
+| 2 | `dashboard/src/App.jsx:24-32` | PLOTS array had 7 entries; 4 of 12 generated PNGs invisible in gallery (`casimir_tellurium.png`, `casimir_wte2.png`, `casimir_comparison.png`, `casimir_benchmark_au_sio2.png`) | Added all 4 with physics-accurate titles and descriptions |
+| 3 | `dashboard/src/App.jsx:~146` | Download Report cited [1]–[4]; omitted Silveirinha (2010) PRB 82, 085101 — source of `E_Casimir_chiral_asymm_mJm2` formula | Added [5] Silveirinha (2010) |
+| 4 | `dashboard/src/components/CasimirScene.jsx:304` | Lower plate 3D label hardcoded `"Td-WTe₂ (Pmn2₁)"` even when hex-WTe₂ (P-6m2) data is loaded | Made dynamic: hex → `"Hex-WTe₂ (P-6m2)"`, td → `"Td-WTe₂ (Pmn2₁)"` via substrate prop |
+| 5 | `dashboard/src/App.jsx:~282` | `<CasimirScene>` missing substrate prop needed for fix 4 | Added `substrate={data?.meta?.substrate ?? 'hex'}` |
+| 6 | `README.md:76` | `visualize.py` shown as "11 plot generators" — actual 12 | Fixed to "12 plot generators" |
+| 7 | `analyze.py` | Entire script used stale flat-list schema (`data['E_Casimir_mJ_m2']`), crashes with `TypeError`; relative path failed outside root | Full rewrite to `{variables, objectives}` schema + `Path(__file__).parent` |
+
+### Pass 2 — Deep Docs, PyPI Package, Config Files (9 fixes)
+
+| # | File | Issue | Fix |
+|---|------|-------|-----|
+| 8 | `dashboard/README.md:44` | Endpoint listed as `/api/simulate` — actual is `/api/run-simulation` | Corrected endpoint name |
+| 9 | `dashboard/README.md:43` | Status returns `"running"` — actual value is `"busy"`; also missing `error` and `paths_verified` fields | Updated schema description |
+| 10 | `dashboard/README.md:45` | Endpoint listed as `/api/pareto` — actual is `/api/results` | Corrected endpoint name |
+| 11 | `dashboard/index.html:7` | Title was `"dashboard"` (Vite default) — unprofessional for IEEE context | Changed to `"Spaceship Bubble — Casimir Research Dashboard"` |
+| 12 | `pyproject.toml:4` | Description was `"Add your description here"` (uv default) | Set to full project description |
+| 13 | `docs/submission_checklist.md:85` | Au/SiO₂ benchmark ratio stated as "Our/PC ≈ 0.21 at d=100nm" — contradicts ieee_draft_outline which correctly states 0.35–0.55 | Fixed to "Our/PC ≈ 0.35–0.55 across d=100–500 nm" |
+| 14 | `docs/serb_proposal_draft.md:30` | Executive summary used approximate `ε_⊥ ≈ 131, ε_∥ ≈ 231` — exact values are 130.86, 231.09 | Updated to exact values; also changed "62% at κ=0.5" → "38–42% at κ=0.5" (62% contradicted by all other docs and Table D3) |
+| 15 | `docs/serb_proposal_draft.md:56` | Same ε approximations in B3 section | Updated to exact values 130.86, 231.09 |
+| 16 | `dashboard/src/App.jsx` | `casimir_chiral.png` present in `dashboard/public/plots/` but had no PLOTS entry (was the 12th missing plot) | Added with description of κ₀ sweep vs θ |
+| + | `project_map.html` | 10 nodes, missing: sync_assets.py, FastAPI server, visualize.py, plots/ storage, tests, PyPI package; all node descriptions generic | Expanded to 15 nodes with full descriptions; added 10 missing links |
+
+### Pass 3 — Deep File Audit (Every remaining file, 8 fixes)
+
+| # | File | Issue | Fix |
+|---|------|-------|-----|
+| 17 | `dashboard/src/assets/react.svg`, `vite.svg`, `hero.png` | Vite default boilerplate files — unused, 0 references in any source file | Deleted all 3 |
+| 18 | `dashboard/public/icons.svg` | Custom SVG icons — 0 references anywhere in dashboard source | Deleted |
+| 19 | `casimir_tools/casimir_tools/_core.py:244,530` | Ambiguous variable `I` (ruff E741) — `I` looks like the number `1` in monospace code review | Renamed to `integral_val` in both `_inner_chiral_symmetric` and `_inner_chiral_asymmetric` outer functions |
+| 20 | `src/visualize.py:21` | Unused import `WTE2_2OSC` (ruff F401) — imported but never referenced in the file | Removed from import list |
+| 21 | `CLAUDE.md` | Project Structure section was incomplete — missing `analyze.py`, `README.md`, `data/`, `outputs/`, `plots/`, `docs/`, `tests/`, `casimir_tools/`, `pyproject.toml`, and all `src/` subfiles | Fully expanded structure with all directories and key files |
+| 22 | `dashboard/README.md` Plot Gallery claim | Said "12 publication figures" — was true but gallery actually showed only 7 plots before Pass 1 fix | Consistent now (12 shown, 12 claimed) ✓ |
+| + | All lambda (E731), semicolon (E702) ruff issues | 38 lambdas + 7 semicolons in physics integration code | Intentionally left — idiomatic scientific Python for `scipy.integrate.quad` callbacks; fixing would harm readability without functional benefit |
+| + | mypy type stub warnings (13 issues) | Missing stubs for numpy, scipy, matplotlib, pymoo, mp_api, dotenv | Intentionally left — expected for scientific Python; no official stubs for these packages; code is functionally correct |
+
+### What Was Confirmed Clean (Pass 2)
+
+- casimir_tools v0.1.6: `__init__.py` == `pyproject.toml` == PyPI ✓
+- All physics constants (HBAR, KB, C) identical in `_core.py` and `src/lifshitz.py` ✓
+- Lifshitz prefactor `ħ/(4π²c²)` correct in both codebases ✓
+- All 26 public API functions exported correctly in `__init__.py` ✓
+- casimir_tools test suite: 82 tests pass (34 physics + 14 materials + others) ✓
+- GitHub CI workflows: correct Python matrix (3.10/3.11/3.12), correct trigger tags ✓
+- Material presets: Te C1=45.77, ω1=3.0e13, C2=117.50, ω2=4.5e15 → ε(0)=164.27 ✓
+- ieee_draft_outline.md: all numeric values, references [1]–[25], 12-figure list all correct ✓
+- cover_letter.md: all physics values correct; intentional [PLACEHOLDER] fields for GitHub URL and faculty name (pre-submission TO-DOs) ✓
+- serb_proposal_draft.md: intentional [TBD] for budget and collaborator names (pre-submission TO-DOs) ✓
+- ieee_draft_outline.md Acknowledgments: "Grant No. TBD" intentional (SERB number assigned post-funding) ✓
+- CHIRAL_FACTOR = 2.0 in casimir_tools vs 1.0 in src: intentional, documented in code comments ✓
+
+---
+
+## Session 38 — Full End-to-End Audit + Sidebar False Claim Fix
 
 ### Summary
 

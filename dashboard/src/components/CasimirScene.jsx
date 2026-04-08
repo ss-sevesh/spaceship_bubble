@@ -269,7 +269,7 @@ const MetamaterialLayers = ({ nLayers, gap, kappa }) => {
   );
 };
 
-const CasimirScene = ({ selectedDesign }) => {
+const CasimirScene = ({ selectedDesign, substrate = 'hex' }) => {
   const nLayers = selectedDesign?.N_layers || 14;
   const gap = (selectedDesign?.d_nm || 50) / 10;
   const kappa = selectedDesign?.kappa_eff || 0.7;
@@ -301,7 +301,7 @@ const CasimirScene = ({ selectedDesign }) => {
             <WTe2Plate
               position={[0, -gap / 2, 0]}
               color="#9333ea"
-              label="Td-WTe₂ (Pmn2₁)"
+              label={substrate === 'td' ? 'Td-WTe₂ (Pmn2₁)' : 'Hex-WTe₂ (P-6m2)'}
             />
             <MetamaterialLayers nLayers={nLayers} gap={gap} kappa={kappa} />
             <ParticleField count={300} gap={gap} />

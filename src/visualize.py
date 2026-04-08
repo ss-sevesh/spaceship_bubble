@@ -18,7 +18,7 @@ from pathlib import Path
 from lifshitz import (sweep_separation, load_eps_static, load_eps_tensor,
                       sweep_chiral, sweep_force, sweep_separation_aniso,
                       sweep_separation_2osc, sweep_finite_T,
-                      TE_2OSC, WTE2_2OSC,
+                      TE_2OSC,
                       epsilon_imaginary_drude, epsilon_imaginary,
                       casimir_force_from_eps_fns, AU_DRUDE)
 

@@ -241,10 +241,10 @@ def _casimir_chiral_correction_symmetric(eps_static1: float, eps_static2: float,
         if xi == 0.0:
             return 0.0
         p_max = min(max(20.0, 5.0 * C / (xi * d)), 1.0e6)
-        I, _ = quad(_inner_chiral_symmetric, 1.0, p_max,
+        integral_val, _ = quad(_inner_chiral_symmetric, 1.0, p_max,
                     args=(xi, eps_fn1, eps_fn2, d),
                     limit=200, epsrel=1e-4)
-        return xi ** 2 * I
+        return xi ** 2 * integral_val
 
     xi_max = 10.0 * omega_uv
     raw, _ = quad(outer, 0.0, xi_max, limit=80, epsrel=1e-3, points=[omega_uv])
@@ -527,10 +527,10 @@ def _casimir_chiral_correction_asymmetric(eps_static1: float, eps_static2: float
         if xi == 0.0:
             return 0.0
         p_max = min(max(20.0, 2.5 * C / (xi * d)), 1.0e6)
-        I, _ = quad(_inner_chiral_asymmetric, 1.0, p_max,
+        integral_val, _ = quad(_inner_chiral_asymmetric, 1.0, p_max,
                     args=(xi, eps_fn1, eps_fn2, d),
                     limit=150, epsrel=1e-4)
-        return xi ** 2 * I
+        return xi ** 2 * integral_val
 
     xi_max = 10.0 * omega_uv
     raw, _ = quad(outer, 0.0, xi_max, limit=80, epsrel=1e-3, points=[omega_uv])

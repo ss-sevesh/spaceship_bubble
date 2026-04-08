@@ -40,9 +40,9 @@ Open http://localhost:5173.
 
 | Endpoint | Method | Description |
 |---|---|---|
-| `/api/status` | GET | Returns `{"status": "idle"/"running"}` |
-| `/api/simulate` | POST | Triggers optimizer run (`--optimize --plot`) |
-| `/api/pareto` | GET | Returns `pareto_results.json` |
+| `/api/status` | GET | Returns `{"status": "idle"/"busy", "error": null, "paths_verified": {...}}` |
+| `/api/run-simulation` | POST | Triggers optimizer run (`--optimize --plot`), returns `{"status": "Simulation started"}` |
+| `/api/results` | GET | Returns `pareto_results.json` as JSON |
 
 ## Notes
 

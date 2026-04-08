@@ -37,7 +37,7 @@ import json
 import warnings
 import numpy as np
 from pathlib import Path
-from scipy.integrate import dblquad, quad
+from scipy.integrate import quad
 from typing import Callable
 
 # ── Physical constants (SI) ──────────────────────────────────────────────────
