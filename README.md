@@ -86,8 +86,10 @@ spaceship_bubble/
 │   └── public/               # Synced assets (served by Vite)
 ├── casimir_tools/            # PyPI-ready package (pip install casimir-tools)
 ├── docs/
-│   ├── ieee_draft_outline.md # IEEE Trans. Nanotechnology draft
-│   └── serb_proposal_draft.md # SERB CRG proposal draft
+│   ├── ieee_draft_outline.md    # IEEE Trans. Nanotechnology draft
+│   ├── serb_proposal_draft.md   # SERB CRG proposal draft
+│   ├── submission_checklist.md  # Pre-submission verification checklist
+│   └── cover_letter.md          # Journal cover letter (GitHub URL filled)
 └── PROGRESS.md               # Session-by-session progress log
 ```
 
