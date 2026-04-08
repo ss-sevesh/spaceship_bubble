@@ -2,11 +2,41 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2026  
-**Last updated**: 2026-04-08 (Session 39)
+**Last updated**: 2026-04-08 (Session 40)
 
 ---
 
-## Session 39 — Full-Depth Audit (Two Passes): 16 Issues Found & Fixed (Current)
+## Session 40 — Complete File Inventory Audit: 6 Additional Fixes (Current)
+
+### Summary
+
+Full audit using `git ls-files` inventory to guarantee zero unchecked files. All 51 auditable text files verified. 6 issues found in backend Python, frontend config, and docs.
+
+### Fixes
+
+| # | File | Issue | Fix |
+|---|------|-------|-----|
+| 1 | `src/fetch_materials.py:6` | Docstring listed wrong WTe₂ MP ID: `mp-1019717` (Td phase, no dielectric data) instead of correct `mp-1023926` (hex phase, ε=6.16) | Corrected to `mp-1023926` |
+| 2 | `src/optimizer.py:28` | Module docstring listed Td-WTe₂ as `eps=15.33` — a scalar average, not the actual anisotropic ground truth | Changed to `ε_⊥=18.60, ε_∥=8.80` |
+| 3 | `src/optimizer.py:94` | Inline comment stated DLP classical limit as `E_{n=0} = -k_BT β₁β₂ / (8π d²)` — contradicted the code below (16π) and the F3 formula in the class docstring (also 16π) | Corrected comment to `(16π d²)` |
+| 4 | `src/optimizer.py:168` | Class docstring for `CasimirOptimizationProblem` listed Td substrate as `eps ≈ 15.33` | Changed to `ε_⊥≈18.60, ε_∥≈8.80` |
+| 5 | `dashboard/package.json:2,4` | Vite default placeholder: name `"dashboard"`, version `"0.0.0"` | Changed to `"casimir-dashboard"`, `"1.0.0"` |
+| 6 | `docs/cover_letter.md:81` | Placeholder `[GitHub repository link — add before submission]` still unfilled | Replaced with actual URL: `https://github.com/ss-sevesh/spaceship_bubble` |
+
+### Files Confirmed Clean This Session
+
+- `main.py`, `sync_assets.py` — pipeline orchestration correct, all 12 plot names match ✓
+- `dashboard/server.py` — all 3 endpoints correct (`/api/results`, `/api/run-simulation`, `/api/status`) ✓
+- All `casimir_tools/` (8 files) — physics constants, material presets, tests, API all verified ✓
+- `data/*.json`, `outputs/pareto_results.json` — all ε values match ground truth ✓
+- `tests/conftest.py`, `tests/test_lifshitz.py` — physics test suite correct ✓
+- `.github/workflows/` — CI matrix (3.10/3.11/3.12) correct per casimir_tools `>=3.10` requirement ✓
+- `LICENSE`, `casimir_tools/tests/__init__.py`, `dashboard/.gitignore` — clean ✓
+- All frontend config: `main.jsx`, `App.css`, `index.css`, `vite.config.js`, `eslint.config.js`, `favicon.svg` — clean ✓
+
+---
+
+## Session 39 — Full-Depth Audit (Two Passes): 16 Issues Found & Fixed
 
 ### Summary
 
