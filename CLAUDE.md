@@ -99,3 +99,30 @@ HBAR = 1.0545718e-34   # J·s
 KB   = 1.380649e-23    # J/K
 C    = 2.99792458e8    # m/s
 ```
+
+---
+
+## Audit Protocol (MANDATORY — never skip)
+
+When asked "is this ready?", "check everything", or any publication/submission audit:
+
+**NEVER trust PROGRESS.md ✓ marks as proof of correctness.** They record what was believed at the time — not current state.
+
+### Required cross-checks before any "ready" verdict
+
+1. **Code → Draft numeric parity**: For every constant, factor, or table in `docs/ieee_draft_outline.md`, grep the live value from the actual source file and compare directly.
+   ```
+   grep CONSTANT src/lifshitz.py          # get live value
+   grep CONSTANT docs/ieee_draft_outline.md  # get claimed value
+   # if different → flag immediately
+   ```
+
+2. **All four audit dimensions** (non-negotiable):
+   - Physics values (constants, prefactors, table numbers)
+   - Doc claims vs live code (draft numbers match what code actually computes)
+   - UX simulation (dashboard renders correctly)
+   - Output field tracing (pareto_results.json fields match what App.jsx reads)
+
+3. **Every directory** — not just `src/`: also `docs/`, `casimir_tools/`, `dashboard/`, `tests/`, `pyproject.toml`, `README.md`
+
+4. **Primary sources only** — open the actual files side by side. PROGRESS.md is a log, not a truth table.
