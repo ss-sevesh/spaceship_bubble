@@ -2,7 +2,38 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2028  
-**Last updated**: 2026-04-08 (Session 44)
+**Last updated**: 2026-04-11 (Session 45)
+
+---
+
+## Session 45 — Full Pre-Professor Audit + KEC Year Fix (Complete)
+
+### Summary
+Full readiness audit before sharing GitHub link with professor for collaboration review.
+Also corrected graduation year from KEC 2026 → KEC 2028 across all files.
+
+### KEC Year Fix (14 occurrences updated)
+- `CLAUDE.md`, `main.py`, `README.md`, `PROGRESS.md`, `dashboard/src/App.jsx`
+- `casimir_tools/casimir_tools/__init__.py`
+- `docs/ieee_draft_outline.md` (2 occurrences — "Kongu Engineering College 2026")
+- `casimir_tools/README_PKG.md` (2 occurrences)
+
+### Critical Bug Fixed — `import casimir_tools` was broken
+`uv run python` was resolving `casimir_tools` as a broken namespace package
+(the outer `casimir_tools/` directory shadowed the real package). Fixed by adding
+casimir-tools as an editable workspace dependency in `pyproject.toml` + `uv.lock`.
+`from casimir_tools import casimir_energy` now works correctly in the project venv.
+
+### Full Audit Results
+- **Physics constants**: HBAR, KB, C, OMEGA_UV — all correct in both `src/` and `casimir_tools/` ✓
+- **Material values**: Te ε_⊥=130.86, ε_∥=231.09; WTe₂ ε_⊥=8.46, ε_∥=1.56; Td-WTe₂ ε_⊥=18.60, ε_∥=8.80 — all match DFT JSON files and IEEE draft ✓
+- **2-oscillator cross-checks**: Te C₁+C₂+1=164.27 ✓; WTe₂ C₁+C₂+1=6.16 ✓
+- **Tests**: `tests/test_lifshitz.py` 42/42 passed ✓; `casimir_tools/tests/` 82 passed, 5 skipped ✓
+- **Plots**: All 12 PNGs present in `plots/` and `dashboard/public/plots/` ✓
+- **Dashboard data flow**: All pareto_results.json fields read by App.jsx are present ✓
+- **Download button**: All fields correctly written to .txt export ✓
+- **pip install casimir-tools**: PyPI v0.1.6 installs correctly (verified with --dry-run) ✓
+- **Integration warnings** in `casimir_energy_2osc` (2-osc model): SciPy adaptive integrator warns on convergence for some param combos; tests still pass; does not affect optimizer (uses fast Hamaker model) — known limitation, not a bug
 
 ---
 
