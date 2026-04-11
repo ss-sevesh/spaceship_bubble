@@ -63,7 +63,7 @@
 - [ ] **Verify all 12 figures are 300 dpi** — run `python -c "from PIL import Image; img=Image.open('plots/casimir_tellurium.png'); print(img.info.get('dpi'))"`
 
 ### Cover Letter
-- [ ] Add GitHub repo link in cover letter
+- [x] Add GitHub repo link in cover letter
 - [ ] Choose 2–3 reviewers from the suggested list that you have not cited (to avoid conflict of interest flags)
 - [ ] Sign the cover letter (typed full name is fine for online submission)
 

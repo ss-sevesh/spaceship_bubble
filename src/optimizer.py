@@ -390,8 +390,8 @@ def run_optimization(n_gen: int = 100, pop_size: int = 50,
           f"EPS_SUB={eps_sub2:.2f}")
     print(f"  Temperature: T={T:.0f} K  "
           f"(thermal length l_T={_thermal_length_nm(T):.0f} nm)")
-    print(f"  Objectives: F1=|E_Casimir|  F2=thickness  "
-          f"F3=thermal_fraction")
+    print("  Objectives: F1=|E_Casimir|  F2=thickness  "
+          "F3=thermal_fraction")
 
     res = minimize(problem, algorithm, termination,
                    seed=seed, verbose=False)

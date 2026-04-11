@@ -196,7 +196,7 @@ Chiral route (Zhao et al. 2009): E = E_Lifshitz + κ² · δE where δE > 0 from
 - **Sevesh SS**, B.E. (Artificial Intelligence and Machine Learning), Kongu Engineering College (KEC), 2026
 - Research area: quantum vacuum effects, computational materials science, MEMS reliability engineering
 - Relevant prior work: AI-driven Casimir stiction suppression framework (this project); NSGA-II Pareto optimisation of chiral metamaterial geometries; full anisotropic Lifshitz implementation for uniaxial heterostructures
-- GitHub / code artefacts: open-source `casimir-tools` (in preparation, target PyPI Month 12)
+- GitHub / code artefacts: open-source `casimir-tools` (published: PyPI v0.1.6, https://pypi.org/project/casimir-tools/)
 
 ### Co-Investigator / Mentor (Proposed)
 - **[TBD]** Faculty member, Dept. of AI & ML / Physics, Kongu Engineering College (KEC), Erode — confirm name with HOD prior to portal submission

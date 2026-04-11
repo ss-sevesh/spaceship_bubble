@@ -13,7 +13,7 @@ import numpy as np
 import pytest
 
 from lifshitz import (
-    HBAR, C, KB, OMEGA_UV, CHIRAL_FACTOR,
+    HBAR, C, OMEGA_UV,
     epsilon_imaginary,
     epsilon_imaginary_2osc,
     epsilon_imaginary_drude_lorentz,

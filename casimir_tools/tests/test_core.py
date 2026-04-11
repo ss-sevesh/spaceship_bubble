@@ -19,7 +19,7 @@ import numpy as np
 import pytest
 
 from casimir_tools._core import (
-    HBAR, KB, C, OMEGA_UV,
+    HBAR, KB, C,
     epsilon_imaginary,
     epsilon_imaginary_2osc,
     epsilon_imaginary_drude,

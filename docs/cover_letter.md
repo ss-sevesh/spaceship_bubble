@@ -59,7 +59,7 @@ of the Casimir force at the material level using chiral metamaterials.
    direct experimental comparison.
 
 5. **Fully validated open-source physics engine**: The `casimir-tools` Python package
-   (to be released on PyPI) implements all Lifshitz variants (isotropic, uniaxial, chiral,
+   (published on PyPI as v0.1.6) implements all Lifshitz variants (isotropic, uniaxial, chiral,
    finite-T Matsubara, Drude metals) with an 82-test suite. Au/SiO₂ benchmark confirms
    Our/PC ratio ≈ 0.35–0.55 at d = 100–500 nm, consistent with published Drude-Lifshitz
    predictions (Lambrecht & Reynaud 2000).
