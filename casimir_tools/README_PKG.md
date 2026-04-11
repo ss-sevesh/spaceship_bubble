@@ -107,7 +107,7 @@ Extensions:
   title   = {casimir-tools: Lifshitz-Casimir Force Engineering Toolkit},
   year    = {2026},
   url     = {https://github.com/ss-sevesh/spaceship_bubble/tree/master/casimir_tools},
-  version = {0.1.6},
+  version = {0.1.7},
 }
 ```
 
