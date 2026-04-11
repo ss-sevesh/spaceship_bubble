@@ -2,7 +2,7 @@
 ## AI-driven Casimir Stiction Suppression via Chiral Tellurium Metamaterials
 
 **Target journal**: IEEE Transactions on Nanotechnology  
-**Author**: Sevesh SS, Kongu Engineering College 2026 | seveshss.24aim@kongu.edu | ORCID: 0009-0007-5498-8076  
+**Author**: Sevesh SS, Kongu Engineering College 2028 | seveshss.24aim@kongu.edu | ORCID: 0009-0007-5498-8076  
 **Status**: Full draft (Session 35, April 2026)
 
 ---

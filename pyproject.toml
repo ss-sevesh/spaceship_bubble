@@ -14,9 +14,18 @@ dependencies = [
     "python-dotenv>=1.2.2",
     "scipy>=1.17.1",
     "uvicorn>=0.43.0",
+    "casimir-tools>=0.1.6",
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
 ]
+
+[tool.uv.workspace]
+members = [
+    "casimir_tools",
+]
+
+[tool.uv.sources]
+casimir-tools = { workspace = true, editable = true }

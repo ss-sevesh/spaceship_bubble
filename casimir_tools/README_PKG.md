@@ -2,7 +2,7 @@
 
 **Open-source Python toolkit for Lifshitz-Casimir force engineering in anisotropic and chiral dielectric heterostructures.**
 
-Developed as part of the *AI-driven Casimir Stiction Suppression* project (Kongu Engineering College 2026, SERB CRG).
+Developed as part of the *AI-driven Casimir Stiction Suppression* project (Kongu Engineering College 2028, SERB CRG).
 
 ## Installation
 
@@ -113,4 +113,4 @@ Extensions:
 
 ## License
 
-MIT © Sevesh SS, Kongu Engineering College 2026
+MIT © Sevesh SS, Kongu Engineering College 2028
