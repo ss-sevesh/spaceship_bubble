@@ -1420,3 +1420,22 @@ The research dashboard is now a complete application where physical simulation r
 ### Remaining (user action only)
 - [ ] **PyPI publish**: `git tag casimir-tools-v0.1.0 && git push --tags`
 - [ ] Re-run plots after Td optimizer: `uv run python main.py --plot && uv run python sync_assets.py`
+
+---
+
+## Session 46 — Git Cleanup + CI Re-run (Complete)
+
+### Summary
+
+Pushed 7 unstaged files that were missed at the end of Session 45. Fixed transient GitHub Actions SSL failure (scipy download corruption mid-stream — not a code bug) by re-running the workflow.
+
+### Actions
+
+| Action | Detail |
+|--------|--------|
+| Committed + pushed 7 files | `analyze.py`, `casimir_tools/tests/test_core.py`, `docs/cover_letter.md`, `docs/serb_proposal_draft.md`, `docs/submission_checklist.md`, `src/optimizer.py`, `tests/test_lifshitz.py` |
+| Commit message | `fix: ruff lint cleanup — remove unused imports, fix redundant f-strings` |
+| CI failure cause | `ssl.SSLError: DECRYPTION_FAILED_OR_BAD_RECORD_MAC` during scipy wheel download — transient GitHub infra blip |
+| Resolution | `gh run rerun 24279036803` — re-queued successfully |
+| `master` state | Fully in sync with `origin/master` ✓ |
+| `PROGRESS.md` | Restructured — full history moved to `PROGRESS_ARCHIVE.md` |

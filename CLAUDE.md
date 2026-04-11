@@ -129,16 +129,52 @@ When asked "is this ready?", "check everything", or any publication/submission a
 
 ---
 
-# Codebase Knowledge Graph
+# Codebase Knowledge Graph — Full Efficiency Protocol
 
-- Before making any change: check blast radius using graph
-- Never modify a function without checking what depends on it
-- If a dependency chain is 3+ levels deep, use plan mode first
+This project has TWO graph tools. Use BOTH. They complement each other.
+
+| Tool | Index | Best for |
+|------|-------|----------|
+| **GitNexus** | Manual — run `npx gitnexus analyze` after every commit | Deep blast radius, execution flow tracing, safe rename |
+| **code-review-graph** | Auto — updates after every Edit/Write/Bash | Quick structural impact, callers/callees, post-edit confirmation |
+
+## Mandatory Workflow for Every Code Change
+
+### Step 1 — Before touching ANY symbol (function, class, constant):
+1. `gitnexus_impact({target: "symbolName", direction: "upstream", includeTests: true})` — blast radius + risk level
+2. `get_impact_radius({symbol: "symbolName"})` — structural callers/callees from code-review-graph
+3. Report both results to user — if either returns HIGH or CRITICAL, warn before proceeding
+4. If chain is 3+ levels deep → enter plan mode first
+
+### Step 2 — Before exploring unfamiliar code (use graph, NOT Grep):
+- `gitnexus_query({query: "concept"})` — finds execution flows by concept, ranked by relevance
+- `semantic_search_nodes({query: "keyword"})` — finds functions/classes by name or keyword
+- `gitnexus_context({name: "symbolName"})` — full 360° view: callers, callees, which flows it's in
+- `query_graph({pattern: "callers_of", target: "X"})` — structural relationships
+- Fall back to Grep/Glob/Read ONLY when graph doesn't cover it
+
+### Step 3 — After the edit:
+- `gitnexus_detect_changes({scope: "staged"})` — confirms only expected symbols changed
+- code-review-graph auto-updates (no action needed)
+
+### Step 4 — After every commit:
+```bash
+npx gitnexus analyze
+```
+GitNexus goes stale after commits. A stale index = wrong blast radius on next change.
+If embeddings exist: `npx gitnexus analyze --embeddings`
+
+## Never Do
+- NEVER use Grep to explore code when graph tools can answer it
+- NEVER edit a symbol without running BOTH blast radius checks first
+- NEVER rename with find-and-replace — use `gitnexus_rename` (understands call graph)
+- NEVER commit without `gitnexus_detect_changes()` confirming scope
+- NEVER ignore HIGH or CRITICAL risk warnings
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **spaceship_bubble** (552 symbols, 1188 relationships, 34 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **spaceship_bubble** (557 symbols, 1192 relationships, 34 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
