@@ -101,13 +101,16 @@ Extensions:
 
 ## Citation
 
+[![PyPI version](https://img.shields.io/pypi/v/casimir-tools)](https://pypi.org/project/casimir-tools/)
+
 ```bibtex
 @software{sevesh2026casimir,
   author  = {Sevesh SS},
   title   = {casimir-tools: Lifshitz-Casimir Force Engineering Toolkit},
   year    = {2026},
   url     = {https://github.com/ss-sevesh/spaceship_bubble/tree/master/casimir_tools},
-  version = {0.1.7},
+  doi     = {10.5281/zenodo.19517865},
+  url     = {https://doi.org/10.5281/zenodo.19517865},
 }
 ```
 

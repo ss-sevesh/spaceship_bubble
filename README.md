@@ -3,6 +3,9 @@
 **AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials**  
 Lead: Sevesh SS, KEC 2028 | Target: IEEE Transactions on Nanotechnology + SERB CRG
 
+[![DOI](https://zenodo.org/badge/1202645604.svg)](https://doi.org/10.5281/zenodo.19517865)
+[![PyPI version](https://img.shields.io/pypi/v/casimir-tools)](https://pypi.org/project/casimir-tools/)
+
 ---
 
 ## What This Is
@@ -135,7 +138,7 @@ E_chiral = ct.casimir_energy_chiral(eps_static1=164.27, eps_static2=6.16, d=10e-
 d_nm, F  = ct.sweep_force(eps1=164.27, eps2=6.16, d_min_nm=5.0, d_max_nm=100.0, n_points=100)
 ```
 
-Current version: `v0.1.6` — live on PyPI.
+[![PyPI version](https://img.shields.io/pypi/v/casimir-tools)](https://pypi.org/project/casimir-tools/) — live on PyPI.
 
 ---
 
