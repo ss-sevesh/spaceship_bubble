@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|Bash",
+        "command": "code-review-graph update --skip-flows",
+        "timeout": 5000
+      },
+      {
+        "matcher": "Bash",
+        "command": "node \".claude/hooks/auto-gitnexus-analyze.cjs\"",
+        "timeout": 30000
+      }
+    ]
+  }
+}

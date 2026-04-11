@@ -39,6 +39,8 @@ node_modules/
 *.log
 *_output.txt
 
-# Claude Code session cache (local only)
-.claude/
+# Claude Code session cache (local only — except project hooks + settings)
+.claude/*
+!.claude/settings.json
+!.claude/hooks/
 .gitnexus
