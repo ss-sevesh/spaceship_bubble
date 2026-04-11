@@ -3,7 +3,7 @@
 **AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials**  
 Lead: Sevesh SS, KEC 2028 | Target: IEEE Transactions on Nanotechnology + SERB CRG
 
-[![DOI](https://zenodo.org/badge/1202645604.svg)](https://doi.org/10.5281/zenodo.19517865)
+[![DOI](https://zenodo.org/badge/1202645604.svg)](https://doi.org/10.5281/zenodo.19517866)
 [![PyPI version](https://img.shields.io/pypi/v/casimir-tools)](https://pypi.org/project/casimir-tools/)
 
 ---
