@@ -1,0 +1,33 @@
+{
+  "title": "AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials",
+  "description": "Full-stack physics research pipeline for Casimir stiction suppression using chiral Tellurium metamaterials. Implements Lifshitz theory with uniaxial Fresnel coefficients, two-oscillator Sellmeier dielectric model, finite-temperature Matsubara summation, and three-objective NSGA-II optimization. Includes the casimir-tools PyPI package, FastAPI backend, and React 3D dashboard. Target: IEEE Transactions on Nanotechnology + SERB CRG funding.",
+  "upload_type": "software",
+  "license": "MIT",
+  "language": "eng",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "SS, Sevesh",
+      "affiliation": "Kongu Engineering College",
+      "orcid": "0009-0007-5498-8076"
+    }
+  ],
+  "keywords": [
+    "Casimir effect",
+    "stiction",
+    "Lifshitz theory",
+    "chiral metamaterials",
+    "tellurium",
+    "WTe2",
+    "Weyl semimetal",
+    "MEMS",
+    "NEMS",
+    "multi-objective optimization",
+    "NSGA-II",
+    "nanophysics",
+    "quantum vacuum",
+    "metamaterials",
+    "dielectric",
+    "nanotechnology"
+  ]
+}
