@@ -1,7 +1,7 @@
 # Spaceship Bubble
 
 **AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials**  
-Lead: Sevesh SS, KEC 2026 | Target: IEEE Transactions on Nanotechnology + SERB CRG
+Lead: Sevesh SS, KEC 2028 | Target: IEEE Transactions on Nanotechnology + SERB CRG
 
 ---
 

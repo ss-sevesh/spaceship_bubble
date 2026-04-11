@@ -3,7 +3,7 @@ casimir_tools — Open-source Casimir force engineering toolkit.
 
 A self-contained Python library for computing Lifshitz-Casimir interactions
 in anisotropic, chiral dielectric heterostructures. Developed as part of the
-AI-driven Casimir Stiction Suppression project (KEC 2026, SERB CRG).
+AI-driven Casimir Stiction Suppression project (KEC 2028, SERB CRG).
 
 Public API
 ----------

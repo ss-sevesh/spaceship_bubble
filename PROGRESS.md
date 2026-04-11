@@ -1,7 +1,7 @@
 # PROGRESS.md — Spaceship Bubble Research Pipeline
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
-**Lead**: Sevesh SS, KEC 2026  
+**Lead**: Sevesh SS, KEC 2028  
 **Last updated**: 2026-04-08 (Session 44)
 
 ---
@@ -787,7 +787,7 @@ Two occurrences of **"~4× stronger"** corrected to **"~2× stronger (ratio 2.0 
 
 - [x] ~~**Regenerate figures at 300 dpi**~~ — Done this session
 - [ ] **PyPI publish**: `git tag casimir-tools-v0.1.0 && git push --tags`
-- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2026" with full affiliation block)
+- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2028" with full affiliation block)
 - [ ] Fill in SERB grant number once assigned (placeholder: [Grant No. TBD])
 - [ ] Cover letter for IEEE Transactions on Nanotechnology
 - [ ] Find faculty PI at KEC/IIT for SERB CRG co-applicant
@@ -847,7 +847,7 @@ Three parallel Explore agents audited all of `src/`, `casimir_tools/`, `dashboar
 
 - [ ] **Regenerate figures at 300 dpi**: `uv run python main.py --plot`
 - [ ] **PyPI publish**: `git tag casimir-tools-v0.1.0 && git push --tags`
-- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2026" with full affiliation block)
+- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2028" with full affiliation block)
 - [ ] Fill in SERB grant number once assigned (placeholder: [Grant No. TBD])
 - [ ] Cover letter for IEEE Transactions on Nanotechnology
 - [ ] Find faculty PI at KEC/IIT for SERB CRG co-applicant
@@ -901,7 +901,7 @@ as a numerical artifact. The corrected value is **E_T300 = −4.2393×10⁻⁴ m
 ### Remaining (user action only)
 
 - [ ] **PyPI publish**: `git tag casimir-tools-v0.1.0 && git push --tags`
-- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2026" with full affiliation block)
+- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2028" with full affiliation block)
 - [ ] Fill in SERB grant number once assigned (placeholder: [Grant No. TBD])
 - [ ] Cover letter for IEEE Transactions on Nanotechnology
 - [ ] Find faculty PI at KEC/IIT for SERB CRG application
@@ -944,7 +944,7 @@ as a numerical artifact. The corrected value is **E_T300 = −4.2393×10⁻⁴ m
 ### Remaining (user action only)
 
 - [ ] **PyPI publish**: `git tag casimir-tools-v0.1.0 && git push --tags`
-- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2026" with full affiliation block)
+- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2028" with full affiliation block)
 - [ ] Fill in SERB grant number once assigned (placeholder: [Grant No. TBD])
 - [ ] Cover letter for IEEE Transactions on Nanotechnology
 - [ ] Find faculty PI at KEC/IIT for SERB CRG application
@@ -969,7 +969,7 @@ as a numerical artifact. The corrected value is **E_T300 = −4.2393×10⁻⁴ m
 ### Remaining (user action only)
 
 - [ ] **PyPI publish**: `git tag casimir-tools-v0.1.0 && git push --tags`
-- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2026" with full affiliation block)
+- [ ] Author affiliations, email, ORCID (replace "Sevesh SS, KEC 2028" with full affiliation block)
 - [ ] Fill in SERB grant number once assigned (placeholder: [Grant No. TBD])
 - [ ] Cover letter for IEEE Transactions on Nanotechnology
 - [ ] Regenerate all figures at 300 dpi: `uv run python main.py --plot`

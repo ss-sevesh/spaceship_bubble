@@ -151,7 +151,7 @@ const App = () => {
       '  [4] NSGA-II: Deb et al. (2002) IEEE Trans. Evol. Comp. 6, 182',
       '  [5] Silveirinha (2010) PRB 82, 085101  [asymmetric chiral Casimir, Te|WTe₂]',
       '',
-      '  Lead: Sevesh SS, KEC 2026',
+      '  Lead: Sevesh SS, KEC 2028',
       '  Project: spaceship_bubble | IEEE + SERB CRG',
       '='.repeat(60),
     ].join('\n');

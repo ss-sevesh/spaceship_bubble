@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Title** | AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials |
-| **Lead** | Sevesh SS, KEC 2026 |
+| **Lead** | Sevesh SS, KEC 2028 |
 | **Goals** | IEEE publication + SERB funding application |
 | **Status** | Active development (April 2026) |
 

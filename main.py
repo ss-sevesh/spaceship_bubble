@@ -2,7 +2,7 @@
 main.py — Spaceship Bubble Research Pipeline Orchestrator.
 
 AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials.
-Lead: Sevesh SS, KEC 2026.
+Lead: Sevesh SS, KEC 2028.
 Goals: IEEE publication + SERB funding.
 
 Usage:
@@ -154,7 +154,7 @@ def main() -> None:
     print("=" * 60)
     print("  Spaceship Bubble Research Pipeline")
     print("  AI-driven Casimir Stiction Suppression")
-    print("  Lead: Sevesh SS | KEC 2026")
+    print("  Lead: Sevesh SS | KEC 2028")
     print("=" * 60)
 
     results: dict[str, bool] = {}
