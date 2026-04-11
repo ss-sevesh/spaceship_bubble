@@ -2,9 +2,39 @@
 
 **Project**: AI-driven Casimir Stiction-Suppressing Chiral Tellurium Metamaterials  
 **Lead**: Sevesh SS, KEC 2028  
-**Last updated**: 2026-04-11 (Session 46)
+**Last updated**: 2026-04-11 (Session 47)
 
 > Full session-by-session history: see `PROGRESS_ARCHIVE.md`
+
+---
+
+## Session 47 — Knowledge Graph Setup + PyPI v0.1.7 + Thermal Bug Fix (Complete)
+
+### Summary
+
+Set up full codebase knowledge graph (GitNexus + code-review-graph), fixed 3 Claude Code settings issues, ran full pre-IEEE audit, fixed classical thermal formula bug in casimir_tools tests, and published casimir-tools v0.1.7 to PyPI.
+
+### Actions
+
+| Action | Detail |
+|--------|--------|
+| GitNexus analyze | 552 nodes, 1,188 edges, 34 execution flows indexed |
+| gitnexus setup | MCP + hooks configured globally for Claude Code |
+| code-review-graph build | 313 nodes, 1,905 edges; auto-updates on every file edit |
+| Settings fixes (3) | Removed invalid `SessionStart` + `PreCommit` hooks; fixed `timeout: 10` → `10000` |
+| Full pre-IEEE audit | All 4 dimensions checked — physics constants, doc claims, UX, output fields — all pass |
+| Thermal formula bug fixed | `casimir_tools/tests/test_core.py`: `/8π` → `/16π` for classical n=0 Matsubara term (DLP 1961 with weight ½); 55/55 tests passing |
+| casimir-tools v0.1.7 published | Live at pypi.org/project/casimir-tools/0.1.7/ — verified install + physics |
+| `.pypirc` configured | `C:\Users\11SEV\.pypirc` — future uploads fully automated |
+| Draft footer updated | `docs/ieee_draft_outline.md`: v0.1.6 → v0.1.7 |
+
+### Audit Results (Session 47)
+
+- All physical constants match across `src/lifshitz.py`, `casimir_tools/_core.py`, CLAUDE.md, and IEEE draft ✓
+- All 12 plots present and matching App.jsx PLOTS array ✓
+- All pareto_results.json fields read by App.jsx present ✓
+- 2-oscillator parameters consistent across all files ✓
+- NSGA-II parameters (pop=50, n_gen=100, seed=42) match draft and JSON ✓
 
 ---
 

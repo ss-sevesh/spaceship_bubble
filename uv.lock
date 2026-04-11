@@ -186,7 +186,7 @@ wheels = [
 
 [[package]]
 name = "casimir-tools"
-version = "0.1.6"
+version = "0.1.7"
 source = { editable = "casimir_tools" }
 dependencies = [
     { name = "numpy" },

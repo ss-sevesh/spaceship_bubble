@@ -339,8 +339,9 @@ class TestCasimirEnergyFiniteT:
         """At d=5000 nm >> l_T≈1215 nm, finite-T energy approaches classical DLP formula.
 
         Classical limit (Dzyaloshinskii-Lifshitz-Pitaevskii n=0 Matsubara term):
-            E_classical = -k_B T * beta1 * beta2 / (8 * pi * d^2)
+            E_classical = -k_B T * beta1 * beta2 / (16 * pi * d^2)
         where beta = (eps-1)/(eps+1).
+        The 1/16π factor includes the weight-½ on the n=0 Matsubara term (DLP 1961).
 
         At d >> l_T, the quantum fluctuation terms are exponentially suppressed and
         the n=0 Matsubara term dominates.  Verified within 10%.
@@ -349,7 +350,7 @@ class TestCasimirEnergyFiniteT:
         d   = 5000e-9   # 5000 nm >> l_T ≈ 1215 nm
         beta1 = (EPS_TE   - 1.0) / (EPS_TE   + 1.0)
         beta2 = (EPS_WTE2 - 1.0) / (EPS_WTE2 + 1.0)
-        E_classical = -KB * T * beta1 * beta2 / (8.0 * math.pi * d ** 2)
+        E_classical = -KB * T * beta1 * beta2 / (16.0 * math.pi * d ** 2)
         E_full = casimir_energy_finite_T(EPS_TE, EPS_WTE2, d, T=T, n_max=20)
         rel_diff = abs(E_full - E_classical) / abs(E_classical)
         assert rel_diff < 0.10, (
@@ -370,7 +371,7 @@ class TestCasimirEnergyFastFiniteT:
     imported here (pymoo dependency not available in casimir-tools venv).
     The correction formula is simple enough to verify inline:
 
-        E_classical = -k_B T / (8 pi d^2) * beta1 * beta2
+        E_classical = -k_B T / (16 pi d^2) * beta1 * beta2
 
     Since beta1, beta2 > 0 for eps > 1, E_classical < 0, so
     casimir_energy_fast_finite_T < casimir_energy_fast (more negative).
@@ -383,7 +384,7 @@ class TestCasimirEnergyFastFiniteT:
         (DLP 1961; Parsegian 2006 eq. 2.17) to avoid the pymoo import dependency:
 
             E_T = E_fast(kappa=0) + E_classical
-            E_classical = -k_B T * beta1 * beta2 / (8 pi d^2)
+            E_classical = -k_B T * beta1 * beta2 / (16 pi d^2)
 
         Verifies E_T < E_fast(kappa=0), i.e., thermal correction always adds
         to attraction when eps1, eps2 > 1.
@@ -394,7 +395,7 @@ class TestCasimirEnergyFastFiniteT:
         E_fast = casimir_energy_fast(EPS_TE, EPS_WTE2, d, kappa)
         beta1 = (EPS_TE   - 1.0) / (EPS_TE   + 1.0)
         beta2 = (EPS_WTE2 - 1.0) / (EPS_WTE2 + 1.0)
-        E_classical = -KB * T / (8.0 * math.pi * d ** 2) * beta1 * beta2
+        E_classical = -KB * T / (16.0 * math.pi * d ** 2) * beta1 * beta2
         E_fast_finite_T = E_fast + E_classical
         # Thermal correction must be negative (attractive)
         assert E_classical < 0.0
@@ -410,7 +411,7 @@ class TestCasimirEnergyFastFiniteT:
         d   = D_100NM
         beta1 = (EPS_TE   - 1.0) / (EPS_TE   + 1.0)
         beta2 = (EPS_WTE2 - 1.0) / (EPS_WTE2 + 1.0)
-        E_classical = -KB * T / (8.0 * math.pi * d ** 2) * beta1 * beta2
+        E_classical = -KB * T / (16.0 * math.pi * d ** 2) * beta1 * beta2
         for kappa in [0.0, 0.2, 0.5]:
             E_fast   = casimir_energy_fast(EPS_TE, EPS_WTE2, d, kappa)
             E_total  = E_fast + E_classical

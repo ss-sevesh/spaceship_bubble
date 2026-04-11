@@ -440,4 +440,4 @@ This work was supported by the Science and Engineering Research Board (SERB), De
 
 ---
 
-*Draft updated: 2026-04-08 (Session 39). Status: All IEEE submission blockers resolved. Physics engine fully audited — all prefactors HBAR/(4π²c²) confirmed correct in src/lifshitz.py and casimir_tools/_core.py. Frontend-backend Re-Optimize fixed (proxy, poll loop, --optimize --plot). Author details complete: Sevesh SS, seveshss.24aim@kongu.edu, ORCID 0009-0007-5498-8076, Kongu Engineering College. PyPI: casimir-tools v0.1.6 published. Remaining: faculty co-author, LaTeX/PDF conversion.*
+*Draft updated: 2026-04-08 (Session 39). Status: All IEEE submission blockers resolved. Physics engine fully audited — all prefactors HBAR/(4π²c²) confirmed correct in src/lifshitz.py and casimir_tools/_core.py. Frontend-backend Re-Optimize fixed (proxy, poll loop, --optimize --plot). Author details complete: Sevesh SS, seveshss.24aim@kongu.edu, ORCID 0009-0007-5498-8076, Kongu Engineering College. PyPI: casimir-tools v0.1.7 published. Remaining: faculty co-author, LaTeX/PDF conversion.*
