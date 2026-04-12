@@ -1,11 +1,13 @@
 {
   "mcpServers": {
+    "gitnexus": {
+      "command": "npx",
+      "args": ["gitnexus", "mcp"],
+      "type": "stdio"
+    },
     "code-review-graph": {
       "command": "uvx",
-      "args": [
-        "code-review-graph",
-        "serve"
-      ],
+      "args": ["code-review-graph", "serve"],
       "type": "stdio"
     }
   }

@@ -47,3 +47,4 @@ project_map.html
 !.claude/settings.json
 !.claude/hooks/
 .gitnexus
+.code-review-graph/

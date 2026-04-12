@@ -15,16 +15,6 @@
             "timeout": 5000
           }
         ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \".claude/hooks/auto-gitnexus-analyze.cjs\"",
-            "timeout": 30000
-          }
-        ]
       }
     ]
   }
