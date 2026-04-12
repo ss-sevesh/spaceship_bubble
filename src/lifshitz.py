@@ -31,6 +31,7 @@ References:
     Lifshitz (1956) Sov. Phys. JETP 2, 73.
     Parsegian (2006) Van der Waals Forces. Cambridge UP, ch. 2.
     Dzyaloshinskii, Lifshitz, Pitaevskii (1961) Adv. Phys. 10, 165.
+    Drude (1900) Ann. Phys. 306, 566.  [free-carrier Drude model for Td-WTe2]
 """
 
 import json
