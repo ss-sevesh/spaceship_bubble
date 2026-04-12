@@ -40,20 +40,30 @@ References:
 """
 
 import json
-import numpy as np
 from pathlib import Path
 from typing import Callable
 
-from pymoo.core.problem import Problem
+import numpy as np
 from pymoo.algorithms.moo.nsga2 import NSGA2
+from pymoo.core.problem import Problem
 from pymoo.optimize import minimize
 from pymoo.termination import get_termination
 
-from lifshitz import (casimir_energy, casimir_energy_fast, casimir_energy_finite_T,
-                      casimir_energy_multilayer, casimir_energy_chiral_asymmetric,
-                      epsilon_imaginary, epsilon_imaginary_drude_lorentz,
-                      WTE2_TD_DRUDE, OMEGA_UV as _OMEGA_UV,
-                      load_eps_static, KB as _KB, HBAR as _HBAR, C as _C)
+from lifshitz import HBAR as _HBAR
+from lifshitz import KB as _KB
+from lifshitz import OMEGA_UV as _OMEGA_UV
+from lifshitz import (
+    WTE2_TD_DRUDE,
+    casimir_energy,
+    casimir_energy_chiral_asymmetric,
+    casimir_energy_fast,
+    casimir_energy_finite_T,
+    casimir_energy_multilayer,
+    epsilon_imaginary,
+    epsilon_imaginary_drude_lorentz,
+    load_eps_static,
+)
+from lifshitz import C as _C
 
 
 def _thermal_length_nm(T: float) -> float:

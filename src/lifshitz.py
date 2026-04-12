@@ -35,10 +35,11 @@ References:
 
 import json
 import warnings
-import numpy as np
 from pathlib import Path
-from scipy.integrate import quad
 from typing import Callable
+
+import numpy as np
+from scipy.integrate import quad
 
 # ── Physical constants (SI) ──────────────────────────────────────────────────
 HBAR     = 1.0545718e-34   # J*s   — reduced Planck constant

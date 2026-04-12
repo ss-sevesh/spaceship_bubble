@@ -29,3 +29,20 @@ members = [
 
 [tool.uv.sources]
 casimir-tools = { workspace = true, editable = true }
+
+[tool.pytest.ini_options]
+testpaths    = ["tests"]
+addopts      = "-v --tb=short"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length    = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = [
+    "E501",   # line too long — handled by formatter
+    "E731",   # lambda assignment — common pattern in scientific integration callbacks
+    "E702",   # semicolon — used for paired physics assignments (ep1; ea1)
+]

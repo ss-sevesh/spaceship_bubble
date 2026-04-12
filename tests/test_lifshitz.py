@@ -13,24 +13,26 @@ import numpy as np
 import pytest
 
 from lifshitz import (
-    HBAR, C, OMEGA_UV,
-    epsilon_imaginary,
-    epsilon_imaginary_2osc,
-    epsilon_imaginary_drude_lorentz,
-    casimir_energy,
-    casimir_energy_aniso,
-    casimir_energy_chiral,
-    casimir_energy_chiral_asymmetric,
-    casimir_energy_finite_T,
-    casimir_energy_fast,
-    casimir_energy_2osc,
-    casimir_force,
+    HBAR,
+    OMEGA_UV,
+    TE_2OSC,
+    WTE2_2OSC,
+    C,
     _hamaker_constant,
     _reflection_te,
     _reflection_tm,
-    TE_2OSC, WTE2_2OSC,
+    casimir_energy,
+    casimir_energy_2osc,
+    casimir_energy_aniso,
+    casimir_energy_chiral,
+    casimir_energy_chiral_asymmetric,
+    casimir_energy_fast,
+    casimir_energy_finite_T,
+    casimir_force,
+    epsilon_imaginary,
+    epsilon_imaginary_2osc,
+    epsilon_imaginary_drude_lorentz,
 )
-
 
 # ── Representative material parameters ───────────────────────────────────────
 EPS_TE   = 164.27   # Te static dielectric (mp-19, trace average)

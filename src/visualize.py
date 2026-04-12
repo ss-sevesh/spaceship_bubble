@@ -17,17 +17,27 @@ Generates 12 publication-quality plots (saved to plots/):
 """
 
 import json
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 from pathlib import Path
 
-from lifshitz import (sweep_separation, load_eps_static, load_eps_tensor,
-                      sweep_chiral, sweep_force, sweep_separation_aniso,
-                      sweep_separation_2osc, sweep_finite_T,
-                      TE_2OSC,
-                      epsilon_imaginary_drude, epsilon_imaginary,
-                      casimir_force_from_eps_fns, AU_DRUDE)
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+
+from lifshitz import (
+    AU_DRUDE,
+    TE_2OSC,
+    casimir_force_from_eps_fns,
+    epsilon_imaginary,
+    epsilon_imaginary_drude,
+    load_eps_static,
+    load_eps_tensor,
+    sweep_chiral,
+    sweep_finite_T,
+    sweep_force,
+    sweep_separation,
+    sweep_separation_2osc,
+    sweep_separation_aniso,
+)
 
 # ── Plot styling ──────────────────────────────────────────────────────────────
 plt.rcParams.update({

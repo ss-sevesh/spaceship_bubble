@@ -8,8 +8,8 @@ Fetches dielectric tensor + crystal structure for:
 Saves results to data/tellurium.json and data/wte2.json.
 """
 
-import os
 import json
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv

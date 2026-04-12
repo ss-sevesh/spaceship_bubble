@@ -13,8 +13,7 @@ dist/
 build/
 wheels/
 
-# uv
-.python-version
+# uv — keep .python-version tracked (pins runtime for reproducibility)
 
 # Jupyter
 .ipynb_checkpoints/
@@ -38,6 +37,10 @@ node_modules/
 # Misc generated
 *.log
 *_output.txt
+ruff_find.txt
+ruff_utf8.txt
+project_map.html
+.aider.chat.history.md
 
 # Claude Code session cache (local only — except project hooks + settings)
 .claude/*

@@ -6,7 +6,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "code-review-graph update --skip-flows",
+            "command": "uvx code-review-graph update --skip-flows",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "python update_claude_md.py",
             "timeout": 5000
           }
         ]
