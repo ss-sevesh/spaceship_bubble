@@ -11,7 +11,7 @@
           },
           {
             "type": "command",
-            "command": "python update_claude_md.py",
+            "command": "python scripts/update_claude_md.py",
             "timeout": 5000
           }
         ]
