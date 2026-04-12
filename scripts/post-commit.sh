@@ -29,7 +29,7 @@ if [ "$PY_CHANGED" = "1" ]; then
     echo "[post-commit] GitNexus index updated ✓"
 
     # 2. Sync CLAUDE.md from live values
-    if python "$ROOT/update_claude_md.py"; then
+    if python "$ROOT/scripts/update_claude_md.py"; then
         echo "[post-commit] CLAUDE.md synced ✓"
     else
         echo "[post-commit] ERROR: update_claude_md.py failed"
