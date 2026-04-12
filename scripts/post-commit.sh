@@ -36,11 +36,13 @@ if [ "$PY_CHANGED" = "1" ]; then
         exit 1
     fi
 
-    # 3. If CLAUDE.md changed, amend it into the commit
-    if ! git -C "$ROOT" diff --quiet CLAUDE.md 2>/dev/null; then
-        git -C "$ROOT" add CLAUDE.md
+    # 3. If CLAUDE.md or AGENTS.md changed, amend them into the commit
+    DOCS_CHANGED=0
+    git -C "$ROOT" diff --quiet CLAUDE.md  2>/dev/null || { git -C "$ROOT" add CLAUDE.md;  DOCS_CHANGED=1; }
+    git -C "$ROOT" diff --quiet AGENTS.md  2>/dev/null || { git -C "$ROOT" add AGENTS.md;  DOCS_CHANGED=1; }
+    if [ "$DOCS_CHANGED" = "1" ]; then
         git commit --amend --no-edit --no-verify
-        echo "[post-commit] CLAUDE.md auto-patched into commit ✓"
+        echo "[post-commit] CLAUDE.md + AGENTS.md auto-patched into commit ✓"
     fi
 else
     echo "[post-commit] No Python files changed — skipping re-index"
