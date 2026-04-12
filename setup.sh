@@ -19,10 +19,10 @@ check_cmd() {
     return 0
 }
 
-HAS_NPX=1; HAS_UVX=1; HAS_UV=1
-check_cmd npx  "install Node.js from https://nodejs.org" || HAS_NPX=0
-check_cmd uvx  "install uv from https://docs.astral.sh/uv"  || HAS_UVX=0
-check_cmd uv   "install uv from https://docs.astral.sh/uv"  || HAS_UV=0
+HAS_NPX=1; HAS_UV=1; HAS_PYTHON=1
+check_cmd npx    "install Node.js from https://nodejs.org"   || HAS_NPX=0
+check_cmd uv     "install uv from https://docs.astral.sh/uv" || HAS_UV=0
+check_cmd python "install Python 3.11+"                      || HAS_PYTHON=0
 
 # ── 1. Install git post-commit hook ──────────────────────────────────────────
 echo ""
@@ -52,20 +52,21 @@ else
 fi
 
 # ── 4. code-review-graph — build graph ───────────────────────────────────────
-if [ "$HAS_UVX" = "1" ]; then
+# Note: 'build' has a known upstream sqlite bug; 'update' is the working equivalent
+if [ "$HAS_PYTHON" = "1" ]; then
     echo ""
     echo "==> Building code-review-graph..."
-    uvx code-review-graph build --repo-root "$ROOT" 2>/dev/null || \
-        warn "code-review-graph build failed — run 'uvx code-review-graph build' manually"
+    (cd "$ROOT" && python -m code_review_graph update --skip-flows) 2>/dev/null || \
+        warn "code-review-graph update failed — run 'python -m code_review_graph update --skip-flows' manually"
     echo "    ✓ code-review-graph built"
 else
-    warn "uvx not found — skipping code-review-graph build"
+    warn "python not found — skipping code-review-graph build"
 fi
 
-# ── 5. Sync CLAUDE.md ─────────────────────────────────────────────────────────
+# ── 5. Sync CLAUDE.md + AGENTS.md ────────────────────────────────────────────
 echo ""
-echo "==> Syncing CLAUDE.md..."
-python "$ROOT/update_claude_md.py" && echo "    ✓ CLAUDE.md up to date"
+echo "==> Syncing CLAUDE.md + AGENTS.md..."
+python "$ROOT/scripts/update_claude_md.py" && echo "    ✓ docs up to date"
 
 echo ""
 echo "==> Setup complete."
