@@ -6,8 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uvx code-review-graph update --skip-flows",
-            "timeout": 5000
+            "command": "python -m code_review_graph update --skip-flows",
+            "timeout": 10000
           },
           {
             "type": "command",
