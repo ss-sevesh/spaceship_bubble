@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Auto-patches dynamic sections of CLAUDE.md from live project state.
-Runs as a PostToolUse hook after every Edit/Write.
+Auto-patches dynamic sections of CLAUDE.md and AGENTS.md from live project state.
+Runs as a PostToolUse hook after every Edit/Write/Bash.
 
 Updates:
   - casimir-tools version (from casimir_tools/casimir_tools/__init__.py)
   - Physical constants block (from src/lifshitz.py)
-  - GitNexus index stats (from .gitnexus/meta.json)
+  - GitNexus index stats (from .gitnexus/meta.json) — in both CLAUDE.md and AGENTS.md
 """
 
 import json
@@ -16,6 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 CLAUDE_MD = ROOT / "CLAUDE.md"
+AGENTS_MD = ROOT / "AGENTS.md"
 
 
 def get_casimir_version() -> str | None:
@@ -55,17 +56,23 @@ def get_gitnexus_stats() -> dict | None:
         return None
 
 
-def patch(text: str) -> str:
+def patch_gitnexus_stats(text: str, stats: dict) -> str:
+    return re.sub(
+        r"(indexed by GitNexus as \*\*spaceship_bubble\*\* \()\d+ symbols, \d+ relationships, \d+ execution flows(\))",
+        rf"\g<1>{stats['nodes']} symbols, {stats['edges']} relationships, {stats['processes']} execution flows\2",
+        text,
+    )
+
+
+def patch_claude_md(text: str) -> str:
     # --- 1. casimir-tools version ---
     version = get_casimir_version()
     if version:
-        # Checklist line: v0.1.7 live
         text = re.sub(
             r"(\*\*casimir-tools PyPI package\*\* \(v)[0-9a-zA-Z.\-]+",
             rf"\g<1>{version}",
             text,
         )
-        # Project structure line: casimir_tools/ ... v0.1.x
         text = re.sub(
             r"(casimir_tools/\s+<-.*?v)[0-9a-zA-Z.\-]+",
             rf"\g<1>{version}",
@@ -94,26 +101,41 @@ def patch(text: str) -> str:
     # --- 3. GitNexus stats ---
     stats = get_gitnexus_stats()
     if stats:
-        text = re.sub(
-            r"(indexed by GitNexus as \*\*spaceship_bubble\*\* \()\d+ symbols, \d+ relationships, \d+ execution flows(\))",
-            rf"\g<1>{stats['nodes']} symbols, {stats['edges']} relationships, {stats['processes']} execution flows\2",
-            text,
-        )
+        text = patch_gitnexus_stats(text, stats)
 
     return text
 
 
-def main() -> None:
-    if not CLAUDE_MD.exists():
-        print("CLAUDE.md not found — skipping", file=sys.stderr)
-        return
+def patch_agents_md(text: str) -> str:
+    stats = get_gitnexus_stats()
+    if stats:
+        text = patch_gitnexus_stats(text, stats)
+    return text
 
-    original = CLAUDE_MD.read_text(encoding="utf-8")
-    updated = patch(original)
 
+def sync_file(path: Path, patch_fn) -> bool:
+    """Returns True if the file was changed."""
+    if not path.exists():
+        return False
+    original = path.read_text(encoding="utf-8")
+    updated = patch_fn(original)
     if updated != original:
-        CLAUDE_MD.write_text(updated, encoding="utf-8")
-        print("CLAUDE.md auto-updated")
+        path.write_text(updated, encoding="utf-8")
+        return True
+    return False
+
+
+def main() -> None:
+    changed = []
+
+    if sync_file(CLAUDE_MD, patch_claude_md):
+        changed.append("CLAUDE.md")
+
+    if sync_file(AGENTS_MD, patch_agents_md):
+        changed.append("AGENTS.md")
+
+    if changed:
+        print(f"auto-updated: {', '.join(changed)}")
     # silent no-op when nothing changed
 
 
